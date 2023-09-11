@@ -8,7 +8,6 @@ class AwesomeCVSanitizer():
             sanitized_cv[escape_latex(section_name)] = section_data
         
         for section_name, section_data in sanitized_cv.items():
-            assert isinstance(section_name, str), f'Name of section "{section_name}" must be of type string!'
             assert isinstance(section_data, dict), f'Data of section "{section_name}" must be described using type dictionary!'
             AwesomeCVSanitizer.sanitize_section(section_name, section_data)
         
@@ -30,7 +29,6 @@ class AwesomeCVSanitizer():
 
         if section_type == 'cvskills':
             assert len(item) == 1, f'Item {i} of section "{section_name}" can only have one key-value pair!'
-            assert isinstance(list(item.keys())[0], str), f'Name of item {i} of section "{section_name}" must be of type string!'
             assert isinstance(list(item.values())[0], str), f'Value of item {i} of section "{section_name}" must be of type string!'
             sanitized_key = escape_latex(list(item.keys())[0])
             item[sanitized_key] = escape_latex(item.pop(list(item.keys())[0]))
@@ -50,7 +48,6 @@ class AwesomeCVSanitizer():
                 AwesomeCVSanitizer.sanitize_point(section_name, section_type, i, j+1, item, point)
         elif section_type == 'cvhonors':
             assert len(item) == 1, f'Item {i} of section "{section_name}" can only have one key-value pair!'
-            assert isinstance(list(item.keys())[0], str), f'Name of item {i} of section "{section_name}" must be of type string!'
             sanitized_key = escape_latex(list(item.keys())[0])
             item[sanitized_key] = item.pop(list(item.keys())[0])
             assert isinstance(list(item.values())[0], list), f'Value of item {i} of section "{section_name}" must be of type list!'
