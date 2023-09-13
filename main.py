@@ -20,5 +20,5 @@ if __name__ == '__main__':
     
     AwesomeCVTexGenerator.generate_cv(cv, args)
 
-    process = subprocess.Popen('cmd /k "xelatex '+args.cv_blueprint_json_filepath.split('/')[-1].split('.')[0]+'.tex"', cwd='tex')
+    process = subprocess.Popen('cmd /k "xelatex '+args.cv_blueprint_json_filepath.replace('.json', '.tex'), cwd='tex')
     process.wait()

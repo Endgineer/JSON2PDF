@@ -14,7 +14,7 @@ class AwesomeCVTexGenerator():
             string += '\n'+AwesomeCVTexGenerator.generate_section(section_name, section_data)
         string += '\n\n\n%-------------------------------------------------------------------------------\n\\end{document}\n'
 
-        with open('tex/'+args.cv_blueprint_json_filepath.split('/')[-1].split('.')[0]+'.tex', 'w') as cv_file:
+        with open('tex/'+args.cv_blueprint_json_filepath.replace('.json', '.tex'), 'w') as cv_file:
             cv_file.write(string)
     
     def generate_section(section_name, section_data):
