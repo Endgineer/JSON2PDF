@@ -46,7 +46,7 @@ class AwesomeCVTexGenerator():
         if section_type == 'cvskills':
             string += '%---------------------------------------------------------\n  \\cvskill\n    {'+list(item.keys())[0]+'}\n    {'+str(item[list(item.keys())[0]])+'}\n\n%---------------------------------------------------------\n'
         elif section_type == 'cventries':
-            string += '%---------------------------------------------------------\n  \\cventry\n    {'+item['botleft']+'}\n    {'+item['topleft']+'}\n    {'+item['topright']+'}\n    {'+item['botright']+'}\n    {'
+            string += '%---------------------------------------------------------\n  \\cventry\n    {'+('\\href{'+item['repo']+'}{'+item['botleft']+'}' if 'repo' in item else item['botleft'])+'}\n    {'+('\\href{'+item['url']+'}{'+item['topleft']+'}' if 'url' in item else item['topleft'])+'}\n    {'+item['topright']+'}\n    {'+item['botright']+'}\n    {'
             if item['content']:
                 string += '\n      \\begin{cvitems}'
                 for point in item['content']:
