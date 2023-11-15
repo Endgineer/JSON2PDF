@@ -13,6 +13,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', '--mobile', type=str, default=None)
     parser.add_argument('-e', '--email', type=str, default=None)
     parser.add_argument('-l', '--linkedin', type=str, default=None)
+    parser.add_argument('-g', '--github', type=str, default=None)
     args = parser.parse_args()
 
     with open(args.cv_blueprint_json_filepath) as cv:
