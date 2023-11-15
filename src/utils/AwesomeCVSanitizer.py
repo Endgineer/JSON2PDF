@@ -1,5 +1,4 @@
 from pylatex.utils import escape_latex
-import validators
 
 class AwesomeCVSanitizer():
 
@@ -34,10 +33,8 @@ class AwesomeCVSanitizer():
             sanitized_key = escape_latex(list(item.keys())[0])
             item[sanitized_key] = escape_latex(item.pop(list(item.keys())[0]))
         elif section_type == 'cventries':
-            assert not set(item.keys()).difference({'botleft', 'topleft', 'topright', 'botright', 'content', 'url'}), f'Item {i} of section "{section_name}" contains invalid fields {set(item.keys()).difference({"botleft", "topleft", "topright", "botright", "content", "url"})}!'
+            assert not set(item.keys()).difference({'botleft', 'topleft', 'topright', 'botright', 'content'}), f'Item {i} of section "{section_name}" contains invalid fields {set(item.keys()).difference({"botleft", "topleft", "topright", "botright", "content"})}!'
             assert {'botleft', 'topleft', 'topright', 'botright', 'content'}.issubset(set(item.keys())), f'Item {i} of section "{section_name}" does not contain all required fields {str({"botleft", "topleft", "topright", "botright", "content"})}!'
-            if 'url' in item:
-                assert validators.url(item['url']), f'Value of the field "url" of item {i} of section "{section_name}" must be a valid URL of type string!'
             assert isinstance(item['botleft'], str), f'Value of field "botleft" of item {i} of section "{section_name}" must be of type string!'
             item['botleft'] = escape_latex(item['botleft'])
             assert isinstance(item['topleft'], str), f'Value of field "topleft" of item {i} of section "{section_name}" must be of type string!'
