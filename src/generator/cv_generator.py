@@ -4,11 +4,11 @@ from src.generator.honors_generator import generate_honors
 
 def generate_cv(cv_sanitized, args):
     string = {
-        'name': '\\name{'+args.name.split()[0]+'}{'+args.name.split()[1]+'}' if args.name else 'Curriculum Vitae',
+        'name': '\\name{'+args.name.split()[0]+'}{'+args.name.split()[1]+'}' if args.name else '\\name{Curriculum}{Vitae}',
         'position': '\\position{'+args.position+'}' if args.position else '% \\position{}',
-        'address': '\\address{'+args.address+'}' if args.address else '% \\address{}',
-        'mobile': '\\mobile{'+args.mobile+'}' if args.mobile else '% \\mobile{}',
-        'email': '\\email{'+args.email+'}' if args.email else '% \\email{}',
+        'address': '\\address{'+args.address+'}' if args.address else '\\address{City, Region}',
+        'mobile': '\\mobile{'+args.mobile+'}' if args.mobile else '\\mobile{000-000-0000}',
+        'email': '\\email{'+args.email+'}' if args.email else '\\email{emailaddress@domain.com}',
         'github': '\\github{'+args.github+'}' if args.github else '% \\github{}',
         'linkedin': '\\linkedin{'+args.linkedin+'}' if args.linkedin else '% \\linkedin{}',
         'footer': '\\makecvfooter\n  {\\today}\n  {'+args.name+'~~~Â·~~~Curriculum Vitae}\n  {\\thepage\\ / \\pageref*{LastPage}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}',
