@@ -1,0 +1,105 @@
+{
+    "Summary": {
+        "": "Your resume is a json object consisting of as many sections as you want. Each section can be one of three types (summaries, records, or honors) and can contain zero or more items. This is an example of a summaries section, which consists of as many labeled items as you want. This item, whose key value is empty, is the empty item. You can use the empty item to write a short introduction or summary about yourself.",
+        "Languages": "...",
+        "Technologies": "...",
+        "Concepts": "..."
+    },
+    
+    "Experience": [
+        {
+            "botleft": "Job Role",
+            "topleft": "Company Name",
+            "topright": "Location",
+            "botright": "MM/YYYY - MM/YYYY",
+            "content": [
+                "Remember that any section or item can have as many children as you want!",
+                "Even zero!"
+            ]
+        },
+        {
+            "botleft": "Job Role",
+            "topleft": "Company Name",
+            "topright": "Location",
+            "botright": "MM/YYYY - MM/YYYY",
+            "content": []
+        }
+    ],
+    
+    "Education": [
+        {
+            "botleft": "Degree",
+            "topleft": "Institution",
+            "topright": "Location",
+            "botright": "MM/YYYY",
+            "content": [
+                "GPA: 0.00"
+            ]
+        },
+        {
+            "botleft": "Degree",
+            "topleft": "Institution",
+            "topright": "Location",
+            "botright": "MM/YYYY",
+            "content": []
+        }
+    ],
+
+    "Projects": [
+        {
+            "botleft": "",
+            "topleft": "You can leave fields you don't want to specify empty, but it will still print an empty field.",
+            "topright": "Technologies Used",
+            "botright": "MM/YYYY",
+            "content": [
+                "Remember that you can have as many of a section type as you like, and you can name them and use them as you like.",
+                "In this case, we have created a 'Projects' section with the same section type as 'Experience', because we like giving details."
+            ]
+        }
+    ],
+
+    "Awards": {
+        "": [
+            {
+                "leftmost": "YYYY",
+                "left": "Sections of type 'honors' can also have labeled items or the empty item.",
+                "right": "",
+                "rightmost": ""
+            },
+            {
+                "leftmost": "YYYY",
+                "left": "But it's not recommended to use both, as it looks weird.",
+                "right": "",
+                "rightmost": ""
+            }
+        ],
+        "More Info": [
+            {
+                "leftmost": "YYYY",
+                "left": "Use labeled items if you want to divide different-natured accomplishments.",
+                "right": "",
+                "rightmost": ""
+            },
+            {
+                "leftmost": "YYYY",
+                "left": "Otherwise put all your awards under the empty item.",
+                "right": "",
+                "rightmost": ""
+            }
+        ],
+        "Certifications": [
+            {
+                "leftmost": "YYYY",
+                "left": "Certified Awesome Resume",
+                "right": "Institute of Awesome",
+                "rightmost": "A-CV"
+            },
+            {
+                "leftmost": "YYYY",
+                "left": "Masters in Resume Building",
+                "right": "Institute of Awesome",
+                "rightmost": "M-CV"
+            }
+        ]
+    }
+}
