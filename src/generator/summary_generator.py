@@ -1,0 +1,2 @@
+def generate_summary(summary_name, summary_data):
+    return '%---------------------------------------------------------\n  \\cvskill\n    {'+summary_name+'}\n    {'+summary_data+'}\n\n%---------------------------------------------------------\n'
