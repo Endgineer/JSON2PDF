@@ -1,14 +1,14 @@
 from pylatex.utils import escape_latex
 
-def sanitize_affiliation(path_markers, affiliation_data, ERRORS):
-    AFFILIATION = list()
+def sanitize_honors(path_markers, honors_data, ERRORS):
+    HONORS = list()
 
-    for honor_index, honor_data in enumerate(affiliation_data):
-        next_markers = dict(list({'honor': honor_index+1}.items())+list(path_markers.items()))
-        if isinstance(honor_data, dict): AFFILIATION.append(sanitize_honor(next_markers, honor_data, ERRORS))
-        else: ERRORS.append(f'\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in next_markers.items()])}: All honors within an affiliation must be JSON object literals.')
+    for honor_index, honor_data in enumerate(honors_data):
+        next_markers = dict(list({'point': honor_index+1}.items())+list(path_markers.items()))
+        if isinstance(honor_data, dict): HONORS.append(sanitize_honor(next_markers, honor_data, ERRORS))
+        else: ERRORS.append(f'\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in next_markers.items()])}: All points categorized under an item must be JSON object literals.')
     
-    return AFFILIATION
+    return HONORS
 
 def sanitize_honor(path_markers, honor_data, ERRORS):
     HONOR = dict()

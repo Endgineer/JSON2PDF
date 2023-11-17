@@ -27,7 +27,7 @@ def sanitize_content(path_markers, content_data, ERRORS):
     for point_index, point_data in enumerate(content_data):
         next_markers = dict(list({'point': point_index+1}.items())+list(path_markers.items()))
         if isinstance(point_data, str): CONTENT.append(sanitize_text(next_markers, point_data, ERRORS))
-        else: ERRORS.append(f'\t\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in next_markers.items()])}: All points that define the content of a record must be JSON string literals.')
+        else: ERRORS.append(f'\t\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in next_markers.items()])}: All points that define the "content" prop of an item must be JSON string literals.')
     
     return CONTENT
 
