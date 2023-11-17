@@ -8,6 +8,7 @@ def sanitize_cv(cv_json):
 
     for section_name, section_data in cv_json.items():
         next_markers = dict(list({'section': section_name}.items()))
+        if not section_name: ERRORS.append(f'ERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in next_markers.items()])}: A section must have a name.')
         if isinstance(section_data, dict):
             CV[escape_latex(section_name)] = sanitize_section(next_markers, section_data, ERRORS)
         elif isinstance(section_data, list):
