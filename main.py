@@ -1,8 +1,10 @@
 import subprocess
 import argparse
 import json
+import os
 
-from src.AwesomeCVTexGenerator import AwesomeCVTexGenerator
+from src.sanitizer.cv_sanitizer import sanitize_cv
+from src.generator.cv_generator import generate_cv
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -14,12 +16,20 @@ if __name__ == '__main__':
     parser.add_argument('-e', '--email', type=str, default=None)
     parser.add_argument('-l', '--linkedin', type=str, default=None)
     parser.add_argument('-g', '--github', type=str, default=None)
+    parser.add_argument('-c', '--color', type=str, default=None)
+    parser.add_argument('--footer', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
-    with open(args.cv_blueprint_json_filepath) as cv:
+    with open(f'{args.cv_blueprint_json_filepath}.json') as cv:
         cv = json.load(cv)
     
-    AwesomeCVTexGenerator.generate_cv(cv, args)
-
-    process = subprocess.Popen('cmd /k "xelatex '+args.cv_blueprint_json_filepath.replace('.json', '.tex'), cwd='tex')
-    process.wait()
+    cv, errors = sanitize_cv(cv)
+    if errors: print('\n'.join(errors))
+    elif not [error for error in errors if 'ERROR' in error]:
+        generate_cv(cv, args)
+        process = subprocess.Popen(f'cmd /k "xelatex {args.cv_blueprint_json_filepath}.tex')
+        process.wait()
+    
+    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
+    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.log'): os.remove(f'{args.cv_blueprint_json_filepath}.log')
+    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.tex'): os.remove(f'{args.cv_blueprint_json_filepath}.tex')
