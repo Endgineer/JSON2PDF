@@ -27,8 +27,7 @@ if __name__ == '__main__':
     if errors: print('\n'.join(errors))
     elif not [error for error in errors if 'ERROR' in error]:
         generate_cv(cv, args)
-        process = subprocess.Popen(f'cmd /k "xelatex {args.cv_blueprint_json_filepath}.tex')
-        process.wait()
+        process = subprocess.call([f'xelatex', f'{args.cv_blueprint_json_filepath}.tex'])
     
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.log'): os.remove(f'{args.cv_blueprint_json_filepath}.log')
