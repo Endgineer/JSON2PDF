@@ -1,6 +1,6 @@
 import subprocess
 import argparse
-import json5
+from ruamel.yaml import YAML
 import os
 
 from src.sanitizer.cv_sanitizer import sanitize_cv
@@ -20,8 +20,9 @@ if __name__ == '__main__':
     parser.add_argument('--footer', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
-    with open(f'{args.cv_blueprint_json_filepath}.json' if os.path.isfile(f'{args.cv_blueprint_json_filepath}.json') else f'{args.cv_blueprint_json_filepath}.json5') as cv:
-        cv = json5.load(cv)
+    with open(f'{args.cv_blueprint_json_filepath}.yaml') as file:
+        yaml_parser = YAML(typ='safe')
+        cv = yaml_parser.load(file)
     
     cv, errors = sanitize_cv(cv)
     if errors: print('\n'.join(errors))
