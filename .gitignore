@@ -7,4 +7,4 @@ dist
 *.tex
 *.log
 *.aux
-*.yaml
+*.yml

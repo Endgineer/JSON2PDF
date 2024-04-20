@@ -20,7 +20,7 @@ if __name__ == '__main__':
     parser.add_argument('--footer', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
-    with open(f'{args.cv_blueprint_json_filepath}.yaml') as file:
+    with open(f'{args.cv_blueprint_json_filepath}.yml') as file:
         yaml_parser = YAML(typ='safe')
         cv = yaml_parser.load(file)
     
