@@ -18,7 +18,7 @@ def sanitize_honor(path_markers, honor_data, ERRORS):
     invalid = set(honor_data.keys()).difference(require)
 
     if missing: ERRORS.append(f'\t\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in path_markers.items()])}: Missing required props {missing}.')
-    if invalid: ERRORS.append(f'\t\t\tWARNING in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in path_markers.items()])}: Ignoring invalid props {invalid}.')
+    if invalid: ERRORS.append(f'\t\t\tERROR in {" of ".join([f"{marker_type} {marker}" for marker_type, marker in path_markers.items()])}: Found invalid props {invalid}.')
 
     for prop_name, prop_data in honor_data.items():
         next_markers = dict(list({'prop': prop_name}.items())+list(path_markers.items()))
