@@ -16,6 +16,7 @@ if __name__ == '__main__':
     parser.add_argument('-l', '--linkedin', type=str, default=None)
     parser.add_argument('-g', '--github', type=str, default=None)
     parser.add_argument('-c', '--color', type=str, default=None)
+    parser.add_argument('-w', '--website', type=str, default=None)
     parser.add_argument('--footer', action=argparse.BooleanOptionalAction)
     parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
@@ -30,6 +31,7 @@ if __name__ == '__main__':
     subprocess.call([f'xelatex', f'{args.cv_blueprint_json_filepath}.tex'])
     subprocess.call([f'xelatex', f'{args.cv_blueprint_json_filepath}.tex'])
     
+    if args.debug: exit()
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.log'): os.remove(f'{args.cv_blueprint_json_filepath}.log')
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.tex'): os.remove(f'{args.cv_blueprint_json_filepath}.tex')
