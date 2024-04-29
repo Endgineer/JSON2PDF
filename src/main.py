@@ -31,9 +31,9 @@ if __name__ == '__main__':
 
     if error_handler.fired: exit()
     logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
-    subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{args.cv_blueprint_json_filepath}.tex'])
+    subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating portable document...')
-    subprocess.call([f'xelatex', '-halt-on-error', f'{args.cv_blueprint_json_filepath}.tex'])
+    subprocess.call([f'xelatex', '-halt-on-error', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL)
     
     if args.debug: exit()
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
