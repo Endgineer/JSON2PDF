@@ -23,16 +23,19 @@ if __name__ == '__main__':
 
     error_handler = errorhandler.ErrorHandler()
     stream_handler = logging.StreamHandler(stream=sys.stderr)
-    stream_handler.setFormatter(logging.Formatter(fmt='[%(levelname)s]: %(message)s'))
-    logging.getLogger().setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger().addHandler(stream_handler)
+    stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
+    
+    logging.getLogger('COMPILER').setLevel(logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger('COMPILER').addHandler(stream_handler)
+
+    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
 
     logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
 
     if error_handler.fired: exit()
-    logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
+    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
     subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating portable document...')
+    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating portable document...')
     subprocess.call([f'xelatex', '-halt-on-error', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL)
     
     if args.debug: exit()
