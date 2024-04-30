@@ -15,3 +15,14 @@ The process of generating your cv starts with a blueprint, which must be a `json
 ```
 json2cv resume_name_without_extension -n "First Last" -p "Employee Role" -m "000-000-0000" -e "email@provider.tld" -l "linkedin-id" -a "City, PV" -g "GithubUsername" -c "DC3522" --footer
 ```
+
+## Build
+Starting from the project/src directory.
+```SH
+pyinstaller -F --specpath ../release/spec --distpath ../release/dist --workpath ../release/build main.py
+```
+
+To hash the executable.
+```SH
+Certutil -hashfile ../release/dist/main.exe SHA512
+```
