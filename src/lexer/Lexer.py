@@ -1,5 +1,4 @@
 import logging
-import os
 
 from lexer.components.Token import Token
 from lexer.components.Context import Context
@@ -9,10 +8,6 @@ class Lexer():
   context: Context
 
   def __init__(self, cv_json_path: str):
-    if not os.path.isfile(cv_json_path):
-      logging.getLogger('LEXICAL').critical(f'The path "{cv_json_path}" does not point to an existing file.')
-      exit()
-
     self.context = Context(cv_json_path)
   
   def __enter__(self):

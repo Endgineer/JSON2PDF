@@ -23,6 +23,10 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
+    if not os.path.isfile(f'{args.cv_blueprint_json_filepath}.json'):
+      logging.getLogger('COMPILER').critical(f'The path "{args.cv_blueprint_json_filepath}.json" does not point to an existing file.')
+      exit()
+
     error_handler = errorhandler.ErrorHandler()
     stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
