@@ -43,10 +43,20 @@ if __name__ == '__main__':
             pass
 
     if error_handler.fired: exit()
+    
     logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
     subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    if False:
+        logging.getLogger('COMPILER').critical(f'Xelatex failed to generate auxiliary references. See "{args.cv_blueprint_json_filepath}.log".')
+        exit()
+
     logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating portable document...')
     subprocess.call([f'xelatex', '-halt-on-error', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL)
+
+    if False:
+        logging.getLogger('COMPILER').critical(f'Xelatex failed to generate portable document. See "{args.cv_blueprint_json_filepath}.log".')
+        exit()
     
     if args.debug: exit()
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
