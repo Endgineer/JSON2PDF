@@ -5,6 +5,9 @@ import os
 from lexer.Lexer import Lexer
 
 class Compiler():
+  file_path: str
+  lexer: Lexer
+  
   def __init__(self, file_path):
     if not os.path.isfile(f'{file_path}.json'):
       logging.getLogger('COMPILER').critical(f'The path "{file_path}.json" does not point to an existing file.')
