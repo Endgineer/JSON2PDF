@@ -23,10 +23,6 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
-    if not os.path.isfile(f'{args.cv_blueprint_json_filepath}.json'):
-      logging.getLogger('COMPILER').critical(f'The path "{args.cv_blueprint_json_filepath}.json" does not point to an existing file.')
-      exit()
-
     error_handler = errorhandler.ErrorHandler()
     stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
@@ -35,6 +31,10 @@ if __name__ == '__main__':
     logging.getLogger('COMPILER').addHandler(stream_handler)
     logging.getLogger('LEXICAL').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('LEXICAL').addHandler(stream_handler)
+
+    if not os.path.isfile(f'{args.cv_blueprint_json_filepath}.json'):
+      logging.getLogger('COMPILER').critical(f'The path "{args.cv_blueprint_json_filepath}.json" does not point to an existing file.')
+      exit()
 
     logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
 
