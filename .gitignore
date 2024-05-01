@@ -7,5 +7,7 @@ __pycache__
 /*.tex
 /*.log
 /*.aux
+/*.xdv
+/*.exe
 
 TODO

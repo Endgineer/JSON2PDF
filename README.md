@@ -17,12 +17,11 @@ json2cv resume_name_without_extension -n "First Last" -p "Employee Role" -m "000
 ```
 
 ## Build
-Starting from the project/src directory.
 ```SH
-pyinstaller -F --specpath ../release/spec --distpath ../release/dist --workpath ../release/build main.py
+pyinstaller -F --specpath ./release/spec --distpath ./ --workpath ./release/build ./src/main.py
 ```
 
 To hash the executable.
 ```SH
-Certutil -hashfile ../release/dist/main.exe SHA512
+Certutil -hashfile ./main.exe SHA512
 ```
