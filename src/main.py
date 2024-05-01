@@ -5,6 +5,8 @@ import logging
 import sys
 import os
 
+from lexer.Lexer import Lexer
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='cv_blueprint_json_filepath', type=str)
@@ -27,10 +29,14 @@ if __name__ == '__main__':
     
     logging.getLogger('COMPILER').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('COMPILER').addHandler(stream_handler)
+    logging.getLogger('LEXICAL').setLevel(logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger('LEXICAL').addHandler(stream_handler)
 
     logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
 
-    logging.getLogger().info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
+    with Lexer(f'{args.cv_blueprint_json_filepath}.json') as lex:
+        while lex.next() != None:
+            pass
 
     if error_handler.fired: exit()
     logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
