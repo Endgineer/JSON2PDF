@@ -1,0 +1,81 @@
+{
+  "start": "whitespace { root } whitespace",
+
+  "root": "whitespace | sections",
+
+  "sections": "section ( , section ) *",
+
+  "section": "string : whitespace [ sectiondata ] whitespace",
+
+  "sectiondata": "whitespace | cvparagraphitems | cvskillsitems | cvhonorsitems | cvitemsitems",
+
+  "cvparagraphitems": "cvparagraphitem ( , cvparagraphitem ) *",
+
+  "cvskillsitems": "cvskillsitem ( , cvskillsitem ) *",
+
+  "cvhonorsitems": "cvhonorsitem ( , cvhonorsitem ) *",
+
+  "cvitemsitems": "cvitemsitem ( , cvitemsitem ) *",
+
+  "cvparagraphitem": "whitespace ( genericitem | { cvparagraphprops } ) whitespace",
+
+  "cvskillsitem": "whitespace ( genericitem | { cvskillsprops } ) whitespace",
+
+  "cvhonorsitem": "whitespace ( genericitem | { cvhonorsprops } ) whitespace",
+
+  "cvitemsitem": "whitespace ( genericitem | { cvitemsprops } ) whitespace",
+
+  "genericitem": "\" filepath : : characters \" | null",
+
+  "filepath": "( / characters ) +",
+
+  "cvparagraphprops": "paragraph",
+
+  "cvskillsprops": "(cvskillsprop divider){0,1} cvskillsprop divider cvskillsprop",
+
+  "cvskillsprop": "category | content | placeholders",
+
+  "cvhonorsprops": "(cvhonorsprop divider){0,1} cvhonorsprop divider cvhonorsprop divider cvhonorsprop divider cvhonorsprop divider cvhonorsprop",
+  
+  "cvhonorsprop": "namespace | ltag | title | subtitle | rtag | placeholders",
+
+  "cvitemsprops": "(cvitemsprop divider){0,1} cvitemsprop divider cvitemsprop divider cvitemsprop divider cvitemsprop divider cvitemsprop",
+
+  "cvitemsprop": "title | subtitle | ttag | btag | details | placeholders",
+
+  "divider": "whitespace , whitespace",
+
+  "placeholders": "whitespace \" p l a c e h o l d e r s \" whitespace : whitespace { substitutions } whitespace",
+
+  "substitutions": "whitespace | substitution ( , substitution ) *",
+
+  "substitution": "string : string ,",
+
+  "paragraph": "whitespace \" p a r a g r a p h \" whitespace : string",
+
+  "category": "whitespace \" c a t e g o r y \" whitespace : string",
+
+  "content": "whitespace \" c o n t e n t \" whitespace : string",
+
+  "namespace": "whitespace \" n a m e s p a c e \" whitespace : string",
+
+  "ltag": "whitespace \" l t a g \" whitespace : string",
+
+  "title": "whitespace \" t i t l e \" whitespace : string",
+
+  "subtitle": "whitespace \" s u b t i t l e \" whitespace : string",
+
+  "rtag": "whitespace \" r t a g \" whitespace : string",
+
+  "ttag": "whitespace \" t t a g \" whitespace : string",
+
+  "btag": "whitespace \" b t a g \" whitespace : string",
+
+  "details": "whitespace \" d e t a i l s \" whitespace : whitespace [ points ] whitespace",
+
+  "points": "whitespace | strings",
+
+  "strings": "string ( , string ) *",
+
+  "string": "whitespace \" characters \" whitespace"
+}
