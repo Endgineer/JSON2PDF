@@ -1,3 +1,4 @@
+import errorhandler
 import subprocess
 import logging
 import os
@@ -23,13 +24,16 @@ class Compiler():
   def __exit__(self, exc_type, exc_value, traceback):
     self.lexer.__exit__(None, None, None)
 
-  def compile(self) -> None:
+  def compile(self, error_handler: errorhandler.ErrorHandler) -> None:
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating typesetting markup...')
 
     while self.lexer.next() != None:
       pass
 
-    if not os.path.isfile(f'{self.flags.file_path}.tex'): exit()
+    if error_handler.fired: exit()
+
+    with open(f'../{self.flags.file_path}.tex', 'w') as file:
+      file.write(self.flags.wrap('DECORATED_ABSTRACT_SYNTAX_TREE__REPR__GOES_HERE'))
     
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating auxiliary references...')
     subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{self.flags.file_path}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

@@ -1,3 +1,4 @@
+import errorhandler
 import argparse
 import logging
 import sys
@@ -21,6 +22,7 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
+    error_handler = errorhandler.ErrorHandler()
     stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
     
@@ -34,7 +36,7 @@ if __name__ == '__main__':
     logging.getLogger('SEMANTIC').addHandler(stream_handler)
 
     with Compiler(args) as compiler:
-      compiler.compile()
+      compiler.compile(error_handler)
     
     if args.debug: exit()
     if os.path.isfile(f'{args.file_path}.aux'): os.remove(f'{args.file_path}.aux')
