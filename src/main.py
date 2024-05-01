@@ -1,11 +1,9 @@
-import errorhandler
-import subprocess
 import argparse
 import logging
 import sys
 import os
 
-from lexer.Lexer import Lexer
+from compiler.Compiler import Compiler
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -23,7 +21,6 @@ if __name__ == '__main__':
     parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
 
-    error_handler = errorhandler.ErrorHandler()
     stream_handler = logging.StreamHandler(stream=sys.stderr)
     stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
     
@@ -32,31 +29,8 @@ if __name__ == '__main__':
     logging.getLogger('LEXICAL').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('LEXICAL').addHandler(stream_handler)
 
-    if not os.path.isfile(f'{args.cv_blueprint_json_filepath}.json'):
-      logging.getLogger('COMPILER').critical(f'The path "{args.cv_blueprint_json_filepath}.json" does not point to an existing file.')
-      exit()
-
-    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating typesetting markup...')
-
-    with Lexer(f'{args.cv_blueprint_json_filepath}.json') as lex:
-        while lex.next() != None:
-            pass
-
-    if error_handler.fired: exit()
-    
-    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating auxiliary references...')
-    subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
-    if False:
-        logging.getLogger('COMPILER').critical(f'Xelatex failed to generate auxiliary references. See "{args.cv_blueprint_json_filepath}.log".')
-        exit()
-
-    logging.getLogger('COMPILER').info(f'Compiling "{args.cv_blueprint_json_filepath}.json" - Generating portable document...')
-    subprocess.call([f'xelatex', '-halt-on-error', f'{args.cv_blueprint_json_filepath}.tex'], stdout=subprocess.DEVNULL)
-
-    if False:
-        logging.getLogger('COMPILER').critical(f'Xelatex failed to generate portable document. See "{args.cv_blueprint_json_filepath}.log".')
-        exit()
+    with Compiler(f'{args.cv_blueprint_json_filepath}') as compiler:
+      compiler.compile()
     
     if args.debug: exit()
     if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
