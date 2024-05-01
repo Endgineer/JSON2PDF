@@ -42,4 +42,4 @@ if __name__ == '__main__':
     if os.path.isfile(f'{args.file_path}.aux'): os.remove(f'{args.file_path}.aux')
     if os.path.isfile(f'{args.file_path}.log'): os.remove(f'{args.file_path}.log')
     if os.path.isfile(f'{args.file_path}.tex'): os.remove(f'{args.file_path}.tex')
-    if os.path.isfile(f'{args.file_path}.tex'): os.remove(f'{args.file_path}.xdv')
+    if os.path.isfile(f'{args.file_path}.xdv'): os.remove(f'{args.file_path}.xdv')
