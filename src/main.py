@@ -28,6 +28,10 @@ if __name__ == '__main__':
     logging.getLogger('COMPILER').addHandler(stream_handler)
     logging.getLogger('LEXICAL').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('LEXICAL').addHandler(stream_handler)
+    logging.getLogger('SYNTAX').setLevel(logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger('SYNTAX').addHandler(stream_handler)
+    logging.getLogger('SEMANTIC').setLevel(logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger('SEMANTIC').addHandler(stream_handler)
 
     with Compiler(f'{args.cv_blueprint_json_filepath}') as compiler:
       compiler.compile()
