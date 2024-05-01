@@ -17,6 +17,7 @@ class Context:
   line_number: int
   token_kind: Token.Kind
   state: State
+  token: Token
   line: str
   head: str
 
@@ -28,6 +29,7 @@ class Context:
     self.line_number = 0
     self.token_kind = None
     self.state = Context.State.START
+    self.token = None
     self.line = ''
     self.head = ''
   
@@ -47,9 +49,14 @@ class Context:
     '''Moves the scanner head one step forward.'''
     self.head = self.line[self.token_start_idx + self.token_len]
   
-  def accept(self) -> Token:
-    '''Accepts the token currently captured by the context and resets the context.'''
-    token = Token(
+  def pop(self) -> Token:
+    token = self.token
+    self.token = None
+    return token
+  
+  def store(self) -> Token:
+    '''Stores the token currently captured by the context and resets the context.'''
+    self.token = Token(
       self.line[self.token_start_idx : self.token_start_idx + self.token_len] if self.token_kind == Token.Kind.STRING else None,
       self.token_kind,
       self.line_number,
@@ -61,10 +68,10 @@ class Context:
     self.token_kind = None
     self.state = Context.State.START
 
-    return token
+    return self.token
   
-  def reject(self) -> Token:
-    '''Rejects the line currently captured by the context and resets the context.'''
+  def discard(self) -> Token:
+    '''Discards the line currently captured by the context and resets the context.'''
     token = Token(
       self.line[self.token_start_idx : len(self.line)],
       Token.Kind.DISCARDED,

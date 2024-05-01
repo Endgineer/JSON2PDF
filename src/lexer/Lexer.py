@@ -16,17 +16,16 @@ class Lexer():
   def __exit__(self, exc_type, exc_value, traceback):
     self.context.clean()
 
-  def next(self) -> Token:
-    '''Scans the next token in the stream. Returns None if at EOF.'''
-    while True:
+  def next(self) -> None:
+    '''Scans the next token in the stream, storing the result in context. None if at EOF.'''
+    while self.context.token is None:
       if len(self.context.line) == self.context.token_start_idx + self.context.token_len:
         if self.context.state != Context.State.START:
-          self.__reject()
+          self.__discard()
         
         self.context.fetch()
       
-      if not self.context.line:
-        return None
+      if not self.context.line: return
       
       self.context.step()
 
@@ -39,15 +38,15 @@ class Lexer():
       if self.context.token_kind is None:
         pass
       elif self.context.token_kind == Token.Kind.DISCARDED:
-        self.__reject()
+        self.__discard()
       else:
-        return self.__accept()
+        return self.__store()
   
-  def __accept(self) -> Token:
-    token = self.context.accept()
-    logging.getLogger('LEXICAL').debug(f'Scanned {token}.')
-    return token
+  def pop(self) -> Token:
+    return self.context.pop()
+
+  def __store(self) -> None:
+    logging.getLogger('LEXICAL').debug(f'Scanned {self.context.store()}.')
   
-  def __reject(self) -> None:
-    token = self.context.reject()
-    logging.getLogger('LEXICAL').error(f'Unexpected symbol {self.context.head} in {token}.')
+  def __discard(self) -> None:
+    logging.getLogger('LEXICAL').error(f'Unexpected symbol {self.context.head} in {self.context.discard()}.')
