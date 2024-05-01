@@ -7,8 +7,8 @@ from lexer.routines.matchers import *
 class Lexer():
   context: Context
 
-  def __init__(self, cv_json_path: str):
-    self.context = Context(cv_json_path)
+  def __init__(self, file_path: str):
+    self.context = Context(file_path)
   
   def __enter__(self):
     return self
