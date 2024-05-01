@@ -7,9 +7,9 @@ from compiler.Compiler import Compiler
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument(dest='cv_blueprint_json_filepath', type=str)
+    parser.add_argument(dest='file_path', type=str)
     parser.add_argument('-n', '--name', type=str, default=None)
-    parser.add_argument('-p', '--position', type=str, default=None)
+    parser.add_argument('-p', '--position', nargs='*', type=str, default=None)
     parser.add_argument('-a', '--address', type=str, default=None)
     parser.add_argument('-m', '--mobile', type=str, default=None)
     parser.add_argument('-e', '--email', type=str, default=None)
@@ -33,10 +33,10 @@ if __name__ == '__main__':
     logging.getLogger('SEMANTIC').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('SEMANTIC').addHandler(stream_handler)
 
-    with Compiler(f'{args.cv_blueprint_json_filepath}') as compiler:
+    with Compiler(args) as compiler:
       compiler.compile()
     
     if args.debug: exit()
-    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.aux'): os.remove(f'{args.cv_blueprint_json_filepath}.aux')
-    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.log'): os.remove(f'{args.cv_blueprint_json_filepath}.log')
-    if os.path.isfile(f'{args.cv_blueprint_json_filepath}.tex'): os.remove(f'{args.cv_blueprint_json_filepath}.tex')
+    if os.path.isfile(f'{args.file_path}.aux'): os.remove(f'{args.file_path}.aux')
+    if os.path.isfile(f'{args.file_path}.log'): os.remove(f'{args.file_path}.log')
+    if os.path.isfile(f'{args.file_path}.tex'): os.remove(f'{args.file_path}.tex')
