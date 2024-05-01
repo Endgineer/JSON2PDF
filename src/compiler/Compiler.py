@@ -32,7 +32,7 @@ class Compiler():
 
     if error_handler.fired: exit()
 
-    with open(f'../{self.flags.file_path}.tex', 'w') as file:
+    with open(f'{self.flags.file_path}.tex', 'w') as file:
       file.write(self.flags.wrap('DECORATED_ABSTRACT_SYNTAX_TREE__REPR__GOES_HERE'))
     
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating auxiliary references...')
