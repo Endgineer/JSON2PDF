@@ -41,7 +41,10 @@ if __name__ == '__main__':
       compiler.compile(error_handler)
     
     if args.debug: sys.exit()
-    if os.path.isfile(f'{args.file_path}.aux'): os.remove(f'{args.file_path}.aux')
-    if os.path.isfile(f'{args.file_path}.log'): os.remove(f'{args.file_path}.log')
-    if os.path.isfile(f'{args.file_path}.tex'): os.remove(f'{args.file_path}.tex')
-    if os.path.isfile(f'{args.file_path}.xdv'): os.remove(f'{args.file_path}.xdv')
+
+    filename = os.path.basename(args.file_path)
+
+    if os.path.isfile(f'{filename}.aux'): os.remove(f'{filename}.aux')
+    if os.path.isfile(f'{filename}.log'): os.remove(f'{filename}.log')
+    if os.path.isfile(f'{filename}.tex'): os.remove(f'{filename}.tex')
+    if os.path.isfile(f'{filename}.xdv'): os.remove(f'{filename}.xdv')

@@ -17,7 +17,7 @@ class Compiler():
       sys.exit()
     
     self.flags = Flags(args)
-    self.lexer = Lexer(f'{self.flags.file_path}.json').__enter__()
+    self.lexer = Lexer(f'{args.file_path}.json').__enter__()
 
   def __enter__(self):
     return self
@@ -26,26 +26,26 @@ class Compiler():
     self.lexer.__exit__(None, None, None)
 
   def compile(self, error_handler: errorhandler.ErrorHandler) -> None:
-    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating typesetting markup...')
+    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating typesetting markup...')
 
     while self.lexer.next() != None:
       pass
 
     if error_handler.fired: sys.exit()
 
-    with open(f'{self.flags.file_path}.tex', 'w') as file:
+    with open(f'{self.flags.filename}.tex', 'w') as file:
       file.write(self.flags.wrap('decorated abstract syntax tree repr goes here'))
     
-    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating auxiliary references...')
-    subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{self.flags.file_path}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating auxiliary references...')
+    subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{self.flags.filename}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
-    if not os.path.isfile(f'{self.flags.file_path}.xdv'):
-      logging.getLogger('COMPILER').critical(f'Xelatex failed to generate auxiliary references. See "{self.flags.file_path}.log".')
+    if not os.path.isfile(f'{self.flags.filename}.xdv'):
+      logging.getLogger('COMPILER').critical(f'Xelatex failed to generate auxiliary references. See "{self.flags.filename}.log".')
       sys.exit()
 
-    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.file_path}.json" - Generating portable document...')
-    subprocess.call([f'xelatex', '-halt-on-error', f'{self.flags.file_path}.tex'], stdout=subprocess.DEVNULL)
+    logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating portable document...')
+    subprocess.call([f'xelatex', '-halt-on-error', f'{self.flags.filename}.tex'], stdout=subprocess.DEVNULL)
 
-    if not os.path.isfile(f'{self.flags.file_path}.pdf'):
-      logging.getLogger('COMPILER').critical(f'Xelatex failed to generate portable document. See "{self.flags.file_path}.log".')
+    if not os.path.isfile(f'{self.flags.filename}.pdf'):
+      logging.getLogger('COMPILER').critical(f'Xelatex failed to generate portable document. See "{self.flags.filename}.log".')
       sys.exit()

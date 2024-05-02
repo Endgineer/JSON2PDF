@@ -1,8 +1,9 @@
-from typing import Sequence
+import typing
+import os
 
 class Flags:
   anonymize: bool
-  file_path: str
+  filename: str
   name: str
   position: str
   address: str
@@ -14,13 +15,12 @@ class Flags:
   website: str
   footer: bool
 
-  def __init__(self, args: Sequence[str]):
+  def __init__(self, args: typing.Sequence[str]):
+    self.filename = os.path.basename(args.file_path)
     self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email]
-    self.file_path = args.file_path
     self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'
-    self.footer = '\\makecvfooter\n  {\\today}\n  {'+args.name+'{\\enskip\\cdotp\\enskip}Curriculum Vitae}\n  {\\thepage\\ / \\pageref*{LastPage}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
     self.color = args.color if args.color else '000000'
-
+    
     if self.anonymize:
       self.name = f'\\name{{First}}{{Last}}'
       self.address = f'\\address{{City, Region}}'
@@ -37,6 +37,8 @@ class Flags:
       self.linkedin = f'\\linkedin{{{args.linkedin}}}' if args.linkedin else '% \\linkedin{}'
       self.github = f'\\github{{{args.github}}}' if args.github else '% \\github{}'
       self.website = f'\\homepage{{{args.website}}}' if args.website else '% \\homepage{}'
+    
+    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{self.name}{{\\enskip\\cdotp\\enskip}}Curriculum Vitae}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
   
   def wrap(self, tex: str) -> str:
     return (
