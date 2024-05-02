@@ -18,7 +18,7 @@ class Lexer():
 
   def next(self) -> None:
     '''Scans the next token in the stream, storing the result in context. None if at EOF.'''
-    while self.context.token is None:
+    while True:
       if len(self.context.line) == self.context.token_start_idx + self.context.token_len:
         if self.context.state != Context.State.START:
           self.__discard()
