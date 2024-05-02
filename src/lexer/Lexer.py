@@ -45,6 +45,9 @@ class Lexer():
   def pop(self) -> Token:
     return self.context.pop()
 
+  def peek(self) -> Token:
+    return self.context.token
+
   def __store(self) -> None:
     logging.getLogger('LEXICAL').debug(f'Scanned {self.context.store()}.')
   
