@@ -1,0 +1,29 @@
+{
+  "start": "'{' ε | sections '}'",
+
+  "sections": "section ( ',' section ) *",
+
+  "section": "string ':' '[' ε | items ']'",
+
+  "items": "item ( ',' item ) *",
+
+  "item": "( string | null | '{' itemproperties '}' )",
+
+  "itemproperties": "itemproperty ( ',' itemproperty ) {0,5}",
+
+  "itemproperty": "string ':' string | stringlist | stringdict",
+
+  "stringlist": "'[' ε | strings ']'",
+
+  "stringdict": "'{' ε | stringpairs '}'",
+
+  "stringpairs": "stringpair ( ',' stringpair ) *",
+
+  "stringpair": "string ':' string",
+
+  "strings": "string ( , string ) *",
+
+  "string": "'\"' nonescapecharacters '\"'",
+
+  "null": "'n' 'u' 'l' 'l'"
+}
