@@ -21,9 +21,5 @@
 
   "stringpair": "string ':' string",
 
-  "strings": "string ( , string ) *",
-
-  "string": "'\"' nonescapecharacters '\"'",
-
-  "null": "'n' 'u' 'l' 'l'"
+  "strings": "string ( , string ) *"
 }
