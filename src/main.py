@@ -34,6 +34,8 @@ if __name__ == '__main__':
     logging.getLogger('SYNTAX').addHandler(stream_handler)
     logging.getLogger('SEMANTIC').setLevel(logging.DEBUG if args.debug else logging.INFO)
     logging.getLogger('SEMANTIC').addHandler(stream_handler)
+    logging.getLogger('SYNTHESIS').setLevel(logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger('SYNTHESIS').addHandler(stream_handler)
 
     with Compiler(args) as compiler:
       compiler.compile(error_handler)
