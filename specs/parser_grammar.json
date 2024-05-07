@@ -7,7 +7,7 @@
 
   "items": "item ( ',' item ) *",
 
-  "item": "( string | null | '{' itemproperties '}' )",
+  "item": "( string | '{' itemproperties '}' )",
 
   "itemproperties": "itemproperty ( ',' itemproperty ) {0,5}",
 
