@@ -9,8 +9,7 @@ class Token:
     RBRACKET = 4
     COLON = 5
     COMMA = 6
-    NULL = 7
-    STRING = 8
+    STRING = 7
   
   value: str
   kind: Kind

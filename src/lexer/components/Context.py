@@ -1,87 +1,70 @@
 import enum
-import io
 
 from lexer.components.Token import Token
 
 class Context:
   class State(enum.Enum):
     START = 0
-    NULL_AWAIT_U = 1
-    NULL_AWAIT_L1 = 2
-    NULL_AWAIT_L2 = 3
-    STR_AWAIT_CHAR = 4
+    STR_AWAIT_CHAR = 1
+    DISCARDED_STRING = 2
   
-  file: io.TextIOWrapper
-  token_start_idx: int
-  token_len: int
+  document: str
+  line_start_idx: int
+  matched_token_start_idx: int
+  matched_token_len: int
   line_number: int
-  token_kind: Token.Kind
   state: State
-  token: Token
-  line: str
-  head: str
+  matched_token_kind: Token.Kind
+  matched_token: Token
+  current_char: str
 
   def __init__(self, file_path: str):
-    self.file = open(file_path, 'r')
+    with open(file_path, 'r') as file:
+      self.document = file.read()
 
-    self.token_start_idx = 0
-    self.token_len = 0
-    self.line_number = 0
-    self.token_kind = None
+    self.line_start_idx = 0
+    self.matched_token_start_idx = 0
+    self.matched_token_len = 0
+    self.line_number = 1
     self.state = Context.State.START
-    self.token = None
-    self.line = ''
-    self.head = ''
+    self.matched_token_kind = None
+    self.matched_token = None
+    self.current_char = ''
   
-  def clean(self) -> None:
-    '''Closes the file attached to the context.'''
-    self.file.close()
+  def scan_next_char(self) -> None:
+    self.current_char = self.document[self.matched_token_start_idx + self.matched_token_len]
   
-  def fetch(self) -> None:
-    '''Fetches the next line into the context.'''
-    self.line = self.file.readline()
-    self.token_start_idx = 0
-    self.token_len = 0
-    self.line_number += 1
-    self.token_kind = None
+  def at_end_of_file(self) -> bool:
+    return len(self.document) == self.matched_token_start_idx + self.matched_token_len
   
-  def step(self) -> None:
-    '''Moves the scanner head one step forward.'''
-    self.head = self.line[self.token_start_idx + self.token_len]
-  
-  def pop(self) -> Token:
-    token = self.token
-    self.token = None
-    return token
-  
-  def store(self) -> Token:
-    '''Stores the token currently captured by the context and resets the context.'''
-    self.token = Token(
-      self.line[self.token_start_idx : self.token_start_idx + self.token_len] if self.token_kind == Token.Kind.STRING else None,
-      self.token_kind,
+  def capture_token(self) -> None:
+    self.matched_token = None if self.matched_token_kind is None else Token(
+      self.document[self.matched_token_start_idx : self.matched_token_start_idx + self.matched_token_len] if self.matched_token_kind == Token.Kind.STRING else None,
+      self.matched_token_kind,
       self.line_number,
-      self.token_start_idx
+      self.matched_token_start_idx - self.line_start_idx
     )
 
-    self.token_start_idx += self.token_len
-    self.token_len = 0
-    self.token_kind = None
+    self.matched_token_start_idx += self.matched_token_len
+    self.matched_token_len = 0
+    self.matched_token_kind = None
     self.state = Context.State.START
-
-    return self.token
   
-  def discard(self) -> Token:
-    '''Discards the line currently captured by the context and resets the context.'''
+  def discard_context(self) -> Token:
+    while self.state == Context.State.DISCARDED_STRING and self.current_char != '"':
+      self.matched_token_len += 1
+      self.scan_next_char()
+    
     token = Token(
-      self.line[self.token_start_idx : len(self.line)],
+      self.document[self.matched_token_start_idx : self.matched_token_start_idx + self.matched_token_len],
       Token.Kind.DISCARDED,
       self.line_number,
-      self.token_start_idx
+      self.matched_token_start_idx - self.line_start_idx
     )
 
-    self.token_start_idx = len(self.line)
-    self.token_len = 0
-    self.token_kind = None
+    self.matched_token_start_idx += self.matched_token_len
+    self.matched_token_len = 0
+    self.matched_token_kind = None
     self.state = Context.State.START
 
     return token

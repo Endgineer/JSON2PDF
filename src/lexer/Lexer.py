@@ -5,51 +5,43 @@ from lexer.components.Context import Context
 from lexer.routines.matchers import *
 
 class Lexer():
-  context: Context
+  lexer_ctx: Context
 
   def __init__(self, file_path: str):
-    self.context = Context(file_path)
+    self.lexer_ctx = Context(file_path)
+    self.scan()
   
-  def __enter__(self):
-    return self
-  
-  def __exit__(self, exc_type, exc_value, traceback):
-    self.context.clean()
-
-  def next(self) -> None:
-    '''Scans the next token in the stream, storing the result in context. None if at EOF.'''
+  def scan(self) -> Token:
     while True:
-      if len(self.context.line) == self.context.token_start_idx + self.context.token_len:
-        if self.context.state != Context.State.START:
-          self.__discard()
-        
-        self.context.fetch()
+      while self.lexer_ctx.at_end_of_file():
+        if self.lexer_ctx.state != Context.State.START:
+          self.__discard_context()
+        else:
+          return self.__advance_tokens()
       
-      if not self.context.line: return
-      
-      self.context.step()
+      self.lexer_ctx.scan_next_char()
 
-      if match_str_char(self.context): pass
-      elif match_start(self.context): pass
-      elif match_null_u(self.context): pass
-      elif match_null_l1(self.context): pass
-      elif match_null_l2(self.context): pass
+      if match_str_char(self.lexer_ctx): pass
+      elif match_start(self.lexer_ctx): pass
       
-      if self.context.token_kind is None:
+      if self.lexer_ctx.matched_token_kind is None:
         pass
-      elif self.context.token_kind == Token.Kind.DISCARDED:
-        self.__discard()
+      elif self.lexer_ctx.matched_token_kind == Token.Kind.DISCARDED:
+        self.__discard_context()
       else:
-        return self.__store()
+        return self.__advance_tokens()
   
-  def pop(self) -> Token:
-    return self.context.pop()
-
   def peek(self) -> Token:
-    return self.context.token
+    return self.lexer_ctx.matched_token
 
-  def __store(self) -> None:
-    logging.getLogger('LEXICAL').debug(f'Scanned {self.context.store()}.')
+  def __advance_tokens(self) -> Token:
+    token = self.lexer_ctx.matched_token
+    self.lexer_ctx.capture_token()
+    
+    if token is not None:
+      logging.getLogger('LEXICAL').debug(f'Scanned {token}.')
+    
+    return token
   
-  def __discard(self) -> None:
-    logging.getLogger('LEXICAL').error(f'Unexpected symbol {self.context.head} in {self.context.discard()}.')
+  def __discard_context(self) -> None:
+    logging.getLogger('LEXICAL').error(f'Unexpected symbol {self.lexer_ctx.current_char} in {self.lexer_ctx.discard_context()}.')

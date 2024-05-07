@@ -17,24 +17,23 @@ class Compiler():
       sys.exit()
     
     self.flags = Flags(args)
-    self.lexer = Lexer(f'{args.file_path}.json').__enter__()
+    self.lexer = Lexer(f'{args.file_path}.json')
 
   def __enter__(self):
     return self
   
   def __exit__(self, exc_type, exc_value, traceback):
-    self.lexer.__exit__(None, None, None)
+    pass
 
   def compile(self, error_handler: errorhandler.ErrorHandler) -> None:
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating typesetting markup...')
 
-    while self.lexer.next() != None:
-      pass
+    while self.lexer.scan() != None: pass
 
     if error_handler.fired: sys.exit()
 
     with open(f'{self.flags.filename}.tex', 'w') as file:
-      file.write(self.flags.wrap('decorated abstract syntax tree repr goes here'))
+      file.write(self.flags.wrap(''))
     
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating auxiliary references...')
     subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{self.flags.filename}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
