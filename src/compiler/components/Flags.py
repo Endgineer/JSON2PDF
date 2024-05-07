@@ -1,6 +1,8 @@
 import typing
 import os
 
+from compiler.routines.awesome_cv import *
+
 class Flags:
   anonymize: bool
   filename: str
@@ -62,7 +64,11 @@ class Flags:
       f'% CONFIGURATIONS\n'
       f'%-------------------------------------------------------------------------------\n'
       f'% A4 paper size by default, use \'letterpaper\' for US letter\n'
-      f'\\documentclass[11pt, a4paper]{{awesome-cv}}\n'
+      f'\\documentclass[11pt, a4paper]{{article}}\n'
+      f'\n'
+      f'\makeatletter\n'
+      f'{load_class()}\n'
+      f'\makeatother\n'
       f'\n'
       f'% Configure page margins with geometry\n'
       f'\\geometry{{left=1.4cm, top=.8cm, right=1.4cm, bottom=1.8cm, footskip=.5cm}}\n'
