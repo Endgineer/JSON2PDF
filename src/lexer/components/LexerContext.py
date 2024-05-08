@@ -18,8 +18,11 @@ class LexerContext:
   matched_token: Token
   current_char: str
 
-  def __init__(self, file_path: str):
-    with open(file_path, 'r') as file:
+  def __init__(self, filepath: str):
+    self.switch(filepath)
+  
+  def switch(self, filepath) -> None:
+    with open(filepath, 'r') as file:
       self.document = file.read()
 
     self.line_start_idx = 0

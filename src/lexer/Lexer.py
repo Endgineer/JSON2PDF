@@ -7,8 +7,9 @@ from lexer.routines.matchers import *
 class Lexer():
   lexer_ctx: LexerContext
 
-  def __init__(self, file_path: str):
-    self.lexer_ctx = LexerContext(file_path)
+  def __init__(self, filepath: str):
+    logging.getLogger('LEXICAL').debug(f'Switched context to "{filepath}"...')
+    self.lexer_ctx = LexerContext(filepath)
     self.scan()
   
   def scan(self) -> Token:
@@ -33,6 +34,11 @@ class Lexer():
   
   def peek(self) -> Token.Kind:
     return None if self.lexer_ctx.matched_token is None else self.lexer_ctx.matched_token.kind
+
+  def context_switch(self, filepath) -> None:
+    logging.getLogger('LEXICAL').debug(f'Switched context to "{filepath}"...')
+    self.lexer_ctx.switch(filepath)
+    self.scan()
 
   def __advance_tokens(self) -> Token:
     token = self.lexer_ctx.matched_token
