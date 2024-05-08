@@ -6,10 +6,12 @@ import os
 
 from compiler.components.Flags import Flags
 from lexer.Lexer import Lexer
+from parser.Parser import Parser
 
 class Compiler():
   flags: Flags
   lexer: Lexer
+  parser: Parser
 
   def __init__(self, args):
     if not os.path.isfile(f'{args.file_path}.json'):
@@ -18,6 +20,7 @@ class Compiler():
     
     self.flags = Flags(args)
     self.lexer = None
+    self.parser = None
 
   def __enter__(self):
     return self
@@ -29,8 +32,9 @@ class Compiler():
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating typesetting markup...')
 
     self.lexer = Lexer(f'{self.flags.filepath}.json')
+    self.parser = Parser(self.lexer)
 
-    while self.lexer.scan() != None: pass
+    self.parser.parse_cv()
 
     if error_handler.fired: sys.exit()
 
