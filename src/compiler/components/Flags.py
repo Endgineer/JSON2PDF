@@ -5,6 +5,7 @@ from compiler.routines.awesome_cv import *
 
 class Flags:
   anonymize: bool
+  filepath: str
   filename: str
   name: str
   position: str
@@ -18,6 +19,7 @@ class Flags:
   footer: bool
 
   def __init__(self, args: typing.Sequence[str]):
+    self.filepath = args.file_path
     self.filename = os.path.basename(args.file_path)
     self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email]
     self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'

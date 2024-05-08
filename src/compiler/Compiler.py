@@ -17,7 +17,7 @@ class Compiler():
       sys.exit()
     
     self.flags = Flags(args)
-    self.lexer = Lexer(f'{args.file_path}.json')
+    self.lexer = None
 
   def __enter__(self):
     return self
@@ -27,6 +27,8 @@ class Compiler():
 
   def compile(self, error_handler: errorhandler.ErrorHandler) -> None:
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating typesetting markup...')
+
+    self.lexer = Lexer(f'{self.flags.filepath}.json')
 
     while self.lexer.scan() != None: pass
 
