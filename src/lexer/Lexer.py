@@ -31,8 +31,8 @@ class Lexer():
       else:
         return self.__advance_tokens()
   
-  def peek(self) -> Token:
-    return self.lexer_ctx.matched_token
+  def peek(self) -> Token.Kind:
+    return None if self.lexer_ctx.matched_token is None else self.lexer_ctx.matched_token.kind
 
   def __advance_tokens(self) -> Token:
     token = self.lexer_ctx.matched_token
