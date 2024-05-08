@@ -1,20 +1,20 @@
 import logging
 
 from lexer.components.Token import Token
-from lexer.components.Context import Context
+from lexer.components.LexerContext import LexerContext
 from lexer.routines.matchers import *
 
 class Lexer():
-  lexer_ctx: Context
+  lexer_ctx: LexerContext
 
   def __init__(self, file_path: str):
-    self.lexer_ctx = Context(file_path)
+    self.lexer_ctx = LexerContext(file_path)
     self.scan()
   
   def scan(self) -> Token:
     while True:
       while self.lexer_ctx.at_end_of_file():
-        if self.lexer_ctx.state != Context.State.START:
+        if self.lexer_ctx.state != LexerContext.State.START:
           self.__discard_context()
         else:
           return self.__advance_tokens()

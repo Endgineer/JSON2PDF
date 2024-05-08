@@ -1,4 +1,4 @@
-from lexer.components.Context import Context
+from lexer.components.LexerContext import LexerContext
 from lexer.components.Token import Token
 
 # ███████ ████████  █████  ██████  ████████     ███    ███  █████  ████████  ██████ ██   ██ ███████ ██████  
@@ -7,8 +7,8 @@ from lexer.components.Token import Token
 #      ██    ██    ██   ██ ██   ██    ██        ██  ██  ██ ██   ██    ██    ██      ██   ██ ██      ██   ██ 
 # ███████    ██    ██   ██ ██   ██    ██        ██      ██ ██   ██    ██     ██████ ██   ██ ███████ ██   ██ 
 
-def match_start(lexer_ctx: Context) -> bool:
-  if lexer_ctx.state != Context.State.START: return False
+def match_start(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.START: return False
 
   match(lexer_ctx.current_char):
     case ' ':
@@ -41,7 +41,7 @@ def match_start(lexer_ctx: Context) -> bool:
       lexer_ctx.matched_token_kind = Token.Kind.COMMA
     case '"':
       lexer_ctx.matched_token_len += 1
-      lexer_ctx.state = Context.State.STR_AWAIT_CHAR
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
     case _:
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
@@ -54,8 +54,8 @@ def match_start(lexer_ctx: Context) -> bool:
 #      ██    ██    ██   ██     ██  ██  ██ ██   ██    ██    ██      ██   ██ ██      ██   ██      ██ 
 # ███████    ██    ██   ██     ██      ██ ██   ██    ██     ██████ ██   ██ ███████ ██   ██ ███████ 
 
-def match_str_char(lexer_ctx: Context) -> bool:
-  if lexer_ctx.state != Context.State.STR_AWAIT_CHAR: return False
+def match_str_char(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.STR_AWAIT_CHAR: return False
 
   match(lexer_ctx.current_char):
     case '"':
@@ -64,7 +64,7 @@ def match_str_char(lexer_ctx: Context) -> bool:
     case '\\':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
-      lexer_ctx.state = Context.State.DISCARDED_STRING
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
     case _:
       lexer_ctx.matched_token_len += 1
   
