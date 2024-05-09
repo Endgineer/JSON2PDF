@@ -1,5 +1,3 @@
-import logging
-
 from parser.components.ParserContext import ParserContext
 from parser.routines.derivators import *
 from lexer.Lexer import Lexer

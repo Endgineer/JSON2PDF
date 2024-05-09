@@ -1,3 +1,5 @@
+import logging
+
 from lexer.Lexer import Lexer
 from compiler.components.Token import Token
 
@@ -14,8 +16,12 @@ class ParserContext:
 
     if lookahead_token_kind is not None and lookahead_token_kind == target_token_kind:
       token = self.lexer.scan()
+      
       if token.kind == Token.Kind.STRING:
         self.matched_token = token
+      
+      logging.getLogger('SYNTAX').debug(f'Parsed {token}, expected {target_token_kind.name}.')
       return True
     
+    logging.getLogger('SYNTAX').error(f'Found {token}, expected {target_token_kind.name}.')
     return False
