@@ -1,6 +1,6 @@
 import logging
 
-from lexer.components.Token import Token
+from compiler.components.Token import Token
 from lexer.components.LexerContext import LexerContext
 from lexer.routines.matchers import *
 

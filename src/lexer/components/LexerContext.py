@@ -1,6 +1,6 @@
 import enum
 
-from lexer.components.Token import Token
+from compiler.components.Token import Token
 
 class LexerContext:
   class State(enum.Enum):

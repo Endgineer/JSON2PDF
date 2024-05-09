@@ -1,5 +1,5 @@
 from lexer.Lexer import Lexer
-from lexer.components.Token import Token
+from compiler.components.Token import Token
 
 class ParserContext:
   lexer: Lexer

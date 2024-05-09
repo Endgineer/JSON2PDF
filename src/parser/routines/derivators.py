@@ -1,7 +1,7 @@
 import typing
 
 from parser.components.ParserContext import ParserContext
-from lexer.components.Token import Token
+from compiler.components.Token import Token
 
 #  ██████  ███████ ███    ██ ███████ ██████  ██  ██████ 
 # ██       ██      ████   ██ ██      ██   ██ ██ ██      
