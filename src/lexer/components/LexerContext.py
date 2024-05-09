@@ -42,7 +42,7 @@ class LexerContext:
   
   def capture_token(self) -> None:
     self.matched_token = None if self.matched_token_kind is None else Token(
-      self.document[self.matched_token_start_idx : self.matched_token_start_idx + self.matched_token_len] if self.matched_token_kind == Token.Kind.STRING else None,
+      self.document[self.matched_token_start_idx + 1 : self.matched_token_start_idx + self.matched_token_len - 1] if self.matched_token_kind == Token.Kind.STRING else None,
       self.matched_token_kind,
       self.line_number,
       self.matched_token_start_idx - self.line_start_idx

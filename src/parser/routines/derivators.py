@@ -17,7 +17,7 @@ def __derive_max(parser_ctx: ParserContext, named: bool, prefix: Token.Kind, der
     if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
       return None
 
-    key = parser_ctx.last_string
+    key = parser_ctx.matched_token
   
   if not parser_ctx.match(prefix): return None
   
@@ -100,7 +100,7 @@ def derive_itemproperty(parser_ctx: ParserContext):
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
   
-  key = parser_ctx.last_string
+  key = parser_ctx.matched_token
   
   match(parser_ctx.lexer.peek()):
     case Token.Kind.LBRACE:
@@ -128,13 +128,13 @@ def derive_stringpair(parser_ctx: ParserContext):
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
 
-  key = parser_ctx.last_string
+  key = parser_ctx.matched_token
   value = derive_string(parser_ctx)
 
   return None if value is None else (key, value)
 
 def derive_string(parser_ctx: ParserContext):
   if parser_ctx.match(Token.Kind.STRING):
-    return parser_ctx.last_string
+    return parser_ctx.matched_token
   
   return None
