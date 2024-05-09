@@ -2,7 +2,7 @@ import typing
 
 from parser.components.ParserContext import ParserContext
 from compiler.components.Token import Token
-import compiler.consts.typing as ptype
+from compiler.consts.typing import *
 
 #  ██████  ███████ ███    ██ ███████ ██████  ██  ██████ 
 # ██       ██      ████   ██ ██      ██   ██ ██ ██      
@@ -39,7 +39,7 @@ def __derive_max(parser_ctx: ParserContext, named: bool, prefix: Token.Kind, der
 #      ██ ██      ██      ██      ██ ██   ██ ██      
 # ███████ ██      ███████  ██████ ██ ██   ██ ███████ 
 
-def derive_curriculumvitae(parser_ctx: ParserContext) -> ptype.SectionsList:
+def derive_curriculumvitae(parser_ctx: ParserContext) -> SyntacticTypes.SectionsList:
   return __derive_max(parser_ctx,
     False,
     Token.Kind.LBRACE,
@@ -48,7 +48,7 @@ def derive_curriculumvitae(parser_ctx: ParserContext) -> ptype.SectionsList:
     Token.Kind.RBRACE
   )
 
-def derive_references(parser_ctx: ParserContext) -> ptype.ReferencedItemsList:
+def derive_references(parser_ctx: ParserContext) -> SyntacticTypes.ReferencedItemsList:
   return __derive_max(parser_ctx,
     False,
     Token.Kind.LBRACE,
@@ -57,7 +57,7 @@ def derive_references(parser_ctx: ParserContext) -> ptype.ReferencedItemsList:
     Token.Kind.RBRACE
   )
 
-def derive_reference(parser_ctx: ParserContext) -> ptype.ReferencedItem:
+def derive_reference(parser_ctx: ParserContext) -> SyntacticTypes.ReferencedItem:
   return __derive_max(parser_ctx,
     True,
     Token.Kind.LBRACE,
@@ -72,7 +72,7 @@ def derive_reference(parser_ctx: ParserContext) -> ptype.ReferencedItem:
 #      ██ ██      ██      ██      ██ ██      ██ ██      
 # ███████ ██      ███████  ██████ ██ ██      ██  ██████ 
 
-def derive_section(parser_ctx: ParserContext) -> ptype.Section:
+def derive_section(parser_ctx: ParserContext) -> SyntacticTypes.Section:
   return __derive_max(parser_ctx,
     True,
     Token.Kind.LBRACKET,
@@ -81,7 +81,7 @@ def derive_section(parser_ctx: ParserContext) -> ptype.Section:
     Token.Kind.RBRACKET
   )
 
-def derive_item(parser_ctx: ParserContext) -> ptype.RefOrItem:
+def derive_item(parser_ctx: ParserContext) -> SyntacticTypes.RefOrItem:
   match(parser_ctx.lexer.peek()):
     case Token.Kind.LBRACE:
       return __derive_max(parser_ctx,
@@ -96,7 +96,7 @@ def derive_item(parser_ctx: ParserContext) -> ptype.RefOrItem:
   
   return None
 
-def derive_itemproperty(parser_ctx: ParserContext) -> ptype.ItemProperty:
+def derive_itemproperty(parser_ctx: ParserContext) -> SyntacticTypes.ItemProperty:
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
   
@@ -124,7 +124,7 @@ def derive_itemproperty(parser_ctx: ParserContext) -> ptype.ItemProperty:
   
   return None if value is None else (key, value)
 
-def derive_stringpair(parser_ctx: ParserContext) -> ptype.StringTokenPair:
+def derive_stringpair(parser_ctx: ParserContext) -> SyntacticTypes.StringTokenPair:
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
 
@@ -133,7 +133,7 @@ def derive_stringpair(parser_ctx: ParserContext) -> ptype.StringTokenPair:
 
   return None if value is None else (key, value)
 
-def derive_string(parser_ctx: ParserContext) -> ptype.StringToken:
+def derive_string(parser_ctx: ParserContext) -> SyntacticTypes.StringToken:
   if parser_ctx.match(Token.Kind.STRING):
     return parser_ctx.matched_token
   
