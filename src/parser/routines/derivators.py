@@ -2,6 +2,7 @@ import typing
 
 from parser.components.ParserContext import ParserContext
 from compiler.components.Token import Token
+import compiler.consts.typing as ptype
 
 #  ██████  ███████ ███    ██ ███████ ██████  ██  ██████ 
 # ██       ██      ████   ██ ██      ██   ██ ██ ██      
@@ -10,7 +11,6 @@ from compiler.components.Token import Token
 #  ██████  ███████ ██   ████ ███████ ██   ██ ██  ██████ 
 
 def __derive_max(parser_ctx: ParserContext, named: bool, prefix: Token.Kind, derivation: typing.Callable, max: int, suffix: Token.Kind):
-  '''If name is None, it will assume no name or specifier.\nIf max is not positive, it will assume no limit.'''
   key = None
 
   if named:
@@ -39,7 +39,7 @@ def __derive_max(parser_ctx: ParserContext, named: bool, prefix: Token.Kind, der
 #      ██ ██      ██      ██      ██ ██   ██ ██      
 # ███████ ██      ███████  ██████ ██ ██   ██ ███████ 
 
-def derive_curriculumvitae(parser_ctx: ParserContext) -> list[tuple[Token, list[Token | list[tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]]]]]:
+def derive_curriculumvitae(parser_ctx: ParserContext) -> ptype.SectionsList:
   return __derive_max(parser_ctx,
     False,
     Token.Kind.LBRACE,
@@ -48,7 +48,7 @@ def derive_curriculumvitae(parser_ctx: ParserContext) -> list[tuple[Token, list[
     Token.Kind.RBRACE
   )
 
-def derive_references(parser_ctx: ParserContext) -> list[tuple[Token, list[tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]]]]:
+def derive_references(parser_ctx: ParserContext) -> ptype.ReferencedItemsList:
   return __derive_max(parser_ctx,
     False,
     Token.Kind.LBRACE,
@@ -57,7 +57,7 @@ def derive_references(parser_ctx: ParserContext) -> list[tuple[Token, list[tuple
     Token.Kind.RBRACE
   )
 
-def derive_reference(parser_ctx: ParserContext) -> tuple[Token, list[tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]]]:
+def derive_reference(parser_ctx: ParserContext) -> ptype.ReferencedItem:
   return __derive_max(parser_ctx,
     True,
     Token.Kind.LBRACE,
@@ -72,7 +72,7 @@ def derive_reference(parser_ctx: ParserContext) -> tuple[Token, list[tuple[Token
 #      ██ ██      ██      ██      ██ ██      ██ ██      
 # ███████ ██      ███████  ██████ ██ ██      ██  ██████ 
 
-def derive_section(parser_ctx: ParserContext) -> tuple[Token, list[Token | list[tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]]]]:
+def derive_section(parser_ctx: ParserContext) -> ptype.Section:
   return __derive_max(parser_ctx,
     True,
     Token.Kind.LBRACKET,
@@ -81,7 +81,7 @@ def derive_section(parser_ctx: ParserContext) -> tuple[Token, list[Token | list[
     Token.Kind.RBRACKET
   )
 
-def derive_item(parser_ctx: ParserContext) -> Token | list[tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]]:
+def derive_item(parser_ctx: ParserContext) -> ptype.RefOrItem:
   match(parser_ctx.lexer.peek()):
     case Token.Kind.LBRACE:
       return __derive_max(parser_ctx,
@@ -96,7 +96,7 @@ def derive_item(parser_ctx: ParserContext) -> Token | list[tuple[Token, Token | 
   
   return None
 
-def derive_itemproperty(parser_ctx: ParserContext) -> tuple[Token, Token | list[Token] | list[tuple[Token, Token]]]:
+def derive_itemproperty(parser_ctx: ParserContext) -> ptype.ItemProperty:
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
   
@@ -124,7 +124,7 @@ def derive_itemproperty(parser_ctx: ParserContext) -> tuple[Token, Token | list[
   
   return None if value is None else (key, value)
 
-def derive_stringpair(parser_ctx: ParserContext) -> tuple[Token, Token]:
+def derive_stringpair(parser_ctx: ParserContext) -> ptype.StringTokenPair:
   if not (parser_ctx.match(Token.Kind.STRING) and parser_ctx.match(Token.Kind.COLON)):
     return None
 
@@ -133,7 +133,7 @@ def derive_stringpair(parser_ctx: ParserContext) -> tuple[Token, Token]:
 
   return None if value is None else (key, value)
 
-def derive_string(parser_ctx: ParserContext) -> Token:
+def derive_string(parser_ctx: ParserContext) -> ptype.StringToken:
   if parser_ctx.match(Token.Kind.STRING):
     return parser_ctx.matched_token
   
