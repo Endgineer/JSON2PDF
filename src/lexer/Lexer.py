@@ -32,6 +32,6 @@ class Lexer():
   def peek(self) -> Token.Kind:
     return None if self.lexer_ctx.matched_token is None else self.lexer_ctx.matched_token.kind
 
-  def context_switch(self, filepath) -> None:
+  def context_switch(self, filepath: str) -> None:
     self.lexer_ctx.switch(filepath)
     self.scan()

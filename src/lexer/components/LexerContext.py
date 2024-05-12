@@ -22,7 +22,7 @@ class LexerContext:
   def __init__(self, filepath: str):
     self.switch(filepath)
   
-  def switch(self, filepath) -> None:
+  def switch(self, filepath: str) -> None:
     logging.getLogger('LEXICAL').debug(f'Switched context to "{filepath}"...')
 
     with open(filepath, 'r') as file:
