@@ -1,7 +1,7 @@
 import enum
 import logging
 
-from compiler.components.Token import Token
+from compiler.units.Token import Token
 
 class LexerContext:
   class State(enum.Enum):

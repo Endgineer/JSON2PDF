@@ -1,6 +1,6 @@
 import typing
 
-from compiler.components.Token import Token
+from compiler.units.Token import Token
 
 T = typing.TypeVar('T')
 U = typing.TypeVar('U')

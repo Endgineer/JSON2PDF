@@ -1,5 +1,5 @@
 from lexer.components.LexerContext import LexerContext
-from compiler.components.Token import Token
+from compiler.units.Token import Token
 
 # ███████ ████████  █████  ██████  ████████     ███    ███  █████  ████████  ██████ ██   ██ ███████ ██████  
 # ██         ██    ██   ██ ██   ██    ██        ████  ████ ██   ██    ██    ██      ██   ██ ██      ██   ██ 

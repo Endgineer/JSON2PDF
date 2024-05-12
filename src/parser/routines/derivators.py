@@ -1,7 +1,7 @@
 import typing
 
 from parser.components.ParserContext import ParserContext
-from compiler.components.Token import Token
+from compiler.units.Token import Token
 from compiler.consts.typing import *
 
 #  ██████  ███████ ███    ██ ███████ ██████  ██  ██████ 

@@ -1,7 +1,7 @@
 import logging
 
 from lexer.Lexer import Lexer
-from compiler.components.Token import Token
+from compiler.units.Token import Token
 
 class ParserContext:
   lexer: Lexer
