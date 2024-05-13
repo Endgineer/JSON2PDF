@@ -3,35 +3,37 @@ from lexer.components.LexerContext import LexerContext
 from lexer.routines.matchers import *
 
 class Lexer():
-  lexer_ctx: LexerContext
+  lexer_ctx_stack: list[LexerContext]
 
   def __init__(self, filepath: str):
-    self.lexer_ctx = LexerContext(filepath)
+    self.lexer_ctx_stack = [LexerContext(filepath)]
     self.scan()
   
   def scan(self) -> Token:
-    while True:
-      while self.lexer_ctx.at_end_of_file():
-        if self.lexer_ctx.state != LexerContext.State.START:
-          self.lexer_ctx.discard_context()
+    while len(self.lexer_ctx_stack) > 0:
+      while self.lexer_ctx_stack[-1].at_end_of_file():
+        if self.lexer_ctx_stack[-1].state != LexerContext.State.START:
+          self.lexer_ctx_stack[-1].discard_context()
         else:
-          return self.lexer_ctx.capture_token()
+          token = self.lexer_ctx_stack[-1].capture_token()
+          if token is None: self.lexer_ctx_stack.pop()
+          return token
       
-      self.lexer_ctx.scan_next_char()
+      self.lexer_ctx_stack[-1].scan_next_char()
 
-      if match_str_char(self.lexer_ctx): pass
-      elif match_start(self.lexer_ctx): pass
+      if match_str_char(self.lexer_ctx_stack[-1]): pass
+      elif match_start(self.lexer_ctx_stack[-1]): pass
       
-      if self.lexer_ctx.matched_token_kind is None:
+      if self.lexer_ctx_stack[-1].matched_token_kind is None:
         pass
-      elif self.lexer_ctx.matched_token_kind == Token.Kind.DISCARDED:
-        self.lexer_ctx.discard_context()
+      elif self.lexer_ctx_stack[-1].matched_token_kind == Token.Kind.DISCARDED:
+        self.lexer_ctx_stack[-1].discard_context()
       else:
-        return self.lexer_ctx.capture_token()
+        return self.lexer_ctx_stack[-1].capture_token()
   
   def peek(self) -> Token.Kind:
-    return None if self.lexer_ctx.matched_token is None else self.lexer_ctx.matched_token.kind
+    return None if self.lexer_ctx_stack[-1].matched_token is None else self.lexer_ctx_stack[-1].matched_token.kind
 
   def context_switch(self, filepath: str) -> None:
-    self.lexer_ctx.switch(filepath)
+    self.lexer_ctx_stack.append(LexerContext(filepath))
     self.scan()
