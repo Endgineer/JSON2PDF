@@ -63,7 +63,7 @@ class LexerContext:
     return token
   
   def discard_context(self) -> None:
-    while self.state == LexerContext.State.DISCARDED_STRING and self.current_char != '"':
+    while self.state == LexerContext.State.DISCARDED_STRING and self.current_char != '"' and self.current_char != '\n' and not self.at_end_of_file():
       self.matched_token_len += 1
       self.scan_next_char()
     
