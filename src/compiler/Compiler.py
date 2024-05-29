@@ -34,7 +34,7 @@ class Compiler():
     self.lexer = Lexer(f'{self.flags.filepath}.json')
     self.parser = Parser(self.lexer)
 
-    self.parser.parse_cv()
+    while self.parser.parse() is not None: pass
 
     if error_handler.fired: sys.exit()
 
