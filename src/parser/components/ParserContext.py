@@ -3,7 +3,7 @@ from collections import deque
 
 from lexer.Lexer import Lexer
 from compiler.units.Token import Token
-from compiler.consts.typing import SyntacticTypes
+from compiler.units.Prop import Prop
 from parser.constants.grammar import *
 from compiler.units.Item import Item
 from parser.components.Scope import Scope
@@ -13,8 +13,7 @@ class ParserContext:
   main_stack: deque[Token.Kind | Nonterminal | None]
   scope: Scope
   captured_item: Item
-  memorized_prop: SyntacticTypes.ItemProperty
-  memorized_propval_type: list | dict
+  memorized_prop: Prop
   memorized_section: str
 
   def __init__(self, lexer: Lexer):
@@ -23,7 +22,6 @@ class ParserContext:
     self.scope = Scope()
     self.captured_item = None
     self.memorized_prop = None
-    self.memorized_propval_type = None
     self.memorized_section = None
   
   def update_context_memory(self, symbol: Token.Kind | Nonterminal | None) -> None:
@@ -38,13 +36,14 @@ class ParserContext:
         None if self.lexer.peek() == Token.Kind.STRING else list()
       )
     elif symbol is PROP and self.lexer.peek() in symbol.first:
-      self.memorized_prop = [None, None]
+      self.memorized_prop = Prop()
+      self.memorized_prop.kind = str
     elif symbol is STRINGLIST and self.lexer.peek() in symbol.first:
-      self.memorized_prop[1] = list()
-      self.memorized_propval_type = list
+      self.memorized_prop.value = list()
+      self.memorized_prop.kind = list
     elif symbol is STRINGDICT and self.lexer.peek() in symbol.first:
-      self.memorized_prop[1] = list()
-      self.memorized_propval_type = dict
+      self.memorized_prop.value = list()
+      self.memorized_prop.kind = dict
   
   def complete_context_item(self, symbol: Token.Kind | Nonterminal | None) -> bool:
     if isinstance(symbol, Nonterminal):
@@ -66,19 +65,8 @@ class ParserContext:
         self.scope.try_enter_scope(token.kind)
 
         if self.captured_item is not None and token.kind == Token.Kind.STRING:
-          if self.captured_item.reference is not None:
-            pass
-          elif self.memorized_prop[0] is None:
-            self.memorized_prop[0] = token
-          elif self.memorized_prop[1] is None:
-            self.memorized_prop[1] = token
-          elif self.memorized_propval_type == list:
-            self.memorized_prop[1].append(token)
-          elif self.memorized_propval_type == dict:
-            if len(self.memorized_prop[1]) == 0 or self.memorized_prop[1][-1][1] is not None:
-              self.memorized_prop[1].append([token, None])
-            else:
-              self.memorized_prop[1][-1][1] = token
+          if self.captured_item.reference is not None: pass
+          else: self.memorized_prop.fill(token)
         
         nonterminal = self.scope.try_exit_scope(self.lexer.peek())
         if nonterminal is ITEM:
@@ -97,7 +85,11 @@ class ParserContext:
       if token is None: return
       self.scope.try_enter_scope(token.kind)
       logging.getLogger('SYNTAX').warning(f'Skipping {token} due to previous error.')
-      if self.scope.try_exit_scope(self.lexer.peek()) is not None: return
+      nonterminal = self.scope.try_exit_scope(self.lexer.peek())
+      if nonterminal is not None:
+        if nonterminal is STRINGPT or nonterminal is STRINGPAIR:
+          self.memorized_prop.fill(None)
+        return
   
   def log_return(self, status: bool) -> bool:
     logging.getLogger('SYNTAX').debug(f'{self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.main_stack])}]')

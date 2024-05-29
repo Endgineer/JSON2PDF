@@ -1,13 +1,13 @@
-from compiler.consts.typing import SyntacticTypes
+from compiler.units.Prop import Prop
 
 class Item:
   section: str
   reference: str
   line_number: int
   char_number: int
-  properties: list[SyntacticTypes.ItemProperty]
+  properties: list[Prop]
 
-  def __init__(self, section: str, reference: str, line_number: int, char_number: int, properties: list[SyntacticTypes.ItemProperty]):
+  def __init__(self, section: str, reference: str, line_number: int, char_number: int, properties: list[Prop]):
     self.section = section
     self.reference = reference
     self.line_number = line_number
