@@ -22,27 +22,28 @@ if __name__ == '__main__':
     arg_parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     args = arg_parser.parse_args()
 
+    filename = os.path.basename(args.file_path)
+    if os.path.isfile(f'{filename}.debug.log'): os.remove(f'{filename}.debug.log')
+
     error_handler = errorhandler.ErrorHandler()
-    stream_handler = logging.StreamHandler(stream=sys.stderr)
-    stream_handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
+    handler = logging.FileHandler(filename=f'{filename}.debug.log', encoding='utf-8') if args.debug else logging.StreamHandler(stream=sys.stderr)
+    handler.setFormatter(logging.Formatter(fmt='[%(name)s %(levelname)s]: %(message)s'))
     
     logging.getLogger('COMPILER').setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger('COMPILER').addHandler(stream_handler)
+    logging.getLogger('COMPILER').addHandler(handler)
     logging.getLogger('LEXICAL').setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger('LEXICAL').addHandler(stream_handler)
+    logging.getLogger('LEXICAL').addHandler(handler)
     logging.getLogger('SYNTAX').setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger('SYNTAX').addHandler(stream_handler)
+    logging.getLogger('SYNTAX').addHandler(handler)
     logging.getLogger('SEMANTIC').setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger('SEMANTIC').addHandler(stream_handler)
+    logging.getLogger('SEMANTIC').addHandler(handler)
     logging.getLogger('SYNTHESIS').setLevel(logging.DEBUG if args.debug else logging.INFO)
-    logging.getLogger('SYNTHESIS').addHandler(stream_handler)
+    logging.getLogger('SYNTHESIS').addHandler(handler)
 
     with Compiler(args) as compiler:
       compiler.compile(error_handler)
     
     if args.debug: sys.exit()
-
-    filename = os.path.basename(args.file_path)
 
     if os.path.isfile(f'{filename}.aux'): os.remove(f'{filename}.aux')
     if os.path.isfile(f'{filename}.log'): os.remove(f'{filename}.log')
