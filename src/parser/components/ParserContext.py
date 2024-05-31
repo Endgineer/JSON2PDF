@@ -25,9 +25,9 @@ class ParserContext:
     self.memorized_section = None
   
   def update_context_memory(self, symbol: Token.Kind | Nonterminal | None) -> None:
-    if symbol is SECTION and self.lexer.peek() in symbol.first:
+    if symbol is SECTION:
         self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token.value
-    elif symbol is ITEM and self.lexer.peek() in symbol.first:
+    elif symbol is ITEM:
       self.captured_item = Item(
         self.memorized_section,
         self.lexer.lexer_ctx_stack[-1].matched_token.value if self.lexer.peek() == Token.Kind.STRING else None,
@@ -35,13 +35,13 @@ class ParserContext:
         self.lexer.lexer_ctx_stack[-1].matched_token.char_number,
         None if self.lexer.peek() == Token.Kind.STRING else list()
       )
-    elif symbol is PROP and self.lexer.peek() in symbol.first:
+    elif symbol is PROP:
       self.memorized_prop = Prop()
       self.memorized_prop.kind = str
-    elif symbol is STRINGLIST and self.lexer.peek() in symbol.first:
+    elif symbol is STRINGLIST:
       self.memorized_prop.value = list()
       self.memorized_prop.kind = list
-    elif symbol is STRINGDICT and self.lexer.peek() in symbol.first:
+    elif symbol is STRINGDICT:
       self.memorized_prop.value = list()
       self.memorized_prop.kind = dict
   
@@ -62,16 +62,16 @@ class ParserContext:
       if token is None and token == symbol:
         return self.log_return(True)
       elif token is not None and token.kind == symbol:
-        self.scope.try_enter_scope(token.kind)
-
         if self.captured_item is not None and token.kind == Token.Kind.STRING:
           if self.captured_item.reference is not None: pass
           else: self.memorized_prop.fill(token)
         
-        nonterminal = self.scope.try_exit_scope(self.lexer.peek())
-        if nonterminal is ITEM:
+        synchronizations = self.scope.synchronize(self.lexer.peek())
+        if synchronizations is None:
+          pass
+        elif ITEM in synchronizations:
           return self.log_return(True)
-        elif nonterminal is PROP:
+        elif PROP in synchronizations:
           self.captured_item.properties.append(self.memorized_prop)
       else:
         logging.getLogger('SYNTAX').error(f'Found {token}, expected {symbol if symbol is None else symbol.name}.')
@@ -81,15 +81,14 @@ class ParserContext:
   
   def panic(self) -> None:
     while True:
-      token = self.lexer.scan()
-      if token is None: return
-      self.scope.try_enter_scope(token.kind)
-      logging.getLogger('SYNTAX').warning(f'Skipping {token} due to previous error.')
-      nonterminal = self.scope.try_exit_scope(self.lexer.peek())
-      if nonterminal is not None:
-        if nonterminal is STRINGPT or nonterminal is STRINGPAIR:
+      synchronizations = self.scope.synchronize(self.lexer.peek())
+      if synchronizations is not None:
+        if STRINGPT in synchronizations or STRINGPAIR in synchronizations:
           self.memorized_prop.fill(None)
         return
+      token = self.lexer.scan()
+      if token is None: return
+      logging.getLogger('SYNTAX').warning(f'Skipping {token} in an attempt to synchronize.')
   
   def log_return(self, status: bool) -> bool:
     logging.getLogger('SYNTAX').debug(f'{self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.main_stack])}]')
