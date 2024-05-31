@@ -53,7 +53,7 @@ class ParserContext:
         logging.getLogger('SYNTAX').debug(f'Used production {symbol} -> {" ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in expansion][::-1]) if len(expansion) > 0 else "ε"}.')
         self.main_stack.extendleft(expansion)
       else:
-        logging.getLogger('SYNTAX').error(f'Found {self.lexer.scan()}, expected one of {{{", ".join([s.name for s in symbol.first.keys()])}}}.')
+        logging.getLogger('SYNTAX').error(f'Found {self.lexer.scan()}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
         self.panic()
     
     elif isinstance(symbol, Token.Kind) or symbol is None:

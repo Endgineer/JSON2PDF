@@ -40,6 +40,7 @@ class Nonterminal:
     return self.symbol
 
 ROOT = Nonterminal('ROOT')
+EOF = Nonterminal('EOF')
 RESUME = Nonterminal('RESUME')
 RESUME1 = Nonterminal('RESUME1')
 RESUME2 = Nonterminal('RESUME2')
@@ -77,8 +78,15 @@ PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
 
 ROOT.define(
   {
-    Token.Kind.LBRACE: [ RESUME, None ],
-    None: [ RESUME, None ]
+    Token.Kind.LBRACE: [ RESUME, EOF ],
+    None: [ RESUME, EOF ]
+  },
+  { None }
+)
+
+EOF.define(
+  {
+    None: []
   },
   { None }
 )

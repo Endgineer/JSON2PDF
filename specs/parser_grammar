@@ -2,7 +2,8 @@
 GRAMMAR
 ===================================================================================================================
 
-ROOT -> RESUME $
+ROOT -> RESUME EOF
+EOF -> $
 
 RESUME -> epsilon
 RESUME -> { RESUME1
@@ -79,6 +80,7 @@ FIRST SETS
 
 FIRST[ROOT] = $ {
 FIRST[RESUME] = {
+FIRST[EOF] = $
 FIRST[RESUME1] = } string
 FIRST[SECTIONS] = string
 FIRST[RESUME2] = }
@@ -117,6 +119,7 @@ FOLLOW SETS
 
 FOLLOW[ROOT] =
 FOLLOW[RESUME] = $
+FOLLOW[EOF] =
 FOLLOW[RESUME1] = $
 FOLLOW[SECTIONS] = }
 FOLLOW[RESUME2] = $
