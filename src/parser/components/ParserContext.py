@@ -83,7 +83,10 @@ class ParserContext:
     while True:
       synchronizations = self.scope.synchronize(self.lexer.peek())
       if synchronizations is not None:
-        if STRINGPT in synchronizations or STRINGPAIR in synchronizations:
+        logging.getLogger('SYNTAX').warning(f'Synchronized to {self.lexer.lexer_ctx_stack[-1].matched_token} in an attempt to recover from previous error.')
+        if len(synchronizations) == 0:
+          self.main_stack.appendleft(self.scope.pop())
+        elif STRINGPT in synchronizations or STRINGPAIR in synchronizations:
           self.memorized_prop.fill(None)
         return
       token = self.lexer.scan()

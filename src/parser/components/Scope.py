@@ -14,6 +14,9 @@ class Scope:
     if not nonterminal.phantasmal:
       self.stack.append(nonterminal)
   
+  def pop(self) -> Nonterminal:
+    return self.stack.pop()
+  
   def synchronize(self, token_kind: Token.Kind) -> list[Nonterminal]:
     skipped_nonterminals = list()
     while True:
