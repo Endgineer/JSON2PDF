@@ -9,6 +9,7 @@ class LexerContext:
     STR_AWAIT_CHAR = 1
     DISCARDED_STRING = 2
   
+  filepath: str
   document: str
   line_start_idx: int
   matched_token_start_idx: int
@@ -28,6 +29,7 @@ class LexerContext:
     with open(filepath, 'r') as file:
       self.document = file.read()
 
+    self.filepath = filepath
     self.line_start_idx = 0
     self.matched_token_start_idx = 0
     self.matched_token_len = 0
@@ -36,6 +38,9 @@ class LexerContext:
     self.matched_token_kind = None
     self.matched_token = None
     self.current_char = ''
+  
+  def restore(self) -> None:
+    logging.getLogger('LEXICAL').debug(f'Restored context of "{self.filepath}"...')
   
   def scan_next_char(self) -> None:
     self.current_char = self.document[self.matched_token_start_idx + self.matched_token_len]

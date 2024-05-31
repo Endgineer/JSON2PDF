@@ -16,7 +16,10 @@ class Lexer():
           self.lexer_ctx_stack[-1].discard_context()
         else:
           token = self.lexer_ctx_stack[-1].capture_token()
-          if token is None: self.lexer_ctx_stack.pop()
+          if token is None:
+            self.lexer_ctx_stack.pop()
+            if len(self.lexer_ctx_stack) > 0:
+              self.lexer_ctx_stack[-1].restore()
           return token
       
       self.lexer_ctx_stack[-1].scan_next_char()
