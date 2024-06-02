@@ -26,5 +26,5 @@ class Segment:
       self.value = labels[self.invocation]
       return True
     
-    self.value = ''.join([' ' if c == '_' else '█' for c in self.value])
+    self.value = ''.join(['█' if c.isalnum() else c for c in self.value])
     return False
