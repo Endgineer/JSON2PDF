@@ -27,5 +27,5 @@ class Token:
   def __repr__(self):
     return f'{self.kind.name} at line {self.line_number} position {self.char_number}{"" if self.value is None else ": "+"".join(str(value) for value in self.value)}'
   
-  def get_string(self):
+  def get_string(self) -> str:
     return ''.join(str(value) for value in self.value)[1:-1]
