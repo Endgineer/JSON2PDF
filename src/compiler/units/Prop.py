@@ -12,7 +12,7 @@ class Prop:
     self.kind = None
   
   def __repr__(self):
-    return f'{(self.key.value, self.value.value if self.kind == str else ([token.value for token in self.value] if self.kind == list else self.value))}'
+    return f'{(self.key.get_string(), self.value.get_string() if self.kind == str else ([token.get_string() for token in self.value] if self.kind == list else self.value))}'
   
   def fill(self, token: Token) -> None:
     if self.key is None:

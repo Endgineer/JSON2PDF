@@ -7,7 +7,7 @@ class Pair:
     self.contents = [ key ]
   
   def __repr__(self):
-    return f'{tuple(None if token is None else token.value for token in self.contents)}'
+    return f'{tuple(None if token is None else token.get_string() for token in self.contents)}'
   
   def try_fill(self, token: Token) -> bool:
     if len(self.contents) == 2: return False
