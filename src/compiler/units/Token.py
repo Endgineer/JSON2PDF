@@ -18,7 +18,7 @@ class Token:
   line_number: int
   char_number: int
 
-  def __init__(self, value: str, kind: Kind, line_number: int, char_number: int):
+  def __init__(self, value: list[Segment], kind: Kind, line_number: int, char_number: int):
     self.value = value
     self.kind = kind
     self.line_number = line_number
