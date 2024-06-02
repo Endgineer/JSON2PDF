@@ -2,6 +2,24 @@
 GRAMMAR
 ===================================================================================================================
 
+REFF -> COLLECTION EOF
+
+COLLECTION -> epsilon
+COLLECTION -> { COLLECTION1
+COLLECTION1 -> REFS COLLECTION2
+COLLECTION2 -> }
+
+REFS -> epsilon
+REFS -> REF PREF
+
+REF -> string REF1
+REF1 -> : REF2
+REF2 -> { ITEM1
+
+PREF -> , REF PREF
+
+
+
 ROOT -> RESUME EOF
 EOF -> $
 
