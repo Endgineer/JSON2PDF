@@ -1,13 +1,17 @@
 import enum
 import logging
+from collections import deque
 
 from compiler.units.Token import Token
+from compiler.units.Segment import Segment
 
 class LexerContext:
   class State(enum.Enum):
     START = 0
     STR_AWAIT_CHAR = 1
-    DISCARDED_STRING = 2
+    STR_AWAIT_INVOCATION_SYLLABLE = 2
+    STR_AWAIT_INVOCATION_DELIMITER = 3
+    DISCARDED_STRING = 4
   
   filepath: str
   document: str
@@ -17,8 +21,10 @@ class LexerContext:
   line_number: int
   state: State
   matched_token_kind: Token.Kind
+  matched_token_value: list[Segment]
   matched_token: Token
   current_char: str
+  errors: deque[str]
 
   def __init__(self, filepath: str):
     self.switch(filepath)
@@ -36,8 +42,10 @@ class LexerContext:
     self.line_number = 1
     self.state = LexerContext.State.START
     self.matched_token_kind = None
+    self.matched_token_value = list()
     self.matched_token = None
     self.current_char = ''
+    self.errors = deque()
   
   def restore(self) -> None:
     logging.getLogger('LEXICAL').debug(f'Restored context of "{self.filepath}"...')
@@ -48,13 +56,22 @@ class LexerContext:
   def at_end_of_file(self) -> bool:
     return len(self.document) == self.matched_token_start_idx + self.matched_token_len
   
+  def create_segment(self) -> None:
+    self.matched_token_value.append(Segment(self.matched_token_len))
+  
+  def define_segment(self, invokable: bool) -> None:
+    self.matched_token_value[-1].define(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len], invokable)
+  
   def capture_token(self) -> Token:
     token = self.matched_token
     if token is not None:
       logging.getLogger('LEXICAL').debug(f'Scanned {token}.')
     
+    while len(self.errors) > 0:
+      logging.getLogger('LEXICAL').error(self.errors.popleft())
+    
     self.matched_token = None if self.matched_token_kind is None else Token(
-      self.document[self.matched_token_start_idx + 1 : self.matched_token_start_idx + self.matched_token_len - 1] if self.matched_token_kind == Token.Kind.STRING else None,
+      self.matched_token_value if self.matched_token_kind == Token.Kind.STRING else None,
       self.matched_token_kind,
       self.line_number,
       self.matched_token_start_idx - self.line_start_idx
@@ -63,25 +80,43 @@ class LexerContext:
     self.matched_token_start_idx += self.matched_token_len
     self.matched_token_len = 0
     self.matched_token_kind = None
+    self.matched_token_value = list()
     self.state = LexerContext.State.START
 
     return token
   
   def discard_context(self) -> None:
-    while self.state == LexerContext.State.DISCARDED_STRING and self.current_char != '"' and self.current_char != '\n' and not self.at_end_of_file():
-      self.matched_token_len += 1
-      self.scan_next_char()
-    
+    responsible_char = None if self.at_end_of_file() and self.state != LexerContext.State.START else self.current_char
+
+    if self.state == LexerContext.State.DISCARDED_STRING or responsible_char is None:
+      while self.current_char != '\n' and not self.at_end_of_file():
+        self.scan_next_char()
+        self.matched_token_len += 1
+        if self.current_char == '"': break
+      string = self.document[self.matched_token_start_idx : self.matched_token_start_idx + self.matched_token_len + (-1 if self.current_char == '\n' else 0)]+('' if self.current_char == '"' else '"')
+    else:
+      string = None
+
     token = Token(
-      self.document[self.matched_token_start_idx : self.matched_token_start_idx + self.matched_token_len],
+      string,
       Token.Kind.DISCARDED,
       self.line_number,
       self.matched_token_start_idx - self.line_start_idx
     )
 
-    logging.getLogger('LEXICAL').error(f'Unexpected symbol {self.current_char} in {token}.')
+    if responsible_char is not None and responsible_char != '\n':
+      self.errors.append(f'Unexpected symbol {repr(responsible_char)} in {token}.')
+    if responsible_char is None or (self.at_end_of_file() and self.state == LexerContext.State.DISCARDED_STRING and self.current_char != '"'):
+      self.errors.append(f'Unexpected EOF before the end of {token}')
+    if responsible_char == '\n' or (self.state == LexerContext.State.DISCARDED_STRING and self.current_char == '\n'):
+      self.errors.append(f'Unexpected NEWLINE before the end of {token}')
 
     self.matched_token_start_idx += self.matched_token_len
     self.matched_token_len = 0
     self.matched_token_kind = None
+    self.matched_token_value = list()
     self.state = LexerContext.State.START
+
+    if self.current_char == '\n':
+      self.line_start_idx = self.matched_token_start_idx
+      self.line_number += 1

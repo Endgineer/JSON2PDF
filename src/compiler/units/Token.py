@@ -1,5 +1,7 @@
 import enum
 
+from compiler.units.Segment import Segment
+
 class Token:
   class Kind(enum.Enum):
     DISCARDED = 0
@@ -11,7 +13,7 @@ class Token:
     COMMA = 6
     STRING = 7
   
-  value: str
+  value: list[Segment]
   kind: Kind
   line_number: int
   char_number: int
@@ -23,4 +25,7 @@ class Token:
     self.char_number = char_number
   
   def __repr__(self):
-    return f'{self.kind.name} at line {self.line_number} position {self.char_number}{"" if self.value is None else ": "+repr(self.value)}'
+    return f'{self.kind.name} at line {self.line_number} position {self.char_number}{"" if self.value is None else ": "+"".join(str(value) for value in self.value)}'
+  
+  def get_string(self):
+    return ''.join(str(value) for value in self.value)[1:-1]
