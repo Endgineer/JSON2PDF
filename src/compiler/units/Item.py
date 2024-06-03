@@ -1,11 +1,21 @@
+import enum
+
 from compiler.units.Prop import Prop
 
 class Item:
+  class Kind(enum.Enum):
+    CVPARAGRAPH = 0
+    CVSKILL = 1
+    CVENTRY = 2
+    CVHONOR = 3
+  
   section: str
   reference: str
   line_number: int
   char_number: int
   properties: list[Prop]
+  kind: Kind
+  labels: set[str]
 
   def __init__(self, section: str, reference: str, line_number: int, char_number: int, properties: list[Prop]):
     self.section = section
@@ -13,7 +23,12 @@ class Item:
     self.line_number = line_number
     self.char_number = char_number
     self.properties = properties
+    self.kind = None
+    self.labels = None
   
   def __repr__(self):
-    refstr = f'referenced by "{self.reference}" ' if self.reference is not None else ''
-    return f'{refstr}at line {self.line_number} position {self.char_number}'
+    return ''.join([
+      f'of type {self.kind.name} ' if self.kind is not None else '',
+      f'referenced by "{self.reference}" ' if self.reference is not None else '',
+      f'at line {self.line_number} position {self.char_number}'
+    ])

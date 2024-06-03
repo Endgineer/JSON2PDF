@@ -7,11 +7,13 @@ import os
 from compiler.components.Flags import Flags
 from lexer.Lexer import Lexer
 from parser.Parser import Parser
+from semanter.Semanter import Semanter
 
 class Compiler():
   flags: Flags
   lexer: Lexer
   parser: Parser
+  semanter: Semanter
 
   def __init__(self, args):
     if not os.path.isfile(f'{args.file_path}.json'):
@@ -21,6 +23,7 @@ class Compiler():
     self.flags = Flags(args)
     self.lexer = None
     self.parser = None
+    self.semanter = None
 
   def __enter__(self):
     return self
@@ -33,8 +36,9 @@ class Compiler():
 
     self.lexer = Lexer(f'{self.flags.filepath}.json')
     self.parser = Parser(self.lexer)
+    self.semanter = Semanter(self.parser)
 
-    while self.parser.parse() is not None: pass
+    while self.semanter.analyze() is not None: pass
 
     if error_handler.fired: sys.exit()
 

@@ -29,3 +29,11 @@ class Token:
   
   def get_string(self) -> str:
     return ''.join(str(value) for value in self.value)[1:-1]
+  
+  def contains_invocation(self) -> bool:
+    if self.value is not None:
+      for segment in self.value:
+        if segment.invocation is not None:
+          return True
+    
+    return False
