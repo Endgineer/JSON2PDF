@@ -33,7 +33,7 @@ json2cv .\samples\resume -n "Awesome Person" -p "Awesome Role" -m "000-000-0000"
 The tool supports an **anonymizing** mode, where personal information and designated text within the cv is anonymized or obfuscated, to allow the cv to be shared with others without giving away personal information. At minimum, in order for a cv to not be anonymized, the tool must be provided with the basic flags. Even if these flags are provided, the cv can still be anonymized by specifying the `--anonymized` flag. As for designated text, in order to designate text as sensitive, you wrap the text in curly braces; but make sure there are no spaces between the curly braces and the sensitive text. By default, if a corresponding label is not provided for designated text, the text will be obfuscated; otherwise it will be anonymized.
 
 ```json
-"This is non-sensitive text. But {this is sensitive text}. { This text will error}, because there is a space between one of the braces and the sensitive text. If the label 'this is sensitive text' -> 'this is the anonymized version' is provided, the text will anonymize into 'this is the anonymized version'. Otherwise, it will obfuscate into "████ ██ █████████ ████"."
+"This is non-sensitive text. But {this is sensitive text}. { This text will error}, because there is a space between one of the braces and the sensitive text. If the label 'this is sensitive text' -> 'this is the anonymized version' is provided, the text will anonymize into 'this is the anonymized version'. Otherwise, it will obfuscate into '████ ██ █████████ ████'."
 ```
 
 ### Structure
