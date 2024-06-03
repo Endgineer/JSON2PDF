@@ -1,0 +1,40 @@
+{
+  "Skills": [
+    {
+      "category": "Lorem",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec ultricies arcu."
+    },
+    {
+      "category": "Praesent",
+      "content": "Praesent in lorem lorem. Pellentesque congue porttitor eros, et pharetra est sollicitudin tempor."
+    },
+    {
+      "category": "Aliquam",
+      "content": "Aliquam at interdum odio. Aliquam blandit tempor est id laoreet."
+    }
+  ],
+
+  "Experience": [
+    "samples/sections/experience::AwesomeCompany:PRESENT"
+  ],
+
+  "Education": [
+    "samples/sections/education::Masters-AwesomeField@AwesomeUniversity",
+    "samples/sections/education::Bachelors-AwesomeField@AwesomeUniversity"
+  ],
+
+  "Projects": [
+    "samples/sections/projects::AwesomeProject1",
+    "samples/sections/projects::AwesomeProject2",
+    "samples/sections/projects::AwesomeProject3"
+  ],
+
+  "Certifications": [
+    "samples/sections/certifications::AwesomeInstitution-CERT2:PRESENT",
+    "samples/sections/certifications::AwesomeInstitution-CERT1:PAST"
+  ],
+
+  "Extracurricular": [
+    "samples/sections/extracurricular::AwesomeEvent:PRESENT"
+  ]
+}

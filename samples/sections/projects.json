@@ -1,0 +1,38 @@
+{
+  "AwesomeProject1" : {
+    "title": "Awesome Project 1",
+    "subtitle": "Awesome Role",
+    "ttag": "Awesome Tools",
+    "btag": "PRESENT",
+    "details": [
+      "Proin eget tincidunt metus. In justo sapien, imperdiet nec urna sit amet, molestie feugiat massa. Cras tempor suscipit arcu, in finibus dolor ultrices vel. Phasellus semper ac enim vitae dictum.",
+      "Nulla quis facilisis ligula. Integer pharetra purus tortor, vitae laoreet tortor facilisis quis. Nulla eu nisi luctus, fringilla lectus vulputate, dignissim mauris. Ut accumsan rhoncus venenatis.",
+      "Donec mattis dapibus consectetur. Suspendisse sagittis quis lacus nec tincidunt. In sed tristique elit, eget efficitur velit. Nam magna nunc, aliquet dignissim ultricies quis, auctor quis dolor. Sed at placerat dui.",
+      "Nullam lorem odio, aliquam in accumsan id, iaculis quis augue. Etiam vulputate finibus lorem, eget tempor diam sodales tincidunt. In laoreet lacus orci, ac euismod tellus blandit eu."
+    ]
+  },
+  "AwesomeProject2" : {
+    "title": "Awesome Project 2",
+    "subtitle": "Awesome Role",
+    "ttag": "Awesome Tools",
+    "btag": "PAST",
+    "details": [
+      "Aliquam ullamcorper volutpat odio, et vulputate sem pulvinar at. Vivamus ipsum libero, lobortis sit amet tempus quis, pharetra at ante. Interdum et malesuada fames ac ante ipsum primis in faucibus.",
+      "Quisque sed efficitur odio. Maecenas hendrerit vehicula lorem eu ultricies. Morbi dui sapien, dignissim quis dui molestie, tempus placerat diam. Nunc ligula massa, ullamcorper ut orci ut, feugiat posuere neque.",
+      "Duis sed mi id sapien interdum vulputate in a turpis. Aliquam a laoreet dui, sit amet tempus quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.",
+      "Sed quis condimentum nulla. Cras maximus, lorem nec volutpat hendrerit, massa augue consectetur ante, ullamcorper convallis tellus risus hendrerit dolor. Integer ante metus, aliquam et justo eget, faucibus placerat mi."
+    ]
+  },
+  "AwesomeProject3" : {
+    "title": "Awesome Project 3",
+    "subtitle": "Awesome Role",
+    "ttag": "Awesome Tools",
+    "btag": "PAST",
+    "details": [
+      "Nulla rutrum enim vitae nibh facilisis maximus. Sed sed bibendum justo, ac vulputate mi. Praesent tempor ex ligula, et porta tellus mattis non. Nullam nec finibus neque, id euismod massa. Etiam eget vehicula risus.",
+      "Suspendisse sed feugiat lectus. Quisque venenatis, augue et feugiat tincidunt, eros augue lobortis diam, a condimentum lectus dui in dui. Donec lacinia egestas lacus nec convallis.",
+      "Integer commodo, neque et molestie faucibus, leo nisl hendrerit dolor, nec venenatis odio nulla in est. Nam consequat nisi eget ipsum fermentum, a placerat massa ullamcorper. Sed dui neque, lacinia at lorem tincidunt, porttitor faucibus turpis.",
+      "Vivamus volutpat tincidunt dui nec gravida. Nunc et felis auctor, commodo leo ut, semper ante. Vivamus scelerisque sem ligula, at cursus nisl pretium eget."
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "AwesomeInstitution-CERT2:PRESENT": {
+    "ltag": "PRESENT",
+    "title": "Certified Awesome Engineer - Professional",
+    "subtitle": "Awesome Institution",
+    "rtag": "CERT2"
+  },
+  "AwesomeInstitution-CERT1:PAST": {
+    "ltag": "PAST",
+    "title": "Certified Awesome Engineer - Associate",
+    "subtitle": "Awesome Institution",
+    "rtag": "CERT1"
+  }
+}

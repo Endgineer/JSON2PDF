@@ -1,0 +1,19 @@
+{
+  "Masters-AwesomeField@AwesomeUniversity" : {
+    "labels": { "Awesome University": "Mysterious University" },
+    "title": "{Awesome University}",
+    "subtitle": "Master of Awesome in Awesomeness (MAA)",
+    "ttag": "Awesome Location",
+    "btag": "PAST - PRESENT",
+    "details": [
+      "Aliquam ullamcorper volutpat odio, et vulputate sem pulvinar at."
+    ]
+  },
+  "Bachelors-AwesomeField@AwesomeUniversity" : {
+    "labels": { "Awesome University": "Mysterious University" },
+    "title": "{Awesome University}",
+    "subtitle": "Bachelor of Awesome in Awesomeness (MAA)",
+    "ttag": "Awesome Location",
+    "btag": "PAST - PRESENT"
+  }
+}

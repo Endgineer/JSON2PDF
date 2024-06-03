@@ -1,0 +1,14 @@
+{
+  "AwesomeEvent:PRESENT" : {
+    "title": "Awesome Project at Awesome Event",
+    "subtitle": "Awesome Role",
+    "ttag": "Awesome Location",
+    "btag": "PRESENT",
+    "details": [
+      "Maecenas et commodo orci, quis mattis urna. Donec vitae condimentum neque.",
+      "Sed ultricies enim elit, ut volutpat nunc accumsan aliquam.",
+      "Aenean risus quam, pellentesque ac augue placerat, scelerisque pellentesque lectus.",
+      "Nam dignissim ligula sem, at feugiat felis convallis sed."
+    ]
+  }
+}
