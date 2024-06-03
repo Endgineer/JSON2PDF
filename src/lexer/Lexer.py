@@ -37,7 +37,7 @@ class Lexer():
         return self.lexer_ctx_stack[-1].capture_token()
   
   def peek(self) -> Token.Kind:
-    return None if self.lexer_ctx_stack[-1].matched_token is None else self.lexer_ctx_stack[-1].matched_token.kind
+    return None if len(self.lexer_ctx_stack) == 0 or self.lexer_ctx_stack[-1].matched_token is None else self.lexer_ctx_stack[-1].matched_token.kind
 
   def context_switch(self, filepath: str) -> None:
     self.lexer_ctx_stack.append(LexerContext(filepath))
