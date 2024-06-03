@@ -16,9 +16,9 @@ class ParserContext:
   memorized_prop: Prop
   memorized_section: Token
 
-  def __init__(self, lexer: Lexer):
+  def __init__(self, lexer: Lexer, starting_symbol: Nonterminal = ROOT):
     self.lexer = lexer
-    self.stack = deque([ ROOT ])
+    self.stack = deque([ starting_symbol ])
     self.scope = Scope()
     self.captured_item = None
     self.memorized_prop = None
