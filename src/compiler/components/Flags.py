@@ -21,7 +21,7 @@ class Flags:
   def __init__(self, args: typing.Sequence[str]):
     self.filepath = args.file_path
     self.filename = os.path.basename(args.file_path)
-    self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email]
+    self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email] or args.anonymized
     self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'
     self.color = args.color if args.color else '000000'
     

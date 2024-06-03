@@ -20,6 +20,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('-w', '--website', type=str, default=None)
     arg_parser.add_argument('--footer', action=argparse.BooleanOptionalAction)
     arg_parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
+    arg_parser.add_argument('--anonymized', action=argparse.BooleanOptionalAction)
     args = arg_parser.parse_args()
 
     filename = os.path.basename(args.file_path)
