@@ -104,6 +104,7 @@ class SemanterContext:
 
   def analyze_prop_labels(self, props_with_valid_keys_vals: list[Prop]) -> dict[str, str]:
     label_registry = dict()
+    label_index = dict()
     
     for prop in props_with_valid_keys_vals:
       if prop.key.get_string() == propset.LABELS:
@@ -114,6 +115,7 @@ class SemanterContext:
             label_registry[pair_key] += 1
           else:
             label_registry[pair_key] = 1
+            label_index[pair_key] = pair[1].get_string()
           
           pair_key_cycle = pair[0].contains_invocation()
           pair_val_cycle = pair[1].contains_invocation()
@@ -123,7 +125,7 @@ class SemanterContext:
           if pair_val_cycle:
             self.error(f'Label value {pair[0]} cannot contain an invocation.')
     
-    return label_registry
+    return label_index
 
 
 
