@@ -1,4 +1,14 @@
 ===================================================================================================================
+STRING TERMINALS
+===================================================================================================================
+
+kstring - A key string, meaning it can only contain lowercase alphabetical characters.
+sstring - A static string, meaning it cannot contain invocations.
+dstring - A dynamic string, meaning it can contain invocations.
+istring - An identifier string, meaning it can only contain letters, digits, delimited by singular standard special symbols: # ~ ! @ $ % ^ & * ( ) _ + - = < > ? : [ ] |
+rstring - A reference string, which must contain a static prefix, scope resolution operator, and then an identifier suffix.
+
+===================================================================================================================
 GRAMMAR
 ===================================================================================================================
 
