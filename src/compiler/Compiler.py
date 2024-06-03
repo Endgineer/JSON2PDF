@@ -34,7 +34,7 @@ class Compiler():
   def __exit__(self, exc_type, exc_value, traceback):
     pass
 
-  def compile(self, error_handler: errorhandler.ErrorHandler) -> None:
+  def compile(self, error_handler: errorhandler.ErrorHandler, test_mode: bool = False) -> None:
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating typesetting markup...')
 
     self.lexer = Lexer(f'{self.flags.filepath}.json')
@@ -44,7 +44,7 @@ class Compiler():
 
     self.synthesizer.synthesize(self.flags.anonymize)
 
-    if error_handler.fired: sys.exit()
+    if error_handler.fired or test_mode: sys.exit()
 
     with open(f'{self.flags.filename}.tex', 'w', encoding='utf-8') as file:
       file.write(self.flags.wrap(self.synthesizer.synthesizer_ctx))
