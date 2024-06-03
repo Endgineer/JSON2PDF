@@ -81,15 +81,16 @@ class SynthesizerContext:
   def invoke_token(labels: dict[str, str], token: Token, anonymize: bool) -> set[str]:
     invoked_labels = set()
 
+    token_string = f'{token}'
     for segment in token.value:
       invocation_result = segment.invoke(labels, anonymize)
 
       if invocation_result is None:
         pass
       elif invocation_result is False:
-        logging.getLogger('SYNTHESIS').warning(f'Missing anonymized version of "{segment.invocation}", obfuscating instead.')
+        logging.getLogger('SYNTHESIS').warning(f'Missing label for invocation "{segment.invocation}" in {token_string}{", will obfuscate instead" if anonymize else ""}.')
       else:
-        logging.getLogger('SYNTHESIS').debug(f'Invoked anonymized version of "{segment.invocation}".')
+        logging.getLogger('SYNTHESIS').debug(f'Bound invocation "{segment.invocation}" in {token_string} to its label.')
         invoked_labels.add(segment.invocation)
     
     return invoked_labels
