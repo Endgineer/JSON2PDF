@@ -62,12 +62,17 @@ class ParserContext:
       if type(expansion) == list:
         logging.getLogger('SYNTAX').debug(f'Used production {symbol} -> {" ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in expansion][::-1]) if len(expansion) > 0 else "ε"}.')
         self.stack.extendleft(expansion)
+        if len(self.stack) == 0: self.scope.pop()
       else:
         logging.getLogger('SYNTAX').error(f'Found {self.lexer.scan()}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
         self.panic()
     
     elif isinstance(symbol, Token.Kind) or symbol is None:
       token = self.lexer.scan()
+
+      corrected_nonterminal = self.scope.correct(token.kind)
+      if corrected_nonterminal is not None:
+        logging.getLogger('SYNTAX').debug(f'Corrected scope based on {corrected_nonterminal} being fulfilled.')
       
       if token is None and token == symbol:
         return self.log_return(True)
@@ -79,12 +84,17 @@ class ParserContext:
         synchronizations = self.scope.synchronize(self.lexer.peek())
         if synchronizations is None:
           pass
-        elif REF2 in synchronizations:
-          return self.log_return(True)
-        elif ITEM in synchronizations:
-          return self.log_return(True)
-        elif PROP in synchronizations:
-          self.captured_item.properties.append(self.memorized_prop)
+        else:
+          if len(synchronizations) > 0:
+            logging.getLogger('SYNTAX').debug(f'Synchronized scope based on an upcoming {None if self.lexer.peek() is None else self.lexer.peek().name} token, popping {synchronizations}.')
+          
+          if PROP in synchronizations:
+            self.captured_item.properties.append(self.memorized_prop)
+          
+          if ITEM in synchronizations:
+            return self.log_return(True)
+          elif REF2 in synchronizations:
+            return self.log_return(True)
       else:
         logging.getLogger('SYNTAX').error(f'Found {token}, expected {symbol if symbol is None else symbol.name}.')
         self.panic()

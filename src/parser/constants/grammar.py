@@ -19,12 +19,11 @@ class Nonterminal:
     self.follow = follow
     return self
   
-  def is_nullable(self):
+  def set_nullable(self):
     self.nullable = True
     return self
   
-  def is_phantasmal(self):
-    self.nullable = True
+  def set_phantasmal(self):
     self.phantasmal = True
     return self
   
@@ -47,6 +46,8 @@ REFS = Nonterminal('REFS')
 REF = Nonterminal('REF')
 REF1 = Nonterminal('REF1')
 REF2 = Nonterminal('REF2')
+REFITEM1 = Nonterminal('REFITEM1')
+REFITEM2 = Nonterminal('REFITEM2')
 PREF = Nonterminal('PREF')
 
 ROOT = Nonterminal('ROOT')
@@ -88,6 +89,13 @@ PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
 
 
 
+for to_be_nullable in [COLLECTION, REFS, PREF, RESUME, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
+  to_be_nullable.set_nullable()
+for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
+  to_be_phantasmal.set_phantasmal()
+
+
+
 REFF.define(
   {
     Token.Kind.LBRACE: [ COLLECTION, EOF ],
@@ -101,7 +109,7 @@ COLLECTION.define(
     Token.Kind.LBRACE: [ Token.Kind.LBRACE, COLLECTION1 ]
   },
   { None }
-).is_nullable()
+)
 
 COLLECTION1.define(
   {
@@ -123,7 +131,7 @@ REFS.define(
     Token.Kind.STRING: [ REF, PREF ]
   },
   { Token.Kind.RBRACE }
-).is_nullable()
+)
 
 REF.define(
   {
@@ -141,7 +149,21 @@ REF1.define(
 
 REF2.define(
   {
-    Token.Kind.LBRACE: [ Token.Kind.LBRACE, ITEM1 ]
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, REFITEM1 ]
+  },
+  REF.follow
+)
+
+REFITEM1.define(
+  {
+    Token.Kind.STRING: [ PROPS, REFITEM2 ]
+  },
+  REF.follow
+)
+
+REFITEM2.define(
+  {
+    Token.Kind.RBRACE: [ Token.Kind.RBRACE ]
   },
   REF.follow
 )
@@ -151,7 +173,7 @@ PREF.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, REF, PREF ]
   },
   { Token.Kind.RBRACE }
-).is_phantasmal()
+)
 
 
 
@@ -175,7 +197,7 @@ RESUME.define(
     Token.Kind.LBRACE: [ Token.Kind.LBRACE, RESUME1 ]
   },
   { None }
-).is_nullable()
+)
 
 RESUME1.define(
   {
@@ -197,7 +219,7 @@ SECTIONS.define(
     Token.Kind.STRING: [ SECTION, PSECTION ]
   },
   { Token.Kind.RBRACE }
-).is_nullable()
+)
 
 SECTION.define(
   {
@@ -241,7 +263,7 @@ PSECTION.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, SECTION, PSECTION ]
   },
   { Token.Kind.RBRACE }
-).is_phantasmal()
+)
 
 ITEMS.define(
   {
@@ -249,7 +271,7 @@ ITEMS.define(
     Token.Kind.STRING: [ ITEM, PITEM ]
   },
   { Token.Kind.RBRACKET }
-).is_nullable()
+)
 
 ITEM.define(
   {
@@ -278,7 +300,7 @@ PITEM.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, ITEM, PITEM ]
   },
   { Token.Kind.RBRACKET }
-).is_phantasmal()
+)
 
 PROPS.define(
   {
@@ -306,7 +328,7 @@ PPROP.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, PROP, PPROP ]
   },
   { Token.Kind.RBRACE }
-).is_phantasmal()
+)
 
 PROPVAL.define(
   {
@@ -366,7 +388,7 @@ STRINGPTS.define(
     Token.Kind.STRING: [ STRINGPT, PSTRINGPT ]
   },
   { Token.Kind.RBRACKET }
-).is_nullable()
+)
 
 STRINGPT.define(
   {
@@ -380,14 +402,14 @@ PSTRINGPT.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, STRINGPT, PSTRINGPT ]
   },
   { Token.Kind.RBRACKET }
-).is_phantasmal()
+)
 
 STRINGPAIRS.define(
   {
     Token.Kind.STRING: [ STRINGPAIR, PSTRINGPAIR ]
   },
   { Token.Kind.RBRACE }
-).is_nullable()
+)
 
 STRINGPAIR.define(
   {
@@ -415,4 +437,4 @@ PSTRINGPAIR.define(
     Token.Kind.COMMA: [ Token.Kind.COMMA, STRINGPAIR, PSTRINGPAIR ]
   },
   { Token.Kind.RBRACE }
-).is_phantasmal()
+)

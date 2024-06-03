@@ -17,6 +17,10 @@ class Scope:
   def pop(self) -> Nonterminal:
     return self.stack.pop()
   
+  def correct(self, token_kind: Token.Kind) -> Nonterminal:
+    if token_kind in self.stack[-1].first and token_kind in self.stack[-1].follow:
+      return self.stack.pop()
+  
   def synchronize(self, token_kind: Token.Kind) -> list[Nonterminal]:
     skipped_nonterminals = list()
     while True:

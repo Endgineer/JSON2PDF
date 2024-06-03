@@ -1,14 +1,4 @@
 ===================================================================================================================
-STRING TERMINALS
-===================================================================================================================
-
-kstring - A key string, meaning it can only contain lowercase alphabetical characters.
-sstring - A static string, meaning it cannot contain invocations.
-dstring - A dynamic string, meaning it can contain invocations.
-istring - An identifier string, meaning it can only contain letters, digits, delimited by singular standard special symbols: # ~ ! @ $ % ^ & * ( ) _ + - = < > ? : [ ] |
-rstring - A reference string, which must contain a static prefix, scope resolution operator, and then an identifier suffix.
-
-===================================================================================================================
 GRAMMAR
 ===================================================================================================================
 
@@ -24,7 +14,9 @@ REFS -> REF PREF
 
 REF -> string REF1
 REF1 -> : REF2
-REF2 -> { ITEM1
+REF2 -> { REFITEM1
+REFITEM1 -> PROPS REFITEM2
+REFITEM2 -> }
 
 PREF -> epsilon
 PREF -> , REF PREF
@@ -103,7 +95,7 @@ PSTRINGPAIR -> , STRINGPAIR PSTRINGPAIR
 SETS
 ===================================================================================================================
 
-NULLIBLES = RESUME SECTIONS PSECTION ITEMS PITEM PPROP STRINGPTS PSTRINGPT STRINGPAIRS PSTRINGPAIR
+NULLABLES = COLLECTION REFS PREF RESUME SECTIONS PSECTION ITEMS PITEM PPROP STRINGPTS PSTRINGPT STRINGPAIRS PSTRINGPAIR
 
 FIRST SETS
 
@@ -115,6 +107,8 @@ FIRST[REFS] = string
 FIRST[REF] = string
 FIRST[REF1] = :
 FIRST[REF2] = {
+FIRST[REFITEM1] = string
+FIRST[REFITEM2] = }
 FIRST[PREF] = ,
 
 FIRST[ROOT] = $ {
@@ -164,6 +158,8 @@ FOLLOW[REFS] = }
 FOLLOW[REF] = } ,
 FOLLOW[REF1] = } ,
 FOLLOW[REF2] = } ,
+FOLLOW[REFITEM1] = } ,
+FOLLOW[REFITEM2] = } ,
 FOLLOW[PREF] = }
 
 FOLLOW[ROOT] =
