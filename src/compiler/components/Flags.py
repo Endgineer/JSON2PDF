@@ -26,6 +26,7 @@ class Flags:
     self.color = args.color if args.color else '000000'
     
     if self.anonymize:
+      footer_name = f'First Last'
       self.name = f'\\name{{First}}{{Last}}'
       self.address = f'\\address{{City, Region}}'
       self.mobile = f'\\mobile{{000-000-0000}}'
@@ -34,6 +35,7 @@ class Flags:
       self.github = f'\\github{{first-last}}' if args.github else '% \\github{}'
       self.website = f'\\homepage{{https://portfolio-website.io/}}' if args.website else '% \\homepage{}'
     else:
+      footer_name = f'{args.name.split()[0]} {args.name.split()[1]}'
       self.name = f'\\name{{{args.name.split()[0]}}}{{{args.name.split()[1]}}}'
       self.address = f'\\address{{{args.address}}}'
       self.mobile = f'\\mobile{{{args.mobile}}}'
@@ -42,7 +44,7 @@ class Flags:
       self.github = f'\\github{{{args.github}}}' if args.github else '% \\github{}'
       self.website = f'\\homepage{{{args.website}}}' if args.website else '% \\homepage{}'
     
-    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{self.name}{{\\enskip\\cdotp\\enskip}}Curriculum Vitae}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
+    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}Curriculum Vitae}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
   
   def wrap(self, tex: str) -> str:
     return (
