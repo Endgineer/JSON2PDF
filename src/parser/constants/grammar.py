@@ -39,6 +39,16 @@ class Nonterminal:
   def __repr__(self):
     return self.symbol
 
+REFF = Nonterminal('REFF')
+COLLECTION = Nonterminal('COLLECTION')
+COLLECTION1 = Nonterminal('COLLECTION1')
+COLLECTION2 = Nonterminal('COLLECTION2')
+REFS = Nonterminal('REFS')
+REF = Nonterminal('REF')
+REF1 = Nonterminal('REF1')
+REF2 = Nonterminal('REF2')
+PREF = Nonterminal('PREF')
+
 ROOT = Nonterminal('ROOT')
 EOF = Nonterminal('EOF')
 RESUME = Nonterminal('RESUME')
@@ -75,6 +85,75 @@ STRINGPAIR = Nonterminal('STRINGPAIR')
 STRINGPAIR1 = Nonterminal('STRINGPAIR1')
 STRINGPAIR2 = Nonterminal('STRINGPAIR2')
 PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
+
+
+
+REFF.define(
+  {
+    Token.Kind.LBRACE: [ COLLECTION, EOF ],
+    None: [ COLLECTION, EOF ]
+  },
+  { None }
+)
+
+COLLECTION.define(
+  {
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, COLLECTION1 ]
+  },
+  { None }
+).is_nullable()
+
+COLLECTION1.define(
+  {
+    Token.Kind.RBRACE: [ REFS, COLLECTION2 ],
+    Token.Kind.STRING: [ REFS, COLLECTION2 ]
+  },
+  COLLECTION.follow
+)
+
+COLLECTION2.define(
+  {
+    Token.Kind.RBRACE: [ Token.Kind.RBRACE ]
+  },
+  COLLECTION.follow
+)
+
+REFS.define(
+  {
+    Token.Kind.STRING: [ REF, PREF ]
+  },
+  { Token.Kind.RBRACE }
+).is_nullable()
+
+REF.define(
+  {
+    Token.Kind.STRING: [ Token.Kind.STRING, REF1 ]
+  },
+  { Token.Kind.RBRACE, Token.Kind.COMMA }
+)
+
+REF1.define(
+  {
+    Token.Kind.COLON: [ Token.Kind.COLON, REF2 ]
+  },
+  REF.follow
+)
+
+REF2.define(
+  {
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, ITEM1 ]
+  },
+  REF.follow
+)
+
+PREF.define(
+  {
+    Token.Kind.COMMA: [ Token.Kind.COMMA, REF, PREF ]
+  },
+  { Token.Kind.RBRACE }
+).is_phantasmal()
+
+
 
 ROOT.define(
   {

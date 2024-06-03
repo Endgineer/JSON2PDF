@@ -25,8 +25,18 @@ class ParserContext:
     self.memorized_section = None
   
   def update_context_memory(self, symbol: Token.Kind | Nonterminal | None) -> None:
-    if symbol is SECTION:
-        self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token
+    if symbol is REF:
+      self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token
+    elif symbol is REF2:
+      self.captured_item = Item(
+        self.memorized_section,
+        None,
+        self.memorized_section.line_number,
+        self.memorized_section.char_number,
+        list()
+      )
+    elif symbol is SECTION:
+      self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token
     elif symbol is ITEM:
       self.captured_item = Item(
         self.memorized_section,
@@ -69,6 +79,8 @@ class ParserContext:
         synchronizations = self.scope.synchronize(self.lexer.peek())
         if synchronizations is None:
           pass
+        elif REF2 in synchronizations:
+          return self.log_return(True)
         elif ITEM in synchronizations:
           return self.log_return(True)
         elif PROP in synchronizations:

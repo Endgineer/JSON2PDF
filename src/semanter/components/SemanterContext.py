@@ -146,7 +146,7 @@ class SemanterContext:
 
 
 
-  def fetch(self, item: Item) -> Item:
+  def fetch(self, item: Item, recursed: bool = False) -> Item:
     if item.reference.contains_invocation():
       return self.error(f'Item {item} cannot contain an invocation.')
     
@@ -176,10 +176,38 @@ class SemanterContext:
       if self.cache[fileref] is None:
         return self.error(f'File reference "{fileref}" in {item} points to an invalid or empty file.')
       elif itemref in self.cache[fileref]:
-        logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
-        return self.cache[fileref][itemref]
+        if not recursed: logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
+        return Item(item.section, self.cache[fileref][itemref].reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
       else:
         return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
 
     logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
-    return None
+    
+    file_items = self.parser.parse_all(f'{fileref}.json')
+    self.cache[fileref] = dict()
+    reference_registry = dict()
+
+    for file_item in file_items:
+      if file_item.reference.contains_invocation():
+        self.error(f'The identifier of item {file_item} in file "{fileref}.json" cannot contain an invocation.')
+        continue
+
+      file_item_reference_string = file_item.reference.get_string()
+
+      if file_item_reference_string.strip() == '':
+        self.error(f'The identifier of item {file_item} in file "{fileref}.json" cannot be empty.')
+        continue
+
+      if not self.identifier_verifier(file_item_reference_string):
+        self.error(f'The identifier of item {file_item} in file "{fileref}.json" is not a valid identifier.')
+        continue
+
+      if file_item_reference_string in reference_registry:
+        self.error(f'Duplicate identifier of item {file_item} in file "{fileref}.json", previously found {reference_registry[file_item_reference_string]} other(s).')
+        reference_registry[file_item_reference_string] += 1
+        continue
+
+      reference_registry[file_item_reference_string] = 1
+      self.cache[fileref][file_item_reference_string] = file_item
+    
+    return self.fetch(item, True)
