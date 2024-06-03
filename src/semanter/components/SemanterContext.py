@@ -174,12 +174,12 @@ class SemanterContext:
     
     if fileref in self.cache:
       if self.cache[fileref] is None:
-        return logging.getLogger('SEMANTIC').error(f'File reference "{fileref}" in {item} points to an invalid or empty file.')
+        return self.error(f'File reference "{fileref}" in {item} points to an invalid or empty file.')
       elif itemref in self.cache[fileref]:
         logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
         return self.cache[fileref][itemref]
       else:
-        return logging.getLogger('SEMANTIC').error(f'Item {item} does not exist in referenced file "{fileref}.json".')
+        return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
 
     logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
     return None
