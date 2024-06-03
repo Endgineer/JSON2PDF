@@ -10,7 +10,7 @@ from parser.components.Scope import Scope
 
 class ParserContext:
   lexer: Lexer
-  main_stack: deque[Token.Kind | Nonterminal | None]
+  stack: deque[Token.Kind | Nonterminal | None]
   scope: Scope
   captured_item: Item
   memorized_prop: Prop
@@ -18,7 +18,7 @@ class ParserContext:
 
   def __init__(self, lexer: Lexer):
     self.lexer = lexer
-    self.main_stack = deque([ ROOT ])
+    self.stack = deque([ ROOT ])
     self.scope = Scope()
     self.captured_item = None
     self.memorized_prop = None
@@ -51,7 +51,7 @@ class ParserContext:
       expansion = symbol.expand(self.lexer.peek())
       if type(expansion) == list:
         logging.getLogger('SYNTAX').debug(f'Used production {symbol} -> {" ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in expansion][::-1]) if len(expansion) > 0 else "ε"}.')
-        self.main_stack.extendleft(expansion)
+        self.stack.extendleft(expansion)
       else:
         logging.getLogger('SYNTAX').error(f'Found {self.lexer.scan()}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
         self.panic()
@@ -85,7 +85,7 @@ class ParserContext:
       if synchronizations is not None:
         logging.getLogger('SYNTAX').warning(f'Synchronized to {self.lexer.lexer_ctx_stack[-1].matched_token} in an attempt to recover from previous error.')
         if len(synchronizations) == 0:
-          self.main_stack.appendleft(self.scope.pop())
+          self.stack.appendleft(self.scope.pop())
         elif STRINGPT in synchronizations or STRINGPAIR in synchronizations:
           self.memorized_prop.fill(None)
         return
@@ -94,6 +94,6 @@ class ParserContext:
       logging.getLogger('SYNTAX').warning(f'Skipping {token} in an attempt to synchronize.')
   
   def log_return(self, status: bool) -> bool:
-    logging.getLogger('SYNTAX').debug(f'{self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.main_stack])}]')
+    logging.getLogger('SYNTAX').debug(f'{self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.stack])}]')
     if status and self.captured_item is not None: logging.getLogger('SYNTAX').debug(f'Captured item {self.captured_item}.')
     return status

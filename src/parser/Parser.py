@@ -12,8 +12,8 @@ class Parser():
   def parse(self) -> Item:
     self.parser_ctx.captured_item = None
     
-    while len(self.parser_ctx.main_stack) > 0:
-      symbol = self.parser_ctx.main_stack.popleft()
+    while len(self.parser_ctx.stack) > 0:
+      symbol = self.parser_ctx.stack.popleft()
 
       self.parser_ctx.update_context_memory(symbol)
 

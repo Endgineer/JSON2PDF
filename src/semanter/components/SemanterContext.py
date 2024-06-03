@@ -5,7 +5,7 @@ from parser.Parser import Parser
 from compiler.units.Item import Item
 from compiler.units.Prop import Prop
 import semanter.constants.propset as propset
-import semanter.utilities.IdentifierVerifier as IdentifierVerifier
+from semanter.utilities.IdentifierVerifier import IdentifierVerifier
 
 class SemanterContext:
   parser: Parser
