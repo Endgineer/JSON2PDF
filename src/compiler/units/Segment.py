@@ -19,12 +19,16 @@ class Segment:
   def __repr__(self):
     return self.value if self.invocation is None or self.value is not None else f'{{{self.invocation}}}'
   
-  def bind(self, labels: dict[str, str]) -> bool:
+  def invoke(self, labels: dict[str, str], anonymize: bool) -> bool:
     if self.invocation is None:
       return None
-    elif self.invocation in labels:
-      self.value = labels[self.invocation]
-      return True
-    
-    self.value = ''.join(['█' if c.isalnum() else c for c in self.value])
-    return False
+    elif anonymize:
+      if self.invocation in labels:
+        self.value = labels[self.invocation]
+        return True
+      
+      self.value = ''.join(['█' if c.isalnum() else c for c in self.invocation])
+      return False
+    else:
+      self.value = self.invocation
+      return self.invocation in labels

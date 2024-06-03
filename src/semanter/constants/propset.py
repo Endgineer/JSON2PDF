@@ -1,8 +1,20 @@
 from compiler.units.Item import Item
 
-STRS = { 'paragraph', 'category', 'content', 'title', 'subtitle', 'btag', 'ttag', 'ltag', 'rtag' }
-LISTS = { 'details' }
-DICTS = { 'labels' }
+PARAGRAPH = 'paragraph'
+CATEGORY = 'category'
+CONTENT = 'content'
+TITLE = 'title'
+SUBTITLE = 'subtitle'
+BTAG = 'btag'
+TTAG = 'ttag'
+LTAG = 'ltag'
+RTAG = 'rtag'
+DETAILS = 'details'
+LABELS = 'labels'
+
+STRS = { PARAGRAPH, CATEGORY, CONTENT, TITLE, SUBTITLE, BTAG, TTAG, LTAG, RTAG }
+LISTS = { DETAILS }
+DICTS = { LABELS }
 
 CVGLOBALS_REQUIRED = set()
 CVGLOBALS_OPTIONAL = { 'labels' }
@@ -36,7 +48,7 @@ def prop_similarity_coefficients(props: set[str]) -> dict[Item.Kind, float]:
   '''
   return {
     Item.Kind.CVPARAGRAPH: float(len(CVPARAGRAPH_REQUIRED.intersection(props - CVPARAGRAPH_OPTIONAL))) / float(len(CVPARAGRAPH_REQUIRED.union(props - CVPARAGRAPH_OPTIONAL))),
-    Item.Kind.CVSKILL: float(len(CVSKILLS_REQUIRED.intersection(props - CVSKILLS_OPTIONAL))) / float(len(CVSKILLS_REQUIRED.union(props - CVSKILLS_OPTIONAL))),
-    Item.Kind.CVENTRY: float(len(CVENTRIES_REQUIRED.intersection(props - CVENTRIES_OPTIONAL))) / float(len(CVENTRIES_REQUIRED.union(props - CVENTRIES_OPTIONAL))),
-    Item.Kind.CVHONOR: float(len(CVHONORS_REQUIRED.intersection(props - CVHONORS_OPTIONAL))) / float(len(CVHONORS_REQUIRED.union(props - CVHONORS_OPTIONAL))),
+    Item.Kind.CVSKILLS: float(len(CVSKILLS_REQUIRED.intersection(props - CVSKILLS_OPTIONAL))) / float(len(CVSKILLS_REQUIRED.union(props - CVSKILLS_OPTIONAL))),
+    Item.Kind.CVENTRIES: float(len(CVENTRIES_REQUIRED.intersection(props - CVENTRIES_OPTIONAL))) / float(len(CVENTRIES_REQUIRED.union(props - CVENTRIES_OPTIONAL))),
+    Item.Kind.CVHONORS: float(len(CVHONORS_REQUIRED.intersection(props - CVHONORS_OPTIONAL))) / float(len(CVHONORS_REQUIRED.union(props - CVHONORS_OPTIONAL))),
   }

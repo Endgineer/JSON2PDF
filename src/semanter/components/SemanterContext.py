@@ -102,11 +102,11 @@ class SemanterContext:
   
 
 
-  def analyze_prop_labels(self, props_with_valid_keys_vals: list[Prop]) -> set[str]:
+  def analyze_prop_labels(self, props_with_valid_keys_vals: list[Prop]) -> dict[str, str]:
     label_registry = dict()
     
     for prop in props_with_valid_keys_vals:
-      if prop.key.get_string() == 'labels':
+      if prop.key.get_string() == propset.LABELS:
         for pair in prop.value:
           pair_key = pair[0].get_string()
           if pair_key in label_registry:
@@ -123,11 +123,11 @@ class SemanterContext:
           if pair_val_cycle:
             self.error(f'Label value {pair[0]} cannot contain an invocation.')
     
-    return set(label_registry)
+    return label_registry
 
 
 
-  def analyze_item_registration(self, item: Item, labels: set[str]) -> bool:
+  def analyze_item_registration(self, item: Item, labels: dict[str, str]) -> bool:
     section_name = item.section.get_string()
 
     if section_name.strip() == '':

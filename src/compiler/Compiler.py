@@ -8,12 +8,14 @@ from compiler.components.Flags import Flags
 from lexer.Lexer import Lexer
 from parser.Parser import Parser
 from semanter.Semanter import Semanter
+from synthesizer.Synthesizer import Synthesizer
 
 class Compiler():
   flags: Flags
   lexer: Lexer
   parser: Parser
   semanter: Semanter
+  synthesizer: Synthesizer
 
   def __init__(self, args):
     if not os.path.isfile(f'{args.file_path}.json'):
@@ -24,6 +26,7 @@ class Compiler():
     self.lexer = None
     self.parser = None
     self.semanter = None
+    self.synthesizer = None
 
   def __enter__(self):
     return self
@@ -37,13 +40,14 @@ class Compiler():
     self.lexer = Lexer(f'{self.flags.filepath}.json')
     self.parser = Parser(self.lexer)
     self.semanter = Semanter(self.parser)
+    self.synthesizer = Synthesizer(self.semanter)
 
-    while self.semanter.analyze() is not None: pass
+    self.synthesizer.synthesize(self.flags.anonymize)
 
     if error_handler.fired: sys.exit()
 
-    with open(f'{self.flags.filename}.tex', 'w') as file:
-      file.write(self.flags.wrap(''))
+    with open(f'{self.flags.filename}.tex', 'w', encoding='utf-8') as file:
+      file.write(self.flags.wrap(self.synthesizer.synthesizer_ctx))
     
     logging.getLogger('COMPILER').info(f'Compiling "{self.flags.filename}.json" - Generating auxiliary references...')
     subprocess.call([f'xelatex', '-halt-on-error', '-no-pdf', f'{self.flags.filename}.tex'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

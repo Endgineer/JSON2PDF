@@ -12,6 +12,7 @@ pyinstaller = "^6.6.0"
 errorhandler = "^2.0.1"
 argparse = "^1.4.0"
 logging = "^0.4.9.6"
+pylatex = "^1.4.2"
 
 
 [build-system]

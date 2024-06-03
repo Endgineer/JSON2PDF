@@ -6,9 +6,9 @@ from compiler.units.Token import Token
 class Item:
   class Kind(enum.Enum):
     CVPARAGRAPH = 0
-    CVSKILL = 1
-    CVENTRY = 2
-    CVHONOR = 3
+    CVSKILLS = 1
+    CVENTRIES = 2
+    CVHONORS = 3
   
   section: Token
   reference: Token
@@ -16,7 +16,7 @@ class Item:
   char_number: int
   properties: list[Prop]
   kind: Kind
-  labels: set[str]
+  labels: dict[str, str]
 
   def __init__(self, section: Token, reference: Token, line_number: int, char_number: int, properties: list[Prop]):
     self.section = section
