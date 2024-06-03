@@ -5,18 +5,21 @@ from parser.Parser import Parser
 from compiler.units.Item import Item
 from compiler.units.Prop import Prop
 import semanter.constants.propset as propset
+import semanter.utilities.IdentifierVerifier as IdentifierVerifier
 
 class SemanterContext:
   parser: Parser
   cache: dict[str, dict[str, Item] | None]
   registry: dict[str, Item.Kind]
   current_item_valid: bool
+  identifier_verifier: IdentifierVerifier
 
   def __init__(self, parser: Parser):
     self.parser = parser
     self.cache = dict()
     self.registry = dict()
     self.current_item_valid = True
+    self.identifier_verifier = IdentifierVerifier()
 
 
 
@@ -125,15 +128,17 @@ class SemanterContext:
 
 
   def analyze_item_registration(self, item: Item, labels: set[str]) -> bool:
-    if item.section.strip() == '':
-      self.error(f'Item {item} cannot belong to a nameless section.')
-    
-    if item.section in self.registry and self.registry[item.section] != item.kind:
-      self.error(f'Type mismatch between item {item} and section "{item.section}", which has previously accepted items of type {self.registry[item.section].name}.')
-    
-    if self.current_item_valid:
-      self.registry[item.section] = item.kind
-      logging.getLogger('SEMANTIC').debug(f'Registered item {item} in section "{item.section}".')
+    section_name = item.section.get_string()
+
+    if section_name.strip() == '':
+      self.error(f'Section namespace {item.section} cannot be nameless.')
+    elif item.section.contains_invocation():
+      self.error(f'Section namespace {item.section} cannot contain an invocation.')
+    elif section_name in self.registry and self.registry[section_name] != item.kind:
+      self.error(f'Type mismatch between item {item} and section namespace "{section_name}", which has previously accepted items of type {self.registry[section_name].name}.')
+    elif self.current_item_valid:
+      self.registry[section_name] = item.kind
+      logging.getLogger('SEMANTIC').debug(f'Registered item {item} under section namespace "{section_name}".')
       item.labels = labels
       return True
     
@@ -142,28 +147,39 @@ class SemanterContext:
 
 
   def fetch(self, item: Item) -> Item:
-    reference_parts = item.reference.split('::')
+    if item.reference.contains_invocation():
+      return self.error(f'Item {item} cannot contain an invocation.')
+    
+    reference_parts = item.reference.get_string().split('::')
 
     if len(reference_parts) != 2:
-      logging.getLogger('SEMANTIC').error(f'Item {item} is not of the form "<FILE_BASENAME_PATH>::<ITEM_IDENTIFIER>".')
-      return None
+      return self.error(f'Item {item} is not of the form "<FILE_BASENAME_PATH>::<ITEM_IDENTIFIER>".')
     
     fileref, itemref = reference_parts
 
+    empty_ref = False
+    if fileref.strip() == '':
+      self.error(f'File basename path "{fileref}" in item {item} cannot be empty.')
+      empty_ref = True
+    if itemref.strip() == '':
+      self.error(f'Item identifier "{itemref}" in item {item} cannot be empty.')
+      empty_ref = True
+    if empty_ref: return
+
+    if not self.identifier_verifier(itemref):
+      return self.error(f'Item identifier "{itemref}" in item {item} is not a valid identifier.')
+
+    if not os.path.isfile(f'{fileref}.json'):
+      return self.error(f'File path "{fileref}.json" from item {item} does not point to an existing file.')
+    
     if fileref in self.cache:
       if self.cache[fileref] is None:
-        logging.getLogger('SEMANTIC').error(f'File reference "{fileref}" at line {item.line_number} position {item.char_number} points to an invalid file.')
-        return None
+        return logging.getLogger('SEMANTIC').error(f'File reference "{fileref}" in {item} points to an invalid or empty file.')
       elif itemref in self.cache[fileref]:
         logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
         return self.cache[fileref][itemref]
       else:
-        logging.getLogger('SEMANTIC').error(f'Item {item} does not exist in referenced file "{fileref}.json".')
-        return None
+        return logging.getLogger('SEMANTIC').error(f'Item {item} does not exist in referenced file "{fileref}.json".')
 
-    if not os.path.isfile(f'{fileref}.json'):
-      logging.getLogger('SEMANTIC').error(f'Reference "{fileref}.json::{itemref}" at line {item.line_number} position {item.char_number} does not point to an existing file.')
-      return None
-    
     logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
     return None

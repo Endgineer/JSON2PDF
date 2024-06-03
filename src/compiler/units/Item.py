@@ -1,6 +1,7 @@
 import enum
 
 from compiler.units.Prop import Prop
+from compiler.units.Token import Token
 
 class Item:
   class Kind(enum.Enum):
@@ -9,15 +10,15 @@ class Item:
     CVENTRY = 2
     CVHONOR = 3
   
-  section: str
-  reference: str
+  section: Token
+  reference: Token
   line_number: int
   char_number: int
   properties: list[Prop]
   kind: Kind
   labels: set[str]
 
-  def __init__(self, section: str, reference: str, line_number: int, char_number: int, properties: list[Prop]):
+  def __init__(self, section: Token, reference: Token, line_number: int, char_number: int, properties: list[Prop]):
     self.section = section
     self.reference = reference
     self.line_number = line_number
@@ -29,6 +30,6 @@ class Item:
   def __repr__(self):
     return ''.join([
       f'of type {self.kind.name} ' if self.kind is not None else '',
-      f'referenced by "{self.reference}" ' if self.reference is not None else '',
+      f'referenced by "{self.reference.get_string()}" ' if self.reference is not None else '',
       f'at line {self.line_number} position {self.char_number}'
     ])

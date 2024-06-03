@@ -14,7 +14,7 @@ class ParserContext:
   scope: Scope
   captured_item: Item
   memorized_prop: Prop
-  memorized_section: str
+  memorized_section: Token
 
   def __init__(self, lexer: Lexer):
     self.lexer = lexer
@@ -26,11 +26,11 @@ class ParserContext:
   
   def update_context_memory(self, symbol: Token.Kind | Nonterminal | None) -> None:
     if symbol is SECTION:
-        self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token.get_string()
+        self.memorized_section = self.lexer.lexer_ctx_stack[-1].matched_token
     elif symbol is ITEM:
       self.captured_item = Item(
         self.memorized_section,
-        self.lexer.lexer_ctx_stack[-1].matched_token.get_string() if self.lexer.peek() == Token.Kind.STRING else None,
+        self.lexer.lexer_ctx_stack[-1].matched_token if self.lexer.peek() == Token.Kind.STRING else None,
         self.lexer.lexer_ctx_stack[-1].matched_token.line_number,
         self.lexer.lexer_ctx_stack[-1].matched_token.char_number,
         None if self.lexer.peek() == Token.Kind.STRING else list()
