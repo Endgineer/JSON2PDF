@@ -23,7 +23,7 @@ json2cv .\samples\resume
 Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not [anonymized](#anonymization). Try running this and seeing the difference from the previous output:
 
 ```sh
-json2cv .\samples\resume -n "Awesome Person" -p "Awesome Role" "Awesome Guy" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "linkedin-id" -a "Awesome City" -g "GithubUsername" -c "DC3522" --footer
+json2cv .\samples\resume -n "Awesome Person" -p "Awesome Position" "Awesome Title" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522" --footer
 ```
 
 Finally, it's worth noting that you can add the json2cv directory path into your system environment variables `PATH`. This will allow you to run the `json2cv` command anywhere on your system.
