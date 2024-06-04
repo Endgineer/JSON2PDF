@@ -20,13 +20,19 @@ The process of generating your cv starts with an image of the CV, which must be 
 json2cv .\samples\resume
 ```
 
-Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not anonymized. More on what this means in the features section. In the meantime, to get you started, try running this and seeing the difference:
+Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not [anonymized](#anonymization). Try running this and seeing the difference from the previous output:
 
 ```sh
 json2cv .\samples\resume -n "Awesome Person" -p "Awesome Role" "Awesome Guy" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "linkedin-id" -a "Awesome City" -g "GithubUsername" -c "DC3522" --footer
 ```
 
 Finally, it's worth noting that you can add the json2cv directory path into your system environment variables `PATH`. This will allow you to run the `json2cv` command anywhere on your system.
+
+## Reporting Issues
+
+When encountering a compile-time issue, such as getting a compile-time error that you shouldn't be getting, or a run-time issue, such as when the generated pdf file is not the expected output, please make sure to include both the `*.log` and `*.debug.log` files corresponding to the erring attempt and a syntactically-equivalent version of your cv image (and whatever external files the image references) in your issue. To obtain the log files, run the tool with the `--debug` flag.
+
+**IMPORTANT PRIVACY DISCLAIMER**: For privacy, we're expecting a syntactically-equivalent version of the cv image and any external files referenced, not the actual files themselves. [Anonymizing](#anonymization) your cv is NOT enough, as the tool is privy to the original content of your cv. The structure is important here, not the text that the pdf ends up containing after compilation. Thus, please make sure to run the tool in debug mode **on a syntactically-equivalent image, not the actual image**, also that **any files referenced in the syntactically-equivalent image are also merely syntactically-equivalent and not the original**, but also that **the file names of all syntactically-equivalent files involved do not contain any sensitive information**, since the logging modules are verbose and will betray the contents and file names of the image and any reference files that the tool happens to compile in the process. As far as I know, the logs should NOT contain the personal information that you provided the tool using flags. However, as I cannot be held accountable for you accidentally leaking your personal information, you **should** also pass the `--anonymized` flag to the tool, just in case.
 
 ## Features
 
