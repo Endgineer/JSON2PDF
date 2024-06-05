@@ -7,6 +7,8 @@ Begin by installing Miktex, which is required in order to be able to compile the
 - Go to Windows search and find "Edit the system environment variables", click "Environment Variables". Under "System Variables", look for the variable `Path`, select it then click "Edit". Click "New" and add the absolute path to the Miktex x64 folder; this path should have the form `...\miktex-portable\texmfs\install\miktex\bin\x64`, where `...` is the prefix of the absolute path (i.e. of the form `C:\etc\etc\etc`).
 - Extract the json2cv folder from `json2cv.zip` and place it somewhere.
 
+If you wish, you can add the json2cv directory path into your system environment variables `PATH`. This will allow you to run the `json2cv` command anywhere on your system.
+
 ## Basic Usage
 Point `cmd` to the json2cv directory; the easiest way to do this is by opening the json2cv directory and typing `cmd` into the address bar of the file explorer. To run the tool, type `json2cv`; you should see an error message asserting the valid arguments that you must or can pass to the tool.
 
@@ -26,7 +28,7 @@ Personal information cannot be provided in the cv image, for security reasons. I
 json2cv .\samples\resume -n "Awesome Person" -p "Awesome Position" "Awesome Title" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522" --footer
 ```
 
-Finally, it's worth noting that you can add the json2cv directory path into your system environment variables `PATH`. This will allow you to run the `json2cv` command anywhere on your system.
+For color highlights, you can also try `18678D` for a deep sea blue or `188D3E` for a jade green. The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Finally, if you hover on each of the headline contact details, you can get an idea of how the flag arguments translate to actual links.
 
 ## Reporting Issues
 
