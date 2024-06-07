@@ -89,7 +89,7 @@ PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
 
 
 
-for to_be_nullable in [COLLECTION, REFS, PREF, RESUME, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
+for to_be_nullable in [REFS, PREF, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
   to_be_nullable.set_nullable()
 for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
   to_be_phantasmal.set_phantasmal()
@@ -99,7 +99,7 @@ for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPA
 REFF.define(
   {
     Token.Kind.LBRACE: [ COLLECTION, EOF ],
-    None: [ COLLECTION, EOF ]
+    None: [ EOF ]
   },
   { None }
 )
@@ -180,7 +180,7 @@ PREF.define(
 ROOT.define(
   {
     Token.Kind.LBRACE: [ RESUME, EOF ],
-    None: [ RESUME, EOF ]
+    None: [ EOF ]
   },
   { None }
 )
