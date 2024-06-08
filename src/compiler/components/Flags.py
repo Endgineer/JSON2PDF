@@ -16,7 +16,8 @@ class Flags:
   github: str
   color: str
   website: str
-  footer: bool
+  footer: str
+  header: str
 
   def __init__(self, args: typing.Sequence[str]):
     self.filepath = args.file_path
@@ -45,6 +46,7 @@ class Flags:
       self.website = f'\\homepage{{{args.website}}}' if args.website else '% \\homepage{}'
     
     self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}Curriculum Vitae}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
+    self.header = f'\\makecvheader' if args.header else f'%\\makecvheader'
   
   def wrap(self, tex: str) -> str:
     return (
@@ -134,7 +136,7 @@ class Flags:
       f'\n'
       f'% Print the header with above personal information\n'
       f'% Give optional argument to change alignment(C: center, L: left, R: right)\n'
-      f'\\makecvheader\n'
+      f'{self.header}\n'
       f'\n'
       f'% Print the footer with 3 arguments(<left>, <center>, <right>)\n'
       f'% Leave any of these blank if they are not needed\n'
