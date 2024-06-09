@@ -21,7 +21,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--footer', action=argparse.BooleanOptionalAction, default=True)
     arg_parser.add_argument('--header', action=argparse.BooleanOptionalAction, default=True)
     arg_parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
-    arg_parser.add_argument('--test', action=argparse.BooleanOptionalAction)
+    arg_parser.add_argument('--interrupt', action=argparse.BooleanOptionalAction)
     arg_parser.add_argument('--anonymized', action=argparse.BooleanOptionalAction)
     args = arg_parser.parse_args()
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
     logging.getLogger('SYNTHESIS').addHandler(handler)
 
     with Compiler(args) as compiler:
-      compiler.compile(error_handler, args.test)
+      compiler.compile(error_handler, args.interrupt)
     
     if args.debug: sys.exit()
 
