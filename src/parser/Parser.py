@@ -10,6 +10,7 @@ class Parser():
   def __init__(self, lexer: Lexer):
     self.primary_parser_ctx = ParserContext(lexer)
     self.auxiliary_parser_ctx = None
+    self.primary_parser_ctx.log_return(False)
   
   def parse(self) -> Item:
     self.primary_parser_ctx.captured_item = None
@@ -27,6 +28,7 @@ class Parser():
   def parse_all(self, filepath: str) -> list[Item]:
     self.auxiliary_parser_ctx = ParserContext(self.primary_parser_ctx.lexer, REFF)
     self.auxiliary_parser_ctx.lexer.context_switch(filepath)
+    self.auxiliary_parser_ctx.log_return(False)
     
     items = list()
     while True:
