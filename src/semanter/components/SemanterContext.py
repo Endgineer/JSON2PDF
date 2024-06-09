@@ -27,8 +27,6 @@ class SemanterContext:
     if item is None: return None
 
     self.current_item_valid = True
-    item.kind = None
-    item.labels = None
 
     analyzable_props = self.analyze_prop_keys(item)
     analyzable_props = self.analyze_prop_vals(analyzable_props)
