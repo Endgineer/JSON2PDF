@@ -42,3 +42,6 @@ class Lexer():
   def context_switch(self, filepath: str) -> None:
     self.lexer_ctx_stack.append(LexerContext(filepath))
     self.scan()
+  
+  def get_context_name(self) -> str:
+    return f'"{self.lexer_ctx_stack[-1].filepath}"' if len(self.lexer_ctx_stack) > 0 else None

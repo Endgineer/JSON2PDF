@@ -116,6 +116,6 @@ class ParserContext:
       logging.getLogger('SYNTAX').warning(f'Skipping {token} in an attempt to synchronize.')
   
   def log_return(self, status: bool) -> bool:
-    logging.getLogger('SYNTAX').debug(f'Context: "{self.lexer.lexer_ctx_stack[-1].filepath}" | {self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.stack])}]')
+    logging.getLogger('SYNTAX').debug(f'Context: {self.lexer.get_context_name()} | {self.scope} | Stack: [{", ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in self.stack])}]')
     if status and self.captured_item is not None: logging.getLogger('SYNTAX').debug(f'Captured item {self.captured_item}.')
     return status
