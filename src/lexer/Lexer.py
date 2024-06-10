@@ -7,7 +7,7 @@ class Lexer():
 
   def __init__(self, filepath: str):
     self.lexer_ctx_stack = [LexerContext(filepath)]
-    self.scan()
+    if not self.lexer_ctx_stack[-1].at_end_of_file(): self.scan()
   
   def scan(self) -> Token:
     while len(self.lexer_ctx_stack) > 0:
@@ -41,7 +41,7 @@ class Lexer():
 
   def context_switch(self, filepath: str) -> None:
     self.lexer_ctx_stack.append(LexerContext(filepath))
-    self.scan()
+    if not self.lexer_ctx_stack[-1].at_end_of_file(): self.scan()
   
   def get_context_name(self) -> str:
     return f'"{self.lexer_ctx_stack[-1].filepath}"' if len(self.lexer_ctx_stack) > 0 else None
