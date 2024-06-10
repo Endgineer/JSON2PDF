@@ -1,0 +1,24 @@
+{
+  "one_implicit_minimal_cventry": {
+    "title": "TestTitle",
+    "subtitle": "TestSubtitle",
+    "ttag": "TestTopTag",
+    "btag": "TestBotTag"
+  },
+  
+  "one_implicit_minimal_cvhonor": {
+    "ltag": "TestLeftTag",
+    "title": "TestTitle",
+    "subtitle": "TestSubtitle",
+    "rtag": "TestRightTag"
+  },
+
+  "one_implicit_minimal_cvparagraph": {
+    "paragraph": "TestParagraph"
+  },
+
+  "one_implicit_minimal_cvskill": {
+    "category": "TestCategory",
+    "content": "TestContent"
+  }
+}
