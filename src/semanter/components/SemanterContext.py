@@ -69,7 +69,7 @@ class SemanterContext:
         break
     
     if item.kind is None:
-      self.error(f'Item {item} has an undeterminable type due to an invalid combination of props {set(key_registry)}.')
+      self.error(f'Item {item} has an undeterminable type due to an invalid combination of props {sorted(key_registry)}.')
     
     return props_with_valid_keys
   

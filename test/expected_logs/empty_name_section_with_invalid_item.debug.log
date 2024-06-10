@@ -74,7 +74,7 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_invalid_item.json" | Scope[8]: SECTION3 | Stack: [PITEM, SECTION4, PSECTION, RESUME2, EOF]
 [SYNTAX DEBUG]: Captured item at line 3 position 4.
 [SEMANTIC ERROR]: Invalid prop key STRING at line 5 position 6: "invalid".
-[SEMANTIC ERROR]: Item at line 3 position 4 has an undeterminable type due to an invalid combination of props {'paragraph', 'invalid'}.
+[SEMANTIC ERROR]: Item at line 3 position 4 has an undeterminable type due to an invalid combination of props ['invalid', 'paragraph'].
 [SEMANTIC ERROR]: Section namespace STRING at line 2 position 2: "" cannot be nameless.
 [SYNTAX DEBUG]: Used production PITEM -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_invalid_item.json" | Scope[8]: SECTION3 | Stack: [SECTION4, PSECTION, RESUME2, EOF]

@@ -46,7 +46,7 @@ class SynthesizerContext:
       
       redundant_labels = set(item.labels) - invoked_labels
       if len(redundant_labels) > 0:
-        logging.getLogger('SYNTHESIS').warning(f'Unused labels {redundant_labels} in item {item}.')
+        logging.getLogger('SYNTHESIS').warning(f'Unused labels {sorted(redundant_labels)} in item {item}.')
 
 
 
