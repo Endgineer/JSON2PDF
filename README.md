@@ -25,7 +25,7 @@ json2cv .\samples\resume
 Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not [anonymized](#anonymization). Try running this and seeing the difference from the previous output:
 
 ```sh
-json2cv .\samples\resume -n "Awesome Person" -p "Awesome Position" "Awesome Title" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522" --footer
+json2cv .\samples\resume -n "Awesome Person" -p "Awesome Position" "Awesome Title" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522"
 ```
 
 For color highlights, you can also try `18678D` for a deep sea blue or `188D3E` for a jade green. The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Finally, if you hover on each of the headline contact details, you can get an idea of how the flag arguments translate to actual links.
