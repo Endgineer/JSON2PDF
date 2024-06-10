@@ -1,0 +1,7 @@
+[COMPILER INFO]: Compiling "no_root.json" - Generating typesetting markup...
+[LEXICAL DEBUG]: Switched context to "../image_jsons/no_root.json"...
+[SYNTAX DEBUG]: Context: None | Scope[0]: None | Stack: [ROOT]
+[SYNTAX DEBUG]: Used production ROOT -> EOF.
+[SYNTAX DEBUG]: Context: None | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Used production EOF -> ε.
+[SYNTAX DEBUG]: Context: None | Scope[0]: None | Stack: []

@@ -10,4 +10,6 @@ __pycache__
 /*.xdv
 /*.exe
 
+/test/generated_logs
+
 TODO
