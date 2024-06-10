@@ -1,0 +1,21 @@
+[COMPILER INFO]: Compiling "no_sections.json" - Generating typesetting markup...
+[LEXICAL DEBUG]: Switched context to "../image_jsons/no_sections.json"...
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[0]: None | Stack: [ROOT]
+[SYNTAX DEBUG]: Used production ROOT -> RESUME EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[1]: ROOT | Stack: [RESUME, EOF]
+[SYNTAX DEBUG]: Used production RESUME -> lbrace RESUME1.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[2]: RESUME | Stack: [lbrace, RESUME1, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 1 position 0.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[2]: RESUME | Stack: [RESUME1, EOF]
+[SYNTAX DEBUG]: Used production RESUME1 -> SECTIONS RESUME2.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[3]: RESUME1 | Stack: [SECTIONS, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTIONS -> ε.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [SECTIONS].
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[3]: RESUME1 | Stack: [RESUME2, EOF]
+[SYNTAX DEBUG]: Used production RESUME2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[4]: RESUME2 | Stack: [rbrace, EOF]
+[LEXICAL DEBUG]: Scanned RBRACE at line 1 position 1.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming None token, popping [RESUME2, RESUME1, RESUME].
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Used production EOF -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[0]: None | Stack: []
