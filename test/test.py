@@ -18,10 +18,10 @@ class LogEqualityTest(unittest.TestCase):
     generated_log_filepath = os.path.join(GEN_LOG_DIR, f'{self.filebasename}.debug.log')
 
     if not os.path.exists(expected_log_filepath):
-      raise AssertionError(f'Test image at "{self.filebasename}.json" does not have a corresponding log file in the "expected_logs" directory.')
+      raise AssertionError(f'{self.filebasename}.json - Expected log file {expected_log_filepath} not found.')
     with open(generated_log_filepath, 'r', encoding='utf-8') as generated_log_file:
       with open(expected_log_filepath, 'r', encoding='utf-8') as expected_log_file:
-        self.assertEqual(generated_log_file.read(), expected_log_file.read())
+        self.assertEqual(generated_log_file.read(), expected_log_file.read(), f'{self.filebasename}.json - Log files not identical.')
   
   def runTest(self):
     subprocess.call(f'../json2cv ../image_jsons/{self.filebasename} --anonymize --debug --interrupt', cwd=GEN_LOG_DIR)
