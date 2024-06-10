@@ -63,6 +63,15 @@ class ParserContext:
         logging.getLogger('SYNTAX').debug(f'Used production {symbol} -> {" ".join([s.name.lower() if type(s) == Token.Kind else str(s) for s in expansion][::-1]) if len(expansion) > 0 else "ε"}.')
         self.stack.extendleft(expansion)
         if len(self.stack) == 0: self.scope.pop()
+        else:
+          upcoming_token_is_expected = any([
+            isinstance(self.stack[0], Token.Kind) and self.lexer.peek() == self.stack[0],
+            isinstance(self.stack[0], Nonterminal) and (self.lexer.peek() in self.stack[0].first or self.stack[0].nullable and self.lexer.peek() in self.stack[0].follow),
+            self.lexer.peek() == self.stack[0]
+          ])
+          synchronizations = self.scope.synchronize(self.lexer.peek()) if upcoming_token_is_expected else None
+          if synchronizations is not None and len(synchronizations) > 0:
+            logging.getLogger('SYNTAX').debug(f'Synchronized scope based on an upcoming {None if self.lexer.peek() is None else self.lexer.peek().name} token, popping {synchronizations}.')
       else:
         logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
         self.panic()
