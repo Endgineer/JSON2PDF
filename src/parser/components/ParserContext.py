@@ -64,30 +64,27 @@ class ParserContext:
         self.stack.extendleft(expansion)
         if len(self.stack) == 0: self.scope.pop()
       else:
-        logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
+        logging.getLogger('SYNTAX').error(f'Found {self.lexer.scan()}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
         self.panic()
     
     elif isinstance(symbol, Token.Kind) or symbol is None:
-      corrected_nonterminal = self.scope.correct(self.lexer.peek())
+      token = self.lexer.scan()
+
+      corrected_nonterminal = self.scope.correct(token.kind)
       if corrected_nonterminal is not None:
         logging.getLogger('SYNTAX').debug(f'Corrected scope based on {corrected_nonterminal} being fulfilled.')
       
-      if self.lexer.peek() is None and symbol is None:
-        self.lexer.scan()
+      if token is None and token == symbol:
         return self.log_return(True)
-      elif self.lexer.peek() == symbol:
-        token = self.lexer.scan()
+      elif token is not None and token.kind == symbol:
         if self.captured_item is not None and token.kind == Token.Kind.STRING:
           if self.captured_item.reference is not None: pass
           else: self.memorized_prop.fill(token)
         
-        upcoming_token_is_expected = any([
-          isinstance(self.stack[0], Token.Kind) and self.lexer.peek() == self.stack[0].kind,
-          isinstance(self.stack[0], Nonterminal) and (self.lexer.peek() in self.stack[0].first or self.stack[0].nullable and self.lexer.peek() in self.stack[0].follow),
-          self.lexer.peek() == self.stack[0]
-        ])
-        synchronizations = self.scope.synchronize(self.lexer.peek()) if upcoming_token_is_expected else None
-        if synchronizations is not None:
+        synchronizations = self.scope.synchronize(self.lexer.peek())
+        if synchronizations is None:
+          pass
+        else:
           if len(synchronizations) > 0:
             logging.getLogger('SYNTAX').debug(f'Synchronized scope based on an upcoming {None if self.lexer.peek() is None else self.lexer.peek().name} token, popping {synchronizations}.')
           
@@ -99,7 +96,7 @@ class ParserContext:
           elif REF2 in synchronizations:
             return self.log_return(True)
       else:
-        logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected {symbol if symbol is None else symbol.name}.')
+        logging.getLogger('SYNTAX').error(f'Found {token}, expected {symbol if symbol is None else symbol.name}.')
         self.panic()
     
     return self.log_return(False)
@@ -108,11 +105,11 @@ class ParserContext:
     while True:
       synchronizations = self.scope.synchronize(self.lexer.peek())
       if synchronizations is not None:
-        logging.getLogger('SYNTAX').warning(f'Synchronized to {self.lexer.lexer_ctx_stack[-1].matched_token} in an attempt to recover from previous error, popping {synchronizations}.')
-        if STRINGPT in synchronizations or STRINGPAIR in synchronizations:
+        logging.getLogger('SYNTAX').warning(f'Synchronized to {self.lexer.lexer_ctx_stack[-1].matched_token} in an attempt to recover from previous error.')
+        if len(synchronizations) == 0:
+          self.stack.appendleft(self.scope.pop())
+        elif STRINGPT in synchronizations or STRINGPAIR in synchronizations:
           self.memorized_prop.fill(None)
-        elif PROP in synchronizations:
-          self.captured_item.properties.append(self.memorized_prop)
         return
       token = self.lexer.scan()
       if token is None: return

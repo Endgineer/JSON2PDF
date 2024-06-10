@@ -52,7 +52,8 @@ class SemanterContext:
         continue
 
       if property.key.get_string() in propset.ALL:
-        props_with_valid_keys.append(property)
+        if property.value is not None:
+          props_with_valid_keys.append(property)
       else:
         self.error(f'Invalid prop key {property.key}.')
 
@@ -69,7 +70,7 @@ class SemanterContext:
         break
     
     if item.kind is None:
-      self.error(f'Item {item} has an undeterminable type due to an invalid combination of props {set(key_registry)}.')
+      self.error(f'Item {item} has an undeterminable type due to an invalid combination of props.')
     
     return props_with_valid_keys
   
@@ -79,18 +80,18 @@ class SemanterContext:
     props_with_valid_keys_vals = list()
 
     for prop in props_with_valid_keys:
-      if prop.key.get_string() in propset.STRS:
-        if prop.kind == str:
+      if prop.kind == str:
+        if prop.key.get_string() in propset.STRS:
           props_with_valid_keys_vals.append(prop)
         else:
           self.error(f'Prop key {prop.key} expected a value of type {str} instead of {prop.kind}.')
-      elif prop.key.get_string() in propset.LISTS:
-        if prop.kind == list:
+      elif prop.kind == list:
+        if prop.key.get_string() in propset.LISTS:
           props_with_valid_keys_vals.append(prop)
         else:
           self.error(f'Prop key {prop.key} expected a value of type {list} instead of {prop.kind}.')
-      elif prop.key.get_string() in propset.DICTS:
-        if prop.kind == dict:
+      elif prop.kind == dict:
+        if prop.key.get_string() in propset.DICTS:
           props_with_valid_keys_vals.append(prop)
         else:
           self.error(f'Prop key {prop.key} expected a value of type {dict} instead of {prop.kind}.')
@@ -112,10 +113,10 @@ class SemanterContext:
             label_registry[pair_key] += 1
           else:
             label_registry[pair_key] = 1
-            label_index[pair_key] = None if pair[1] is None else pair[1].get_string()
+            label_index[pair_key] = pair[1].get_string()
           
           pair_key_cycle = pair[0].contains_invocation()
-          pair_val_cycle = False if pair[1] is None else pair[1].contains_invocation()
+          pair_val_cycle = pair[1].contains_invocation()
 
           if pair_key_cycle:
             self.error(f'Label key {pair[0]} cannot contain an invocation.')
