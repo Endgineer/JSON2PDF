@@ -1,0 +1,5 @@
+{
+  "TestSection": [
+    "../image_jsons/modules/nonexistent_file::nonexistent_item"
+  ]
+}
