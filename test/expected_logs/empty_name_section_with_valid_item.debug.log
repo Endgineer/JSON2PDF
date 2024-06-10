@@ -1,0 +1,75 @@
+[COMPILER INFO]: Compiling "empty_name_section_with_valid_item.json" - Generating typesetting markup...
+[LEXICAL DEBUG]: Switched context to "../image_jsons/empty_name_section_with_valid_item.json"...
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[0]: None | Stack: [ROOT]
+[SYNTAX DEBUG]: Used production ROOT -> RESUME EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[1]: ROOT | Stack: [RESUME, EOF]
+[SYNTAX DEBUG]: Used production RESUME -> lbrace RESUME1.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[2]: RESUME | Stack: [lbrace, RESUME1, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 1 position 0.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[2]: RESUME | Stack: [RESUME1, EOF]
+[SYNTAX DEBUG]: Used production RESUME1 -> SECTIONS RESUME2.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[3]: RESUME1 | Stack: [SECTIONS, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTIONS -> SECTION PSECTION.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[4]: SECTIONS | Stack: [SECTION, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION -> string SECTION1.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[5]: SECTION | Stack: [string, SECTION1, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 2 position 2: "".
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[5]: SECTION | Stack: [SECTION1, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION1 -> colon SECTION2.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[6]: SECTION1 | Stack: [colon, SECTION2, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 2 position 4.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[6]: SECTION1 | Stack: [SECTION2, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION2 -> lbracket SECTION3.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[7]: SECTION2 | Stack: [lbracket, SECTION3, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACKET at line 2 position 6.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[7]: SECTION2 | Stack: [SECTION3, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION3 -> ITEMS SECTION4.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[8]: SECTION3 | Stack: [ITEMS, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEMS -> ITEM PITEM.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[9]: ITEMS | Stack: [ITEM, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEM -> lbrace ITEM1.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[10]: ITEM | Stack: [lbrace, ITEM1, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 3 position 4.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[10]: ITEM | Stack: [ITEM1, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEM1 -> PROPS ITEM2.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[11]: ITEM1 | Stack: [PROPS, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PROPS -> PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[12]: PROPS | Stack: [PROP, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[13]: PROP | Stack: [string, PROP1, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 4 position 6: "paragraph".
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[13]: PROP | Stack: [PROP1, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[14]: PROP1 | Stack: [colon, PROPVAL, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 4 position 17.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[14]: PROP1 | Stack: [PROPVAL, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[15]: PROPVAL | Stack: [string, PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 4 position 19: "TestParagraph".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [PROPVAL, PROP1, PROP, PROPS].
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[11]: ITEM1 | Stack: [PPROP, ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[11]: ITEM1 | Stack: [ITEM2, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEM2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[12]: ITEM2 | Stack: [rbrace, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned RBRACE at line 5 position 4.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACKET token, popping [ITEM2, ITEM1, ITEM, ITEMS].
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[8]: SECTION3 | Stack: [PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Captured item at line 3 position 4.
+[SEMANTIC ERROR]: Section namespace STRING at line 2 position 2: "" cannot be nameless.
+[SYNTAX DEBUG]: Used production PITEM -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[8]: SECTION3 | Stack: [SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION4 -> rbracket.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[9]: SECTION4 | Stack: [rbracket, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned RBRACKET at line 6 position 2.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [SECTION4, SECTION3, SECTION2, SECTION1, SECTION, SECTIONS].
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[3]: RESUME1 | Stack: [PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PSECTION -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[3]: RESUME1 | Stack: [RESUME2, EOF]
+[SYNTAX DEBUG]: Used production RESUME2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[4]: RESUME2 | Stack: [rbrace, EOF]
+[LEXICAL DEBUG]: Scanned RBRACE at line 7 position 0.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming None token, popping [RESUME2, RESUME1, RESUME].
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Used production EOF -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[0]: None | Stack: []
