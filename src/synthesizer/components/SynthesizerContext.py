@@ -64,21 +64,22 @@ class SynthesizerContext:
       for prop in item.properties:
         prop_key = prop.key.get_string()
         if prop.kind == str:
-          self.tree[section][-1][prop_key] = prop.value.get_string()
+          self.tree[section][-1][prop_key] = None if prop.value is None else prop.value.get_string()
         elif prop.kind == list:
           self.tree[section][-1][prop_key] = list()
           for point in prop.value:
-            self.tree[section][-1][prop_key].append(point.get_string())
+            self.tree[section][-1][prop_key].append(None if point is None else point.get_string())
         elif prop.kind == dict:
           self.tree[section][-1][prop_key] = dict()
           for pair in prop.value:
-            self.tree[section][-1][prop_key][pair[0].get_string()] = pair[1].get_string()
+            self.tree[section][-1][prop_key][pair[0].get_string()] = None if pair[1] is None else pair[1].get_string()
       
       logging.getLogger('SYNTHESIS').debug(f'Dictified item {item}: {self.tree[section][-1]}.')
 
 
 
   def invoke_token(labels: dict[str, str], token: Token, anonymize: bool) -> set[str]:
+    if token is None: return set()
     invoked_labels = set()
 
     token_string = f'{token}'
