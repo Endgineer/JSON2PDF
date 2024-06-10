@@ -35,7 +35,7 @@ def test_all_suite() -> unittest.TestSuite:
     os.mkdir(GEN_LOG_DIR)
 
   for filename in os.listdir(IMG_JSN_DIR):
-    if not os.path.isdir(filename):
+    if os.path.isfile(os.path.join(IMG_JSN_DIR, filename)):
       suite.addTest(LogEqualityTest(filename))
   
   return suite
