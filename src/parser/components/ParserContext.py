@@ -82,7 +82,7 @@ class ParserContext:
           else: self.memorized_prop.fill(token)
         
         upcoming_token_is_expected = any([
-          isinstance(self.stack[0], Token.Kind) and self.lexer.peek() == self.stack[0].kind,
+          isinstance(self.stack[0], Token.Kind) and self.lexer.peek() == self.stack[0],
           isinstance(self.stack[0], Nonterminal) and (self.lexer.peek() in self.stack[0].first or self.stack[0].nullable and self.lexer.peek() in self.stack[0].follow),
           self.lexer.peek() == self.stack[0]
         ])
