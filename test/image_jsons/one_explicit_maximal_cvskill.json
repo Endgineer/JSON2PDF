@@ -1,0 +1,9 @@
+{
+  "TestSection": [
+    {
+      "labels": { "TestLabel": "TestSecret" },
+      "category": "TestCategory",
+      "content": "TestContent"
+    }
+  ]
+}

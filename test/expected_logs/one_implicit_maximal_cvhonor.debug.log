@@ -1,0 +1,562 @@
+[COMPILER INFO]: Compiling "one_implicit_maximal_cvhonor.json" - Generating typesetting markup...
+[LEXICAL DEBUG]: Switched context to "../image_jsons/one_implicit_maximal_cvhonor.json"...
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: [ROOT]
+[SYNTAX DEBUG]: Used production ROOT -> RESUME EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: ROOT | Stack: [RESUME, EOF]
+[SYNTAX DEBUG]: Used production RESUME -> lbrace RESUME1.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[2]: RESUME | Stack: [lbrace, RESUME1, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 1 position 0.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[2]: RESUME | Stack: [RESUME1, EOF]
+[SYNTAX DEBUG]: Used production RESUME1 -> SECTIONS RESUME2.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[3]: RESUME1 | Stack: [SECTIONS, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTIONS -> SECTION PSECTION.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[4]: SECTIONS | Stack: [SECTION, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION -> string SECTION1.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[5]: SECTION | Stack: [string, SECTION1, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 2 position 2: "TestSection".
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[5]: SECTION | Stack: [SECTION1, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION1 -> colon SECTION2.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[6]: SECTION1 | Stack: [colon, SECTION2, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 2 position 15.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[6]: SECTION1 | Stack: [SECTION2, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION2 -> lbracket SECTION3.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[7]: SECTION2 | Stack: [lbracket, SECTION3, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACKET at line 2 position 17.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[7]: SECTION2 | Stack: [SECTION3, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION3 -> ITEMS SECTION4.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[8]: SECTION3 | Stack: [ITEMS, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEMS -> ITEM PITEM.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[9]: ITEMS | Stack: [ITEM, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production ITEM -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[10]: ITEM | Stack: [string, PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 3 position 4: "../image_jsons/modules/implicit_maximal_items::one_implicit_maximal_cvhonor".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACKET token, popping [ITEM, ITEMS].
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[8]: SECTION3 | Stack: [PITEM, SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Captured item referenced by "../image_jsons/modules/implicit_maximal_items::one_implicit_maximal_cvhonor" at line 3 position 4.
+[SEMANTIC DEBUG]: Cache miss for item referenced by "../image_jsons/modules/implicit_maximal_items::one_implicit_maximal_cvhonor" at line 3 position 4.
+[LEXICAL DEBUG]: Switched context to "../image_jsons/modules/implicit_maximal_items.json"...
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[0]: None | Stack: [REFF]
+[SYNTAX DEBUG]: Used production REFF -> COLLECTION EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[1]: REFF | Stack: [COLLECTION, EOF]
+[SYNTAX DEBUG]: Used production COLLECTION -> lbrace COLLECTION1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[2]: COLLECTION | Stack: [lbrace, COLLECTION1, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 1 position 0.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[2]: COLLECTION | Stack: [COLLECTION1, EOF]
+[SYNTAX DEBUG]: Used production COLLECTION1 -> REFS COLLECTION2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REFS, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFS -> REF PREF.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REFS | Stack: [REF, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF -> string REF1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF | Stack: [string, REF1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 2 position 2: "one_implicit_maximal_cventry".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF | Stack: [REF1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF1 -> colon REF2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF1 | Stack: [colon, REF2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 2 position 32.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF1 | Stack: [REF2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF2 -> lbrace REFITEM1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[7]: REF2 | Stack: [lbrace, REFITEM1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 2 position 34.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[7]: REF2 | Stack: [REFITEM1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM1 -> PROPS REFITEM2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: REFITEM1 | Stack: [PROPS, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPS -> PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 3 position 4: "labels".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 3 position 12.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> STRINGDICT.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [STRINGDICT, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT -> lbrace STRINGDICT1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT | Stack: [lbrace, STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 3 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT | Stack: [STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT1 -> STRINGPAIRS STRINGDICT2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT1 | Stack: [STRINGPAIRS, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIRS -> STRINGPAIR PSTRINGPAIR.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIRS | Stack: [STRINGPAIR, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR -> string STRINGPAIR1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR | Stack: [string, STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 3 position 16: "TestLabel".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR | Stack: [STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR1 -> colon STRINGPAIR2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[17]: STRINGPAIR1 | Stack: [colon, STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 3 position 27.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[17]: STRINGPAIR1 | Stack: [STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR2 -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[18]: STRINGPAIR2 | Stack: [string, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 3 position 29: "TestSecret".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [STRINGPAIR2, STRINGPAIR1, STRINGPAIR, STRINGPAIRS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT1 | Stack: [PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PSTRINGPAIR -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT1 | Stack: [STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGDICT2 | Stack: [rbrace, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on STRINGDICT2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 3 position 42.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [STRINGDICT1, STRINGDICT, PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 3 position 43.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 4 position 4: "title".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 4 position 11.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 4 position 13: "TestTitle".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 4 position 24.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 5 position 4: "subtitle".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 5 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 5 position 16: "TestSubtitle".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 5 position 30.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 6 position 4: "ttag".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 6 position 10.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 6 position 12: "TestTopTag".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 6 position 24.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 7 position 4: "btag".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 7 position 10.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 7 position 12: "TestBotTag".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 7 position 24.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 8 position 4: "details".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 8 position 13.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> STRINGLIST.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: PROPVAL | Stack: [STRINGLIST, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGLIST -> lbracket STRINGLIST1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGLIST | Stack: [lbracket, STRINGLIST1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACKET at line 8 position 15.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGLIST | Stack: [STRINGLIST1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGLIST1 -> STRINGPTS STRINGLIST2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGLIST1 | Stack: [STRINGPTS, STRINGLIST2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPTS -> STRINGPT PSTRINGPT.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPTS | Stack: [STRINGPT, PSTRINGPT, STRINGLIST2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPT -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPT | Stack: [string, PSTRINGPT, STRINGLIST2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 9 position 6: "TestPoint".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACKET token, popping [STRINGPT, STRINGPTS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGLIST1 | Stack: [PSTRINGPT, STRINGLIST2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PSTRINGPT -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGLIST1 | Stack: [STRINGLIST2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGLIST2 -> rbracket.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGLIST2 | Stack: [rbracket, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned RBRACKET at line 10 position 4.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [STRINGLIST2, STRINGLIST1, STRINGLIST, PROPVAL, PROP1, PROP, PROPS, REFITEM1, REF2, REF1, REF, REFS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Captured item at line 2 position 2.
+[SYNTAX DEBUG]: Used production PPROP -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REFITEM2 | Stack: [rbrace, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on REFITEM2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 11 position 2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PREF -> comma REF PREF.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [comma, REF, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 11 position 3.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REF, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF -> string REF1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [string, REF1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 13 position 2: "one_implicit_maximal_cvhonor".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [REF1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF1 -> colon REF2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [colon, REF2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 13 position 32.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [REF2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF2 -> lbrace REFITEM1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [lbrace, REFITEM1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 13 position 34.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [REFITEM1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM1 -> PROPS REFITEM2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[7]: REFITEM1 | Stack: [PROPS, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPS -> PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 14 position 4: "labels".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 14 position 12.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> STRINGDICT.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [STRINGDICT, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT -> lbrace STRINGDICT1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [lbrace, STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 14 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT1 -> STRINGPAIRS STRINGDICT2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGPAIRS, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIRS -> STRINGPAIR PSTRINGPAIR.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGPAIRS | Stack: [STRINGPAIR, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR -> string STRINGPAIR1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [string, STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 14 position 16: "TestLabel".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR1 -> colon STRINGPAIR2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [colon, STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 14 position 27.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR2 -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[17]: STRINGPAIR2 | Stack: [string, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 14 position 29: "TestSecret".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [STRINGPAIR2, STRINGPAIR1, STRINGPAIR, STRINGPAIRS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PSTRINGPAIR -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT2 | Stack: [rbrace, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on STRINGDICT2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 14 position 42.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [STRINGDICT1, STRINGDICT, PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 14 position 43.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 15 position 4: "ltag".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 15 position 10.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 15 position 12: "TestLeftTag".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 15 position 25.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 16 position 4: "title".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 16 position 11.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 16 position 13: "TestTitle".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 16 position 24.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 17 position 4: "subtitle".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 17 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 17 position 16: "TestSubtitle".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 17 position 30.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 18 position 4: "rtag".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 18 position 10.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 18 position 12: "TestRightTag".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [PROPVAL, PROP1, PROP, PROPS, REFITEM1, REF2, REF1, REF].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Captured item at line 13 position 2.
+[SYNTAX DEBUG]: Used production PPROP -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REFITEM2 | Stack: [rbrace, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on REFITEM2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 19 position 2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PREF -> comma REF PREF.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [comma, REF, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 19 position 3.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REF, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF -> string REF1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [string, REF1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 21 position 2: "one_implicit_maximal_cvparagraph".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [REF1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF1 -> colon REF2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [colon, REF2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 21 position 36.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [REF2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF2 -> lbrace REFITEM1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [lbrace, REFITEM1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 21 position 38.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [REFITEM1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM1 -> PROPS REFITEM2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[7]: REFITEM1 | Stack: [PROPS, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPS -> PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 22 position 4: "labels".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 22 position 12.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> STRINGDICT.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [STRINGDICT, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT -> lbrace STRINGDICT1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [lbrace, STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 22 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT1 -> STRINGPAIRS STRINGDICT2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGPAIRS, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIRS -> STRINGPAIR PSTRINGPAIR.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGPAIRS | Stack: [STRINGPAIR, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR -> string STRINGPAIR1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [string, STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 22 position 16: "TestLabel".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR1 -> colon STRINGPAIR2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [colon, STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 22 position 27.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR2 -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[17]: STRINGPAIR2 | Stack: [string, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 22 position 29: "TestSecret".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [STRINGPAIR2, STRINGPAIR1, STRINGPAIR, STRINGPAIRS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PSTRINGPAIR -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT2 | Stack: [rbrace, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on STRINGDICT2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 22 position 42.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [STRINGDICT1, STRINGDICT, PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 22 position 43.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 23 position 4: "paragraph".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 23 position 15.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 23 position 17: "TestParagraph".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [PROPVAL, PROP1, PROP, PROPS, REFITEM1, REF2, REF1, REF].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Captured item at line 21 position 2.
+[SYNTAX DEBUG]: Used production PPROP -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REFITEM2 | Stack: [rbrace, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on REFITEM2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 24 position 2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PREF -> comma REF PREF.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [comma, REF, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 24 position 3.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REF, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF -> string REF1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [string, REF1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 26 position 2: "one_implicit_maximal_cvskill".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REF | Stack: [REF1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF1 -> colon REF2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [colon, REF2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 26 position 32.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[5]: REF1 | Stack: [REF2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REF2 -> lbrace REFITEM1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [lbrace, REFITEM1, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 26 position 34.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[6]: REF2 | Stack: [REFITEM1, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM1 -> PROPS REFITEM2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[7]: REFITEM1 | Stack: [PROPS, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPS -> PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 27 position 4: "labels".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 27 position 12.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> STRINGDICT.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [STRINGDICT, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT -> lbrace STRINGDICT1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [lbrace, STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned LBRACE at line 27 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[12]: STRINGDICT | Stack: [STRINGDICT1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT1 -> STRINGPAIRS STRINGDICT2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGPAIRS, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIRS -> STRINGPAIR PSTRINGPAIR.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGPAIRS | Stack: [STRINGPAIR, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR -> string STRINGPAIR1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [string, STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 27 position 16: "TestLabel".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[15]: STRINGPAIR | Stack: [STRINGPAIR1, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR1 -> colon STRINGPAIR2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [colon, STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 27 position 27.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[16]: STRINGPAIR1 | Stack: [STRINGPAIR2, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGPAIR2 -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[17]: STRINGPAIR2 | Stack: [string, PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 27 position 29: "TestSecret".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [STRINGPAIR2, STRINGPAIR1, STRINGPAIR, STRINGPAIRS].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [PSTRINGPAIR, STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PSTRINGPAIR -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[13]: STRINGDICT1 | Stack: [STRINGDICT2, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production STRINGDICT2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[14]: STRINGDICT2 | Stack: [rbrace, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on STRINGDICT2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 27 position 42.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [STRINGDICT1, STRINGDICT, PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 27 position 43.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 28 position 4: "category".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 28 position 14.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 28 position 16: "TestCategory".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming COMMA token, popping [PROPVAL, PROP1, PROP].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PPROP -> comma PROP PPROP.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [comma, PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COMMA at line 28 position 30.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[8]: PROPS | Stack: [PROP, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP -> string PROP1.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [string, PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 29 position 4: "content".
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[9]: PROP | Stack: [PROP1, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROP1 -> colon PROPVAL.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [colon, PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned COLON at line 29 position 13.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[10]: PROP1 | Stack: [PROPVAL, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PROPVAL -> string.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[11]: PROPVAL | Stack: [string, PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[LEXICAL DEBUG]: Scanned STRING at line 29 position 15: "TestContent".
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [PROPVAL, PROP1, PROP, PROPS, REFITEM1, REF2, REF1, REF].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PPROP, REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Captured item at line 26 position 2.
+[SYNTAX DEBUG]: Used production PPROP -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [REFITEM2, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production REFITEM2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: REFITEM2 | Stack: [rbrace, PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Corrected scope based on REFITEM2 being fulfilled.
+[LEXICAL DEBUG]: Scanned RBRACE at line 30 position 2.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [PREF, COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production PREF -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[3]: COLLECTION1 | Stack: [COLLECTION2, EOF]
+[SYNTAX DEBUG]: Used production COLLECTION2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[4]: COLLECTION2 | Stack: [rbrace, EOF]
+[LEXICAL DEBUG]: Scanned RBRACE at line 31 position 0.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming None token, popping [COLLECTION2, COLLECTION1, COLLECTION].
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[1]: REFF | Stack: [EOF]
+[SYNTAX DEBUG]: Used production EOF -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_maximal_items.json" | Scope[0]: None | Stack: []
+[LEXICAL DEBUG]: Restored context of "../image_jsons/one_implicit_maximal_cvhonor.json"...
+[SEMANTIC DEBUG]: Registered item of type CVHONORS referenced by "one_implicit_maximal_cvhonor" at line 3 position 4 under section namespace "TestSection".
+[SYNTAX DEBUG]: Used production PITEM -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[8]: SECTION3 | Stack: [SECTION4, PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production SECTION4 -> rbracket.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[9]: SECTION4 | Stack: [rbracket, PSECTION, RESUME2, EOF]
+[LEXICAL DEBUG]: Scanned RBRACKET at line 4 position 2.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming RBRACE token, popping [SECTION4, SECTION3, SECTION2, SECTION1, SECTION, SECTIONS].
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[3]: RESUME1 | Stack: [PSECTION, RESUME2, EOF]
+[SYNTAX DEBUG]: Used production PSECTION -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[3]: RESUME1 | Stack: [RESUME2, EOF]
+[SYNTAX DEBUG]: Used production RESUME2 -> rbrace.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[4]: RESUME2 | Stack: [rbrace, EOF]
+[LEXICAL DEBUG]: Scanned RBRACE at line 5 position 0.
+[SYNTAX DEBUG]: Synchronized scope based on an upcoming None token, popping [RESUME2, RESUME1, RESUME].
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Used production EOF -> ε.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: []
+[SYNTHESIS WARNING]: Unused labels ['TestLabel'] in item of type CVHONORS referenced by "one_implicit_maximal_cvhonor" at line 3 position 4.
+[SYNTHESIS DEBUG]: Dictified item of type CVHONORS referenced by "one_implicit_maximal_cvhonor" at line 3 position 4: {'labels': {'TestLabel': 'TestSecret'}, 'ltag': 'TestLeftTag', 'title': 'TestTitle', 'subtitle': 'TestSubtitle', 'rtag': 'TestRightTag'}.

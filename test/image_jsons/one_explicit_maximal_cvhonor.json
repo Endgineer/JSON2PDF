@@ -1,0 +1,11 @@
+{
+  "TestSection": [
+    {
+      "labels": { "TestLabel": "TestSecret" },
+      "ltag": "TestLeftTag",
+      "title": "TestTitle",
+      "subtitle": "TestSubtitle",
+      "rtag": "TestRightTag"
+    }
+  ]
+}

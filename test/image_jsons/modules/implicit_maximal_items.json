@@ -1,0 +1,31 @@
+{
+  "one_implicit_maximal_cventry": {
+    "labels": { "TestLabel": "TestSecret" },
+    "title": "TestTitle",
+    "subtitle": "TestSubtitle",
+    "ttag": "TestTopTag",
+    "btag": "TestBotTag",
+    "details": [
+      "TestPoint"
+    ]
+  },
+
+  "one_implicit_maximal_cvhonor": {
+    "labels": { "TestLabel": "TestSecret" },
+    "ltag": "TestLeftTag",
+    "title": "TestTitle",
+    "subtitle": "TestSubtitle",
+    "rtag": "TestRightTag"
+  },
+
+  "one_implicit_maximal_cvparagraph": {
+    "labels": { "TestLabel": "TestSecret" },
+    "paragraph": "TestParagraph"
+  },
+
+  "one_implicit_maximal_cvskill": {
+    "labels": { "TestLabel": "TestSecret" },
+    "category": "TestCategory",
+    "content": "TestContent"
+  }
+}
