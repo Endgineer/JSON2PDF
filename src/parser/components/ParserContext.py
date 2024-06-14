@@ -72,7 +72,7 @@ class ParserContext:
           if synchronizations is not None and len(synchronizations) > 0:
             logging.getLogger('SYNTAX').debug(f'Synchronized scope based on an upcoming {None if self.lexer.peek() is None else self.lexer.peek().name} token, popping {synchronizations}.')
       else:
-        logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected one of {{{", ".join([str(s) if s is None else s.name for s in symbol.first.keys()])}}}.')
+        logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected one of {sorted([str(s) if s is None else s.name for s in symbol.first.keys()])}.')
         self.panic()
     
     elif isinstance(symbol, Token.Kind) or symbol is None:
