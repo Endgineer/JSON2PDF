@@ -73,4 +73,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_with_valid_item.json" | Scope[0]: None | Stack: []
-[COMPILER ERROR]: Compiling "empty_name_section_with_valid_item.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling "empty_name_section_with_valid_item.json" - INTERRUPT

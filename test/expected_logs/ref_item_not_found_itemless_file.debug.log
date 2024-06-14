@@ -72,4 +72,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/ref_item_not_found_itemless_file.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/ref_item_not_found_itemless_file.json" | Scope[0]: None | Stack: []
-[COMPILER ERROR]: Compiling "ref_item_not_found_itemless_file.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling "ref_item_not_found_itemless_file.json" - INTERRUPT

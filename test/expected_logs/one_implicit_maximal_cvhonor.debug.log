@@ -560,4 +560,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: []
 [SYNTHESIS WARNING]: Unused labels ['TestLabel'] in item of type CVHONORS referenced by "one_implicit_maximal_cvhonor" at line 3 position 4.
 [SYNTHESIS DEBUG]: Dictified item of type CVHONORS referenced by "one_implicit_maximal_cvhonor" at line 3 position 4: {'labels': {'TestLabel': 'TestSecret'}, 'ltag': 'TestLeftTag', 'title': 'TestTitle', 'subtitle': 'TestSubtitle', 'rtag': 'TestRightTag'}.
-[COMPILER ERROR]: Compiling "one_implicit_maximal_cvhonor.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling "one_implicit_maximal_cvhonor.json" - INTERRUPT

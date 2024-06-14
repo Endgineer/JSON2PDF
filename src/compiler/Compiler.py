@@ -45,7 +45,7 @@ class Compiler():
     self.synthesizer.synthesize(self.flags.anonymize)
 
     if interrupt:
-      logging.getLogger('COMPILER').error(f'Compiling "{self.flags.filename}.json" - INTERRUPT')
+      logging.getLogger('COMPILER').critical(f'Compiling "{self.flags.filename}.json" - INTERRUPT')
 
     if error_handler.fired: sys.exit()
 

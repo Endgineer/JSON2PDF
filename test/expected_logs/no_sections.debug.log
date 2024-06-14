@@ -19,4 +19,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/no_sections.json" | Scope[0]: None | Stack: []
-[COMPILER ERROR]: Compiling "no_sections.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling "no_sections.json" - INTERRUPT

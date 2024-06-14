@@ -125,4 +125,4 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_explicit_minimal_cvhonor.json" | Scope[0]: None | Stack: []
 [SYNTHESIS DEBUG]: Dictified item of type CVHONORS at line 3 position 4: {'ltag': 'TestLeftTag', 'title': 'TestTitle', 'subtitle': 'TestSubtitle', 'rtag': 'TestRightTag'}.
-[COMPILER ERROR]: Compiling "one_explicit_minimal_cvhonor.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling "one_explicit_minimal_cvhonor.json" - INTERRUPT
