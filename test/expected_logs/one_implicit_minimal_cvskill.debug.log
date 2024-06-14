@@ -353,3 +353,4 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cvskill.json" | Scope[0]: None | Stack: []
 [SYNTHESIS DEBUG]: Dictified item of type CVSKILLS referenced by "one_implicit_minimal_cvskill" at line 3 position 4: {'category': 'TestCategory', 'content': 'TestContent'}.
+[COMPILER ERROR]: Compiling "one_implicit_minimal_cvskill.json" - INTERRUPT

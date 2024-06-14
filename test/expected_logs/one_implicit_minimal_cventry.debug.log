@@ -353,3 +353,4 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cventry.json" | Scope[0]: None | Stack: []
 [SYNTHESIS DEBUG]: Dictified item of type CVENTRIES referenced by "one_implicit_minimal_cventry" at line 3 position 4: {'title': 'TestTitle', 'subtitle': 'TestSubtitle', 'ttag': 'TestTopTag', 'btag': 'TestBotTag'}.
+[COMPILER ERROR]: Compiling "one_implicit_minimal_cventry.json" - INTERRUPT

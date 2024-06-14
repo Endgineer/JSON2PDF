@@ -135,3 +135,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/one_explicit_maximal_cvskill.json" | Scope[0]: None | Stack: []
 [SYNTHESIS WARNING]: Unused labels ['TestLabel'] in item of type CVSKILLS at line 3 position 4.
 [SYNTHESIS DEBUG]: Dictified item of type CVSKILLS at line 3 position 4: {'labels': {'TestLabel': 'TestSecret'}, 'category': 'TestCategory', 'content': 'TestContent'}.
+[COMPILER ERROR]: Compiling "one_explicit_maximal_cvskill.json" - INTERRUPT

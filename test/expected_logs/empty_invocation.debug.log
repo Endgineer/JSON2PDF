@@ -73,3 +73,4 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_invocation.json" | Scope[0]: None | Stack: []
 [SYNTHESIS DEBUG]: Dictified item of type CVPARAGRAPH at line 3 position 4: {'paragraph': None}.
+[COMPILER ERROR]: Compiling "empty_invocation.json" - INTERRUPT

@@ -50,3 +50,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/ref_file_not_found.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/ref_file_not_found.json" | Scope[0]: None | Stack: []
+[COMPILER ERROR]: Compiling "ref_file_not_found.json" - INTERRUPT

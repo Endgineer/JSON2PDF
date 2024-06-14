@@ -42,3 +42,4 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_without_item.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/empty_name_section_without_item.json" | Scope[0]: None | Stack: []
+[COMPILER ERROR]: Compiling "empty_name_section_without_item.json" - INTERRUPT
