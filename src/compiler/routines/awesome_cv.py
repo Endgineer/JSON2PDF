@@ -1,4 +1,4 @@
-def load_class():
+def load_class(spaced: bool):
   return '''
 %================================================================================
 %                               AWESOME CV CLASS
@@ -750,11 +750,13 @@ def load_class():
 \\newenvironment{cvitems}{%
   \\vspace{-4.0mm}
   \\begin{justify}
+  \\linespread{'''+('''1.2''' if spaced else '''1.0''')+'''}\\selectfont
   \\begin{itemize}[leftmargin=2ex, nosep, noitemsep]
     \\setlength{\\parskip}{0pt}
     \\renewcommand{\\labelitemi}{\\bullet}
 }{%
   \\end{itemize}
+  \\linespread{1.0}\\selectfont
   \\end{justify}
   \\vspace{-4.0mm}
 }

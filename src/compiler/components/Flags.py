@@ -18,6 +18,7 @@ class Flags:
   website: str
   footer: str
   header: str
+  spaced: bool
 
   def __init__(self, args: typing.Sequence[str]):
     self.filepath = args.file_path
@@ -25,6 +26,7 @@ class Flags:
     self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email] or args.anonymized
     self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'
     self.color = args.color if args.color else '000000'
+    self.spaced = args.spaced
     
     if self.anonymize:
       footer_name = f'First Last'
@@ -73,7 +75,7 @@ class Flags:
       f'\\documentclass[11pt, a4paper]{{article}}\n'
       f'\n'
       f'\makeatletter\n'
-      f'{load_class()}\n'
+      f'{load_class(self.spaced)}\n'
       f'\makeatother\n'
       f'\n'
       f'% Configure page margins with geometry\n'
