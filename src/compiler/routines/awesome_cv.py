@@ -1,4 +1,4 @@
-def load_class(spaced: bool):
+def load_class(spaced: bool, darken: bool):
   return '''
 %================================================================================
 %                               AWESOME CV CLASS
@@ -134,8 +134,8 @@ def load_class(spaced: bool):
 % Gray-scale colors
 \\definecolor{white}{HTML}{FFFFFF}
 \\definecolor{black}{HTML}{000000}
-\\definecolor{darkgray}{HTML}{333333}
-\\definecolor{gray}{HTML}{5D5D5D}
+\\definecolor{darkgray}{HTML}{'''+('000000' if darken else '333333')+'''}
+\\definecolor{gray}{HTML}{'''+('000000' if darken else '5D5D5D')+'''}
 \\definecolor{lightgray}{HTML}{999999}
 % Basic colors
 \\definecolor{green}{HTML}{C2E15F}
@@ -144,7 +144,7 @@ def load_class(spaced: bool):
 \\definecolor{red}{HTML}{FB4485}
 \\definecolor{blue}{HTML}{6CE0F1}
 % Text colors
-\\definecolor{darktext}{HTML}{414141}
+\\definecolor{darktext}{HTML}{'''+('000000' if darken else '414141')+'''}
 \\colorlet{text}{darkgray}
 \\colorlet{graytext}{gray}
 \\colorlet{lighttext}{lightgray}
