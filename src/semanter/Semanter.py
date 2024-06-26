@@ -15,7 +15,7 @@ class Semanter:
       if item is None:
         return None
       elif item.reference is not None:
-        item = self.semanter_ctx.fetch(item)
+        item = self.semanter_ctx.query_cache(item)
 
       item = self.semanter_ctx.analyze_item(item)
 

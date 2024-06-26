@@ -145,48 +145,64 @@ class SemanterContext:
 
 
 
-  def fetch(self, item: Item, recursed: bool = False) -> Item:
+  def query_cache(self, item: Item) -> Item:
     reference_string = item.reference.get_string()
     if reference_string.startswith('//'):
       logging.getLogger('SEMANTIC').debug(f'Item {item} is a comment; skipping semantic analysis.')
       return None
 
-    if item.reference.contains_invocation():
-      return self.error(f'Item {item} cannot contain an invocation.')
+    reference_parts = self.sundered_reference(item, reference_string)
+    if reference_parts is None: return None
+    fileref, itemref = reference_parts
+
+    cache_entry_dirty = fileref not in self.cache
+    if cache_entry_dirty:
+      logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
+      self.query_disk(fileref)
     
+    if itemref not in self.cache[fileref]:
+      return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
+    
+    if not cache_entry_dirty: logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
+    return Item(item.section, self.cache[fileref][itemref].reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
+
+
+
+  def sundered_reference(self, item: Item, reference_string: str) -> tuple[str, str]:
     reference_parts = reference_string.split('::')
 
+    reference_errored = False
+    if item.reference.contains_invocation():
+      self.error(f'Item {item} cannot contain an invocation.')
+      reference_errored = True
     if len(reference_parts) != 2:
-      return self.error(f'Item {item} is not of the form "<FILE_BASENAME_PATH>::<ITEM_IDENTIFIER>".')
+      self.error(f'Item {item} is not of the form "<FILE_BASENAME_PATH>::<ITEM_IDENTIFIER>".')
+      reference_errored = True
+    if reference_errored: return None
     
     fileref, itemref = reference_parts
 
-    empty_ref = False
     if fileref.strip() == '':
       self.error(f'File basename path "{fileref}" in item {item} cannot be empty.')
-      empty_ref = True
+      reference_errored = True
     if itemref.strip() == '':
       self.error(f'Item identifier "{itemref}" in item {item} cannot be empty.')
-      empty_ref = True
-    if empty_ref: return
-
-    if not self.identifier_verifier(itemref):
-      return self.error(f'Item identifier "{itemref}" in item {item} is not a valid identifier.')
+      reference_errored = True
+    if reference_errored: return None
 
     if not os.path.isfile(f'{fileref}.json'):
-      return self.error(f'File path "{fileref}.json" from item {item} does not point to an existing file.')
+      self.error(f'File path "{fileref}.json" from item {item} does not point to an existing file.')
+      reference_errored = True
+    if not self.identifier_verifier(itemref):
+      self.error(f'Item identifier "{itemref}" in item {item} is not a valid identifier.')
+      reference_errored = True
+    if reference_errored: return None
     
-    if fileref in self.cache:
-      if self.cache[fileref] is None:
-        return self.error(f'File reference "{fileref}" in {item} points to an invalid or empty file.')
-      elif itemref in self.cache[fileref]:
-        if not recursed: logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
-        return Item(item.section, self.cache[fileref][itemref].reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
-      else:
-        return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
+    return (fileref, itemref)
 
-    logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
-    
+
+
+  def query_disk(self, fileref: str) -> None:
     file_items = self.parser.parse_all(f'{fileref}.json')
     self.cache[fileref] = dict()
     reference_registry = dict()
@@ -213,5 +229,3 @@ class SemanterContext:
 
       reference_registry[file_item_reference_string] = 1
       self.cache[fileref][file_item_reference_string] = file_item
-    
-    return self.fetch(item, True)
