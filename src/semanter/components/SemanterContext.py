@@ -146,10 +146,15 @@ class SemanterContext:
 
 
   def fetch(self, item: Item, recursed: bool = False) -> Item:
+    reference_string = item.reference.get_string()
+    if reference_string.startswith('//'):
+      logging.getLogger('SEMANTIC').debug(f'Item {item} is a comment; skipping semantic analysis.')
+      return None
+
     if item.reference.contains_invocation():
       return self.error(f'Item {item} cannot contain an invocation.')
     
-    reference_parts = item.reference.get_string().split('::')
+    reference_parts = reference_string.split('::')
 
     if len(reference_parts) != 2:
       return self.error(f'Item {item} is not of the form "<FILE_BASENAME_PATH>::<ITEM_IDENTIFIER>".')
