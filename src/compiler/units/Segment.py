@@ -8,13 +8,11 @@ class Segment:
     self.invocation = None
     self.value = None
   
-  def define(self, string: str, invokable: bool) -> None:
-    if invokable:
-      self.invocation = string[1:-1]
-      self.value = None
-    else:
-      self.invocation = None
-      self.value = string
+  def define_as_plain(self, string: str) -> None:
+    self.value = string
+  
+  def define_as_invokable(self, string: str) -> None:
+    self.invocation = string[1:-1]
   
   def __repr__(self):
     return self.value if self.invocation is None or self.value is not None else f'{{{self.invocation}}}'

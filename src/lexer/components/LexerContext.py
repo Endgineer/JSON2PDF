@@ -56,11 +56,14 @@ class LexerContext:
   def at_end_of_file(self) -> bool:
     return len(self.document) == self.matched_token_start_idx + self.matched_token_len
   
-  def create_segment(self) -> None:
+  def create_new_segment(self) -> None:
     self.matched_token_value.append(Segment(self.matched_token_len))
   
-  def define_segment(self, invokable: bool) -> None:
-    self.matched_token_value[-1].define(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len], invokable)
+  def finalize_segment_plain(self) -> None:
+    self.matched_token_value[-1].define_as_plain(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len])
+  
+  def finalize_segment_invokable(self) -> None:
+    self.matched_token_value[-1].define_as_invokable(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len])
   
   def capture_token(self) -> Token:
     token = self.matched_token

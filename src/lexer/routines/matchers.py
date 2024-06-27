@@ -40,7 +40,7 @@ def match_start(lexer_ctx: LexerContext) -> bool:
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.COMMA
     case '"':
-      lexer_ctx.create_segment()
+      lexer_ctx.create_new_segment()
       lexer_ctx.matched_token_len += 1
       lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
     case _:
@@ -62,10 +62,10 @@ def match_str_char(lexer_ctx: LexerContext) -> bool:
     case '"':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.STRING
-      lexer_ctx.define_segment(False)
+      lexer_ctx.finalize_segment_plain()
     case '{':
-      lexer_ctx.define_segment(False)
-      lexer_ctx.create_segment()
+      lexer_ctx.finalize_segment_plain()
+      lexer_ctx.create_new_segment()
       lexer_ctx.matched_token_len += 1
       lexer_ctx.state = LexerContext.State.STR_AWAIT_INVOCATION_SYLLABLE
     case '}':
@@ -150,8 +150,8 @@ def match_invocation_delimiter(lexer_ctx: LexerContext) -> bool:
     case '}':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
-      lexer_ctx.define_segment(True)
-      lexer_ctx.create_segment()
+      lexer_ctx.finalize_segment_invokable()
+      lexer_ctx.create_new_segment()
     case '\\':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
