@@ -36,13 +36,13 @@ class SynthesizerContext:
       
       for prop in item.properties:
         if prop.kind == str:
-          invoked_labels.update(SynthesizerContext.invoke_token(item.labels, prop.value, anonymize))
+          invoked_labels.update(SynthesizerContext.activate_token(item.labels, prop.value, anonymize))
         elif prop.kind == list:
           for point in prop.value:
-            invoked_labels.update(SynthesizerContext.invoke_token(item.labels, point, anonymize))
+            invoked_labels.update(SynthesizerContext.activate_token(item.labels, point, anonymize))
         elif prop.kind == dict:
           for pair in prop.value:
-            invoked_labels.update(SynthesizerContext.invoke_token(item.labels, pair[1], anonymize))
+            invoked_labels.update(SynthesizerContext.activate_token(item.labels, pair[1], anonymize))
       
       redundant_labels = set(item.labels) - invoked_labels
       if len(redundant_labels) > 0:
@@ -78,13 +78,13 @@ class SynthesizerContext:
 
 
 
-  def invoke_token(labels: dict[str, str], token: Token, anonymize: bool) -> set[str]:
+  def activate_token(labels: dict[str, str], token: Token, anonymize: bool) -> set[str]:
     if token is None: return set()
     invoked_labels = set()
 
     token_string = f'{token}'
     for segment in token.value:
-      invocation_result = segment.invoke(labels, anonymize)
+      invocation_result = segment.activate(labels, anonymize)
 
       if invocation_result is None:
         pass

@@ -1,4 +1,7 @@
+import pylatex
+
 class Segment:
+  active: bool
   value: str
   relative_position: int
   invocation: str
@@ -6,6 +9,7 @@ class Segment:
   def __init__(self, relative_position: int):
     self.relative_position = relative_position
     self.invocation = None
+    self.active = False
     self.value = None
   
   def define_as_plain(self, string: str) -> None:
@@ -15,9 +19,15 @@ class Segment:
     self.invocation = string[1:-1]
   
   def __repr__(self):
-    return self.value if self.invocation is None or self.value is not None else f'{{{self.invocation}}}'
+    if self.invocation is None:
+      return pylatex.escape_latex(self.value) if self.active else self.value
+    
+    return pylatex.escape_latex(self.value) if self.active else f'{{{self.invocation}}}'
   
-  def invoke(self, labels: dict[str, str], anonymize: bool) -> bool:
+  def activate(self, labels: dict[str, str], anonymize: bool) -> bool:
+    if self.active: return None
+    self.active = True
+  
     if self.invocation is None:
       return None
     elif anonymize:
