@@ -7,11 +7,11 @@ from compiler.units.Segment import Segment
 
 class LexerContext:
   class State(enum.Enum):
+    DISCARDED_STRING = -1
     START = 0
     STR_AWAIT_CHAR = 1
     STR_AWAIT_INVOCATION_SYLLABLE = 2
     STR_AWAIT_INVOCATION_DELIMITER = 3
-    DISCARDED_STRING = 4
   
   filepath: str
   document: str
