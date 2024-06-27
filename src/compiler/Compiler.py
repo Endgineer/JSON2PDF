@@ -42,7 +42,7 @@ class Compiler():
     self.semanter = Semanter(self.parser)
     self.synthesizer = Synthesizer(self.semanter)
 
-    self.synthesizer.synthesize(self.flags.anonymize)
+    self.synthesizer.synthesize(self.flags.anonymize, self.flags.bolded)
 
     if interrupt:
       logging.getLogger('COMPILER').critical(f'Compiling "{self.flags.filename}.json" - INTERRUPT')

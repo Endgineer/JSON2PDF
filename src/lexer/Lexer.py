@@ -25,8 +25,12 @@ class Lexer():
       self.lexer_ctx_stack[-1].scan_next_char()
 
       if match_str_char(self.lexer_ctx_stack[-1]): pass
+      elif match_possible_bold_begin(self.lexer_ctx_stack[-1]): pass
+      elif match_bold_char(self.lexer_ctx_stack[-1]): pass
+      elif match_possible_bold_end(self.lexer_ctx_stack[-1]): pass
       elif match_invocation_syllable(self.lexer_ctx_stack[-1]): pass
       elif match_invocation_delimiter(self.lexer_ctx_stack[-1]): pass
+      elif match_possible_bold_in_invokation(self.lexer_ctx_stack[-1]): pass
       elif match_start(self.lexer_ctx_stack[-1]): pass
       
       if self.lexer_ctx_stack[-1].matched_token_kind is None:

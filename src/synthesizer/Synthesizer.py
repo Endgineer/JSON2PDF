@@ -8,9 +8,9 @@ class Synthesizer:
   def __init__(self, semanter: Semanter):
     self.synthesizer_ctx = SynthesizerContext(semanter)
   
-  def synthesize(self, anonymize: bool) -> None:
+  def synthesize(self, anonymize: bool, bolded: bool) -> None:
     self.synthesizer_ctx.build()
 
-    self.synthesizer_ctx.invocations(anonymize)
+    self.synthesizer_ctx.invocations(anonymize, bolded)
 
     self.synthesizer_ctx.dictify()

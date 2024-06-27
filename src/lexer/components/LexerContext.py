@@ -12,6 +12,10 @@ class LexerContext:
     STR_AWAIT_CHAR = 1
     STR_AWAIT_INVOCATION_SYLLABLE = 2
     STR_AWAIT_INVOCATION_DELIMITER = 3
+    STR_POSSIBLE_BOLD_BEGIN = 4
+    STR_AWAIT_BOLD_CHAR = 5
+    STR_POSSIBLE_BOLD_END = 6
+    STR_POSSIBLE_BOLD_IN_INVOKATION = 7
   
   filepath: str
   document: str
@@ -56,14 +60,17 @@ class LexerContext:
   def at_end_of_file(self) -> bool:
     return len(self.document) == self.matched_token_start_idx + self.matched_token_len
   
-  def create_new_segment(self) -> None:
-    self.matched_token_value.append(Segment(self.matched_token_len))
+  def create_new_segment(self, backtrack_end: int = 0) -> None:
+    self.matched_token_value.append(Segment(self.matched_token_len - backtrack_end))
   
-  def finalize_segment_plain(self) -> None:
-    self.matched_token_value[-1].define_as_plain(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len])
+  def finalize_segment_plain(self, backtrack_end: int = 0) -> None:
+    self.matched_token_value[-1].define_as_plain(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len - backtrack_end])
   
-  def finalize_segment_invokable(self) -> None:
-    self.matched_token_value[-1].define_as_invokable(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len])
+  def finalize_segment_invokable(self, backtrack_end: int = 0) -> None:
+    self.matched_token_value[-1].define_as_invokable(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len - backtrack_end])
+  
+  def finalize_segment_bold(self, backtrack_end: int = 0) -> None:
+    self.matched_token_value[-1].define_as_bold(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len - backtrack_end])
   
   def capture_token(self) -> Token:
     token = self.matched_token

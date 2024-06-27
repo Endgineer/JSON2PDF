@@ -68,6 +68,9 @@ def match_str_char(lexer_ctx: LexerContext) -> bool:
       lexer_ctx.create_new_segment()
       lexer_ctx.matched_token_len += 1
       lexer_ctx.state = LexerContext.State.STR_AWAIT_INVOCATION_SYLLABLE
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_POSSIBLE_BOLD_BEGIN
     case '}':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
@@ -93,10 +96,140 @@ def match_str_char(lexer_ctx: LexerContext) -> bool:
   
   return True
 
+def match_possible_bold_begin(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.STR_POSSIBLE_BOLD_BEGIN: return False
+
+  match(lexer_ctx.current_char):
+    case '"':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.STRING
+      lexer_ctx.finalize_segment_plain()
+    case '{':
+      lexer_ctx.finalize_segment_plain()
+      lexer_ctx.create_new_segment()
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_INVOCATION_SYLLABLE
+    case '*':
+      lexer_ctx.finalize_segment_plain(1)
+      lexer_ctx.create_new_segment(1)
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_BOLD_CHAR
+    case '}':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\\':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\n':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\t':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\r':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case _:
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
+  
+  return True
+
+def match_bold_char(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.STR_AWAIT_BOLD_CHAR: return False
+
+  match(lexer_ctx.current_char):
+    case '"':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '{':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_POSSIBLE_BOLD_END
+    case '}':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\\':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\n':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\t':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\r':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case _:
+      lexer_ctx.matched_token_len += 1
+  
+  return True
+
+def match_possible_bold_end(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.STR_POSSIBLE_BOLD_END: return False
+
+  match(lexer_ctx.current_char):
+    case '"':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '{':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
+      lexer_ctx.finalize_segment_bold()
+      lexer_ctx.create_new_segment()
+    case '}':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\\':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\n':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\t':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\r':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case _:
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_BOLD_CHAR
+  
+  return True
+
 def match_invocation_syllable(lexer_ctx: LexerContext) -> bool:
   if lexer_ctx.state != LexerContext.State.STR_AWAIT_INVOCATION_SYLLABLE: return False
 
   match(lexer_ctx.current_char):
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_POSSIBLE_BOLD_IN_INVOKATION
     case '"':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
@@ -139,6 +272,9 @@ def match_invocation_delimiter(lexer_ctx: LexerContext) -> bool:
   if lexer_ctx.state != LexerContext.State.STR_AWAIT_INVOCATION_DELIMITER: return False
 
   match(lexer_ctx.current_char):
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_POSSIBLE_BOLD_IN_INVOKATION
     case '"':
       lexer_ctx.matched_token_len += 1
       lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
@@ -173,5 +309,51 @@ def match_invocation_delimiter(lexer_ctx: LexerContext) -> bool:
       lexer_ctx.state = LexerContext.State.DISCARDED_STRING
     case _:
       lexer_ctx.matched_token_len += 1
+  
+  return True
+
+def match_possible_bold_in_invokation(lexer_ctx: LexerContext) -> bool:
+  if lexer_ctx.state != LexerContext.State.STR_POSSIBLE_BOLD_IN_INVOKATION: return False
+
+  match(lexer_ctx.current_char):
+    case '*':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '"':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '{':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '}':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_CHAR
+      lexer_ctx.finalize_segment_invokable()
+      lexer_ctx.create_new_segment()
+    case '\\':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case ' ':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_INVOCATION_SYLLABLE
+    case '\n':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\t':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case '\r':
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.matched_token_kind = Token.Kind.DISCARDED
+      lexer_ctx.state = LexerContext.State.DISCARDED_STRING
+    case _:
+      lexer_ctx.matched_token_len += 1
+      lexer_ctx.state = LexerContext.State.STR_AWAIT_INVOCATION_DELIMITER
   
   return True

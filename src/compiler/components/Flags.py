@@ -20,6 +20,7 @@ class Flags:
   header: str
   spaced: bool
   darken: bool
+  bolded: bool
 
   def __init__(self, args: typing.Sequence[str]):
     self.filepath = args.file_path
@@ -29,6 +30,7 @@ class Flags:
     self.color = args.color if args.color else '000000'
     self.spaced = args.spaced
     self.darken = args.darken
+    self.bolded = args.bolded
     
     if self.anonymize:
       footer_name = f'First Last'

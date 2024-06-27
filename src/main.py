@@ -23,6 +23,7 @@ if __name__ == '__main__':
     arg_parser.add_argument('--spaced', action=argparse.BooleanOptionalAction, default=True)
     arg_parser.add_argument('--darken', action=argparse.BooleanOptionalAction, default=True)
     arg_parser.add_argument('--anonymized', action=argparse.BooleanOptionalAction, default=False)
+    arg_parser.add_argument('--bolded', action=argparse.BooleanOptionalAction, default=False)
     arg_parser.add_argument('--debug', action=argparse.BooleanOptionalAction)
     arg_parser.add_argument('--interrupt', action=argparse.BooleanOptionalAction)
     args = arg_parser.parse_args()
