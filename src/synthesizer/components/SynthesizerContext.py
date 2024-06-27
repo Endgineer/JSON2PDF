@@ -88,7 +88,7 @@ class SynthesizerContext:
 
       if invocation_result is None:
         pass
-      elif invocation_result is False:
+      elif invocation_result == False:
         logging.getLogger('SYNTHESIS').warning(f'Missing label for invocation "{segment.invocation}" in {token_string}{", will obfuscate instead" if anonymize else ""}.')
       else:
         logging.getLogger('SYNTHESIS').debug(f'Bound invocation "{segment.invocation}" in {token_string} to its label.')
