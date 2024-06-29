@@ -335,7 +335,7 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_minimal_items.json" | Scope[0]: None | Stack: []
 [LEXICAL DEBUG]: Restored context of "../image_jsons/one_implicit_minimal_cvskill.json"...
-[SEMANTIC DEBUG]: Registered item of type CVSKILLS referenced by "one_implicit_minimal_cvskill" at line 3 position 4 under section namespace "TestSection".
+[SEMANTIC DEBUG]: Registered item of type CVSKILLS referenced by "../image_jsons/modules/implicit_minimal_items::one_implicit_minimal_cvskill" at line 3 position 4 under section namespace "TestSection".
 [SYNTAX DEBUG]: Used production PITEM -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cvskill.json" | Scope[8]: SECTION3 | Stack: [SECTION4, PSECTION, RESUME2, EOF]
 [SYNTAX DEBUG]: Used production SECTION4 -> rbracket.
@@ -352,5 +352,5 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cvskill.json" | Scope[1]: ROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cvskill.json" | Scope[0]: None | Stack: []
-[SYNTHESIS DEBUG]: Dictified item of type CVSKILLS referenced by "one_implicit_minimal_cvskill" at line 3 position 4: {'category': 'TestCategory', 'content': 'TestContent'}.
+[SYNTHESIS DEBUG]: Dictified item of type CVSKILLS referenced by "../image_jsons/modules/implicit_minimal_items::one_implicit_minimal_cvskill" at line 3 position 4: {'category': 'TestCategory', 'content': 'TestContent'}.
 [COMPILER CRITICAL]: Compiling "one_implicit_minimal_cvskill.json" - INTERRUPT
