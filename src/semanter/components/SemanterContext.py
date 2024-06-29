@@ -164,7 +164,7 @@ class SemanterContext:
       return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
     
     if not cache_entry_dirty: logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
-    return Item(item.section, self.cache[fileref][itemref].reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
+    return Item(item.section, item.reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
 
 
 
