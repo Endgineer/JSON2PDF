@@ -24,7 +24,7 @@ class LogEqualityTest(unittest.TestCase):
         self.assertEqual(generated_log_file.read(), expected_log_file.read(), f'{self.filebasename}.json - Log files not identical.')
   
   def runTest(self):
-    subprocess.call(f'../json2cv ../image_jsons/{self.filebasename} --anonymize --bolded --debug --interrupt', cwd=GEN_LOG_DIR)
+    subprocess.call(f'python ../../src/main.py ../image_jsons/{self.filebasename} --anonymize --bolded --debug --interrupt', cwd=GEN_LOG_DIR)
     self.assertGeneratedIsExpected()
 
 
