@@ -11,7 +11,7 @@ class IdentifierUtils:
   BINARY_OPS = { '=' }
   WILDCARDS = { '*' }
   
-  def validate(identifier: str) -> bool:
+  def validate(identifier: str, wildcards_disabled: bool = False) -> bool:
     state = IdentifierUtils.State.ACCEPT_SYLLABLE
 
     for char in identifier:
@@ -24,6 +24,7 @@ class IdentifierUtils:
           return False
       elif state == IdentifierUtils.State.ACCEPT_SYLLABLE:
         if char in IdentifierUtils.WILDCARDS:
+          if wildcards_disabled: return False
           state = IdentifierUtils.State.ACCEPT_NONWILDCARD
         elif not char.isalnum():
           return False
@@ -31,6 +32,7 @@ class IdentifierUtils:
           state = IdentifierUtils.State.ACCEPT_DELIMITER
       elif state == IdentifierUtils.State.ACCEPT_DELIMITER:
         if char in IdentifierUtils.WILDCARDS:
+          if wildcards_disabled: return False
           state = IdentifierUtils.State.ACCEPT_NONWILDCARD
         elif char.isalnum():
           pass

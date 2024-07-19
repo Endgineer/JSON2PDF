@@ -223,7 +223,7 @@ class SemanterContext:
         self.error(f'The identifier of item {file_item} in file "{fileref}.json" cannot be empty.')
         continue
 
-      if not IdentifierUtils.validate(file_item_reference_string):
+      if not IdentifierUtils.validate(file_item_reference_string, True):
         self.error(f'The identifier of item {file_item} in file "{fileref}.json" is not a valid identifier.')
         continue
 
