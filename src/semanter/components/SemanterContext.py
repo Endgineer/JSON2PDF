@@ -5,21 +5,19 @@ from parser.Parser import Parser
 from compiler.units.Item import Item
 from compiler.units.Prop import Prop
 import semanter.constants.propset as propset
-from semanter.utilities.IdentifierVerifier import IdentifierVerifier
+from semanter.utilities.IdentifierUtils import IdentifierUtils
 
 class SemanterContext:
   parser: Parser
   cache: dict[str, dict[str, Item] | None]
   registry: dict[str, Item.Kind]
   current_item_valid: bool
-  identifier_verifier: IdentifierVerifier
 
   def __init__(self, parser: Parser):
     self.parser = parser
     self.cache = dict()
     self.registry = dict()
     self.current_item_valid = True
-    self.identifier_verifier = IdentifierVerifier()
 
 
 
@@ -160,11 +158,18 @@ class SemanterContext:
       logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
       self.query_disk(fileref)
     
-    if itemref not in self.cache[fileref]:
+    properties = None
+    regex_tokens = IdentifierUtils.tokenize_regex(itemref)
+    for cached_itemref in self.cache[fileref].keys():
+      if IdentifierUtils.match_itemref(cached_itemref, regex_tokens):
+        logging.getLogger('SEMANTIC').debug(f'Cache hit "{fileref}::{cached_itemref}" matches item {item}.')
+        properties = self.cache[fileref][cached_itemref].properties
+        break
+    
+    if properties is None:
       return self.error(f'Item {item} does not exist in referenced file "{fileref}.json".')
     
-    if not cache_entry_dirty: logging.getLogger('SEMANTIC').debug(f'Cache hit for item {item}.')
-    return Item(item.section, item.reference, item.line_number, item.char_number, self.cache[fileref][itemref].properties)
+    return Item(item.section, item.reference, item.line_number, item.char_number, properties)
 
 
 
@@ -193,7 +198,7 @@ class SemanterContext:
     if not os.path.isfile(f'{fileref}.json'):
       self.error(f'File path "{fileref}.json" from item {item} does not point to an existing file.')
       reference_errored = True
-    if not self.identifier_verifier(itemref):
+    if not IdentifierUtils.validate(itemref):
       self.error(f'Item identifier "{itemref}" in item {item} is not a valid identifier.')
       reference_errored = True
     if reference_errored: return None
@@ -218,7 +223,7 @@ class SemanterContext:
         self.error(f'The identifier of item {file_item} in file "{fileref}.json" cannot be empty.')
         continue
 
-      if not self.identifier_verifier(file_item_reference_string):
+      if not IdentifierUtils.validate(file_item_reference_string):
         self.error(f'The identifier of item {file_item} in file "{fileref}.json" is not a valid identifier.')
         continue
 
