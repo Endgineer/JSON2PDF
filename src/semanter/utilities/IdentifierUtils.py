@@ -27,7 +27,8 @@ class IdentifierUtils:
           state = IdentifierUtils.State.ACCEPT_NONWILDCARD
         elif not char.isalnum():
           return False
-        state = IdentifierUtils.State.ACCEPT_DELIMITER
+        else:
+          state = IdentifierUtils.State.ACCEPT_DELIMITER
       elif state == IdentifierUtils.State.ACCEPT_DELIMITER:
         if char in IdentifierUtils.WILDCARDS:
           state = IdentifierUtils.State.ACCEPT_NONWILDCARD
