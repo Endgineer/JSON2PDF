@@ -16,12 +16,12 @@ class IdentifierUtils:
 
     for char in identifier:
       if state == IdentifierUtils.State.ACCEPT_NONWILDCARD:
-        if char in IdentifierUtils.WILDCARDS:
-          return False
-        elif char in IdentifierUtils.DELIMITERS or char in IdentifierUtils.UNARY_OPS or char in IdentifierUtils.BINARY_OPS:
+        if char in IdentifierUtils.DELIMITERS or char in IdentifierUtils.UNARY_OPS or char in IdentifierUtils.BINARY_OPS:
           state = IdentifierUtils.State.ACCEPT_SYLLABLE
         elif char.isalnum():
           state = IdentifierUtils.State.ACCEPT_DELIMITER
+        else:
+          return False
       elif state == IdentifierUtils.State.ACCEPT_SYLLABLE:
         if char in IdentifierUtils.WILDCARDS:
           state = IdentifierUtils.State.ACCEPT_NONWILDCARD
