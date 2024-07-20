@@ -162,7 +162,7 @@ class SemanterContext:
     regex_tokens = IdentifierUtils.tokenize_regex(itemref)
     for cached_itemref in self.cache[fileref].keys():
       if IdentifierUtils.match_itemref(cached_itemref, regex_tokens):
-        logging.getLogger('SEMANTIC').debug(f'Cache hit "{fileref}::{cached_itemref}" matches item {item}.')
+        logging.getLogger('SEMANTIC').debug(f'Fetched "{fileref}::{cached_itemref}" matches item {item}.' if cache_entry_dirty else f'Cache hit "{fileref}::{cached_itemref}" matches item {item}.')
         properties = self.cache[fileref][cached_itemref].properties
         break
     
