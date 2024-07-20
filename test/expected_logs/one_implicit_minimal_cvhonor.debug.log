@@ -335,6 +335,7 @@
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/modules/implicit_minimal_items.json" | Scope[0]: None | Stack: []
 [LEXICAL DEBUG]: Restored context of "../image_jsons/one_implicit_minimal_cvhonor.json"...
+[SEMANTIC DEBUG]: Fetched "../image_jsons/modules/implicit_minimal_items::one_implicit_minimal_cvhonor" matches item referenced by "../image_jsons/modules/implicit_minimal_items::one_implicit_minimal_cvhonor" at line 3 position 4.
 [SEMANTIC DEBUG]: Registered item of type CVHONORS referenced by "../image_jsons/modules/implicit_minimal_items::one_implicit_minimal_cvhonor" at line 3 position 4 under section namespace "TestSection".
 [SYNTAX DEBUG]: Used production PITEM -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_minimal_cvhonor.json" | Scope[8]: SECTION3 | Stack: [SECTION4, PSECTION, RESUME2, EOF]
