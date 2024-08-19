@@ -9,6 +9,7 @@ __pycache__
 /*.aux
 /*.xdv
 /*.exe
+/*.zip
 
 /test/generated_logs
 
