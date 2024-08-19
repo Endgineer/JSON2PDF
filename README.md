@@ -32,7 +32,9 @@ The `position` flag can be passed with multiple arguments, as shown in the examp
 
 ## Reporting Issues
 
-When encountering a compile-time issue, such as getting a compile-time error that you shouldn't be getting, or a run-time issue, such as when the generated pdf file is not the expected output, please make sure to include both the `*.log` and `*.debug.log` files corresponding to the erring attempt and a syntactically-equivalent version of your cv image (and whatever external files the image references) in your issue. To obtain the log files, run the tool with the `--debug` flag. Also include the `--anonymize` flag to ensure that none of the inputs to the tool make it into the log files. Since the tool is privy to the original content of your cv, you should also make sure that none of the json files referenced or used by the tool contain any sensitive information in their name or content. I cannot be held accountable for you accidentally leaking your personal information.
+When encountering a compile-time issue, such as getting a compile-time error that you shouldn't be getting, or a run-time issue, such as when the generated pdf file is not the expected output, please make sure to include both the `*.log` and `*.debug.log` files corresponding to the erring attempt and a syntactically-equivalent version of your cv image (and whatever external files the image references) in your issue.
+
+To obtain the log files, run the tool with the `--debug` flag. Also include the `--anonymize` flag to ensure that none of the inputs to the tool make it into the log files. Since the tool is privy to the original content of your cv, you should also make sure that none of the json files referenced or used by the tool contain any sensitive information in their name or content. I cannot be held accountable for you accidentally leaking your personal information.
 
 ## Features
 
