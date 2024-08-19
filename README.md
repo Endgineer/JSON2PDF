@@ -22,121 +22,22 @@ The process of generating your cv starts with an image of the CV, which must be 
 json2cv .\samples\resume
 ```
 
-Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not [anonymized](#anonymization). Try running this and seeing the difference from the previous output:
+Personal information cannot be provided in the cv image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2cv` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv is not anonymized. Try running this and seeing the difference from the previous output:
 
 ```sh
 json2cv .\samples\resume -n "Awesome Person" -p "Awesome Architect" "Awesome Expert" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522"
 ```
 
-The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Finally, if you hover on each of the headline contact details, you can get an idea of how the flag arguments translate to actual links.
+The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Try running the above command with and without the `--bolded` and `--anonymized` flags to see the difference.
+
+## Features
+
+The sample resume demonstrates some of the useful features of this tool. The `samples/resume.json` file coupled with the files in the `samples/sections` directory demonstrates the **item referencing** feature. This will be especially beneficial for those who have many items on their history, have multiple item versions, have multiple cv versions that reference the same items, and/or like to be more organized. Instead of defining an item within the sections of a cv image, we can define it in an external collection file and then reference it using a reference string of the form `basepath::itemid`, where `basepath` is the path to the collection file and `itemid` is the identifier of the item. Lines 22-23 of `samples/resume.json` showcase the wildcard feature, which allows us to find the first item in a collection file whose name matches the non-wildcard part of the identifier.
+
+Look into all the sample json files to get an idea of how the cv and sections come together. In particular, you can see the anonymization labeling feature in `samples/sections/experience.json::3,4,6`. Any text you put between curly braces will either be anonymized (if a corresponding label exists) or obfuscated when the tool is running in `--anonymized` mode, in addition to areas of the cv that are considered sensitive. Your cv will also be automatically anonymized if any of the basic flags are missing. You can also see the bolding markdown feature in `samples/sections/experience.json::9,12`. When running the tool in `--bolded` mode, any text that is wrapped in bolding markdown will be bolded.
 
 ## Reporting Issues
 
 When encountering a compile-time issue, such as getting a compile-time error that you shouldn't be getting, or a run-time issue, such as when the generated pdf file is not the expected output, please make sure to include both the `*.log` and `*.debug.log` files corresponding to the erring attempt and a syntactically-equivalent version of your cv image (and whatever external files the image references) in your issue.
 
 To obtain the log files, run the tool with the `--debug` flag. Also include the `--anonymize` flag to ensure that none of the inputs to the tool make it into the log files. Since the tool is privy to the original content of your cv, you should also make sure that none of the json files referenced or used by the tool contain any sensitive information in their name or content. I cannot be held accountable for you accidentally leaking your personal information.
-
-## Features
-
-### Anonymization
-
-The tool supports an **anonymizing** mode, where personal information and designated text within the cv is anonymized or obfuscated, to allow the cv to be shared with others without giving away personal information. At minimum, in order for a cv to not be anonymized, the tool must be provided with the basic flags. Even if these flags are provided, the cv can still be anonymized by specifying the `--anonymized` flag. As for designated text, in order to designate text as sensitive, you wrap the text in curly braces; but make sure there are no spaces between the curly braces and the sensitive text. By default, if a corresponding label is not provided for designated text, the text will be obfuscated; otherwise it will be anonymized.
-
-```json
-"This is non-sensitive text. But {this is sensitive text}. { This text will error}, because there is a space between one of the braces and the sensitive text. If the label 'this is sensitive text' -> 'this is the anonymized version' is provided, the text will anonymize into 'this is the anonymized version'. Otherwise, it will obfuscate into '████ ██ █████████ ████'."
-```
-
-### Structure
-
-A cv image is a json object that consists of as many sections as we'd like, each of which contains as many items as we'd like. For now, we will assume that we must define items in this same file, though the next section will shed light on another option. All in all, the structure of a cv image is as follows:
-
-```json
-{
-  ...
-  "Some Section": [
-    ...
-    {
-      ...
-    },
-    {
-      ...
-    },
-    ...
-  ],
-  "Other Section": [
-    ...
-  ],
-  ...
-}
-```
-
-Each section can only contain items that are all of the same type. In turn, the type of item that is within a section will determine the type and appearance of the section in the cv. There are four of these types: `cvparagraph`, `cvskills`, `cventries`, and `cvhonors`. The props we specify in an item will determine its type. Each of the four types has required and optional props. Some props may be common to multiple item types. All four item types and their props are shown below. Keep in mind that this isn't a valid section, since it contains items of different types.
-
-```json
-{
-  ...
-  "Some Section": [
-    ...
-    {
-      "labels": { "some sensitive text": "anonymized version of the text", ... },                       // OPTIONAL
-      "paragraph": "This is the first paragraph. It can contain as much text as we want it to."         // REQUIRED
-    },
-    {
-      "labels": { "some sensitive text": "anonymized version of the text", ... },                       // OPTIONAL
-      "category": "Some Category",                                                                      //REQUIRED
-      "content": "Content or items related to that category."                                           //REQUIRED
-    },
-    {
-      "labels": { "some sensitive text": "anonymized version of the text", ... },                       // OPTIONAL
-      "title": "Some Title",                                                                            // REQUIRED
-      "subtitle": "Some Subtitle",                                                                      // REQUIRED
-      "ttag": "Some Location",                                                                          // REQUIRED
-      "btag": "Some Date",                                                                              // REQUIRED
-      "details": [                                                                                      // OPTIONAL
-        "We can have as many bullet points detailing this entry as we need.",
-        ...
-      ]
-    },
-    {
-      "labels": { "some sensitive text": "anonymized version of the text", ... },                       // OPTIONAL
-      "ltag": "Some Date",                                                                              // REQUIRED
-      "title": "Some Title",                                                                            // REQUIRED
-      "subtitle": "Some Subtitle",                                                                      // REQUIRED
-      "rtag": "Some Info"                                                                               // REQUIRED
-    },
-    ...
-  ],
-  ...
-}
-```
-
-### Modularity
-
-The tool supports a modular approach to image organization. This will be especially beneficial for those who have many items on their history, have multiple item versions, have multiple cv versions that reference the same items, and/or like to be more organized. Instead of defining an item within the sections of a cv image, we can define it in an external collection file and then reference it within the section as follows:
-
-```json
-{
-  ...
-  "Some Section": [
-    ...
-    "path/to/collection/json/file::some-descriptive-item-identifier",
-    ...
-  ],
-  ...
-}
-```
-
-A `reference` is essentially a file basename (i.e. without the extension) path, followed by the scope resolution symbol `::`, followed by an item identifier. The item identifier can only consist of alphanumeric characters and certain symbols, with none of the symbols appearing consecutively, and must begin and end with an alphanumeric character. The item identifier is used to index into the collection file referenced in the path portion of the reference string. A collection file follows the format shown below and can contain many items, which are hopefully somehow related.
-
-```json
-{
-  ...
-  "some-descriptive-item-identifier" : {
-    ...
-  },
-  "other-descriptive-item-identifier" : {
-    ...
-  },
-  ...
-}
-```

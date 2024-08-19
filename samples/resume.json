@@ -19,8 +19,8 @@
   ],
 
   "Education": [
-    "samples/sections/education::Masters-AwesomeField@AwesomeUniversity",
-    "samples/sections/education::Bachelors-AwesomeField@AwesomeUniversity"
+    "samples/sections/education::Masters*",
+    "samples/sections/education::Bachelors*"
   ],
 
   "Projects": [
