@@ -19,16 +19,16 @@ json2pdf
 In particular, the tool expects that you pass a `-cv` or `-cl` flag, pointing to a cv/cl json blueprint. You can also include both flags and the compiler will compile both files! The process of generating your cv/cl starts with an image of the CV/CL, which must be a `json` file that follows the json2pdf grammar. Since an image essentially represents a version of a cv/cl, it is recommended to give the image file a self-documenting / descriptive name. Inside the json2pdf directory, you should see the `samples` folder, which contains an example cv `resume.json` and cl `letter.json`. You can look into these files and the files in the `sections` folder to get an idea of what cv/cl image files and item collection files look like. Let's try to compile the `resume.json` image. To do this, run:
 
 ```sh
-json2pdf -cv .\samples\resume
+json2pdf -cv ".\samples\resume"
 ```
 
 Personal information cannot be provided in a cv/cl image, for security reasons. Instead, this information is directly passed to the tool through the use of flags. If at any time you would like to view all available flags, simply run the `json2pdf` command with nothing else. At minimum, we must specify the `name`, `position`, `address`, `mobile`, and `email` flags to ensure that our cv/cl is not anonymized. Try running this and seeing the difference from the previous output:
 
 ```sh
-json2pdf -cv .\samples\resume -n "Awesome Person" -p "Awesome Architect" "Awesome Expert" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522"
+json2pdf -cv ".\samples\resume" -n "Awesome Person" -p "Awesome Architect" "Awesome Expert" -m "000-000-0000" -e "awesome.person@awesomecompany.com" -l "awesome-person" -a "Awesome Address" -g "awesome-person" -w "awesome-portfolio.io" -c "DC3522"
 ```
 
-The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Try running the above command with and without the `--bolded` and `--anonymized` flags to see the difference. You can also try running the above with `-cl .\samples\letter` to see what an example cover letter looks like.
+The `position` flag can be passed with multiple arguments, as shown in the example, and these will all show up in the headline. Try running the above command with and without the `--bolded` and `--anonymized` flags to see the difference. You can also try running the above with `-cl ".\samples\letter"` to see what an example cover letter looks like.
 
 ## Features
 

@@ -1,7 +1,6 @@
 import errorhandler
 import subprocess
 import logging
-import sys
 import os
 
 from compiler.components.Flags import Flags
@@ -20,6 +19,12 @@ class Compiler():
 
   def __init__(self, args, root: Nonterminal):
     assert root.primordial_root
+
+    self.flags = None
+    self.lexer = None
+    self.parser = None
+    self.semanter = None
+    self.synthesizer = None
     
     filebasepath = args.cvjson if root is CVROOT else args.cljson
     if not os.path.isfile(f'{filebasepath}.json'):
@@ -27,10 +32,6 @@ class Compiler():
       return
     
     self.flags = Flags(args, root)
-    self.lexer = None
-    self.parser = None
-    self.semanter = None
-    self.synthesizer = None
 
   def __enter__(self):
     return self
