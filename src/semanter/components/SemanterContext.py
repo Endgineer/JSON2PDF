@@ -6,18 +6,21 @@ from compiler.units.Item import Item
 from compiler.units.Prop import Prop
 import semanter.constants.propset as propset
 from semanter.utilities.IdentifierUtils import IdentifierUtils
+from compiler.components.Flags import Flags
 
 class SemanterContext:
   parser: Parser
   cache: dict[str, dict[str, Item] | None]
   registry: dict[str, Item.Kind]
   current_item_valid: bool
+  flags: Flags
 
-  def __init__(self, parser: Parser):
+  def __init__(self, parser: Parser, flags: Flags):
     self.parser = parser
     self.cache = dict()
     self.registry = dict()
     self.current_item_valid = True
+    self.flags = flags
 
 
 
@@ -30,7 +33,8 @@ class SemanterContext:
     analyzable_props = self.analyze_prop_vals(analyzable_props)
     labels = self.analyze_prop_labels(analyzable_props)
 
-    if self.analyze_item_registration(item, labels):
+    if item.kind == Item.Kind.CLLETTER or self.analyze_item_registration(item):
+      item.labels = labels
       return item
 
 
@@ -60,7 +64,7 @@ class SemanterContext:
       else:
         key_registry[property.key.get_string()] = 1
     
-    item_kind_probabilities = propset.prop_similarity_coefficients(set(key_registry))
+    item_kind_probabilities = propset.prop_similarity_coefficients(set(key_registry), self.flags.root)
     for item_kind, probability in item_kind_probabilities.items():
       if probability == 1.0:
         item.kind = item_kind
@@ -124,7 +128,7 @@ class SemanterContext:
 
 
 
-  def analyze_item_registration(self, item: Item, labels: dict[str, str]) -> bool:
+  def analyze_item_registration(self, item: Item) -> bool:
     section_name = item.section.get_string()
 
     if section_name.strip() == '':
@@ -136,7 +140,6 @@ class SemanterContext:
     elif self.current_item_valid:
       self.registry[section_name] = item.kind
       logging.getLogger('SEMANTIC').debug(f'Registered item {item} under section namespace "{section_name}".')
-      item.labels = labels
       return True
     
     return False

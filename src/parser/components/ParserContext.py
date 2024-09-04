@@ -16,9 +16,9 @@ class ParserContext:
   memorized_prop: Prop
   memorized_section: Token
 
-  def __init__(self, lexer: Lexer, starting_symbol: Nonterminal = ROOT):
+  def __init__(self, lexer: Lexer, root: Nonterminal):
     self.lexer = lexer
-    self.stack = deque([ starting_symbol ])
+    self.stack = deque([ root ])
     self.scope = Scope()
     self.captured_item = None
     self.memorized_prop = None
@@ -44,6 +44,14 @@ class ParserContext:
         self.lexer.lexer_ctx_stack[-1].matched_token.line_number,
         self.lexer.lexer_ctx_stack[-1].matched_token.char_number,
         None if self.lexer.peek() == Token.Kind.STRING else list()
+      )
+    elif symbol is LETTER:
+      self.captured_item = Item(
+        None,
+        None,
+        self.lexer.lexer_ctx_stack[-1].matched_token.line_number,
+        self.lexer.lexer_ctx_stack[-1].matched_token.char_number,
+        list()
       )
     elif symbol is PROP:
       self.memorized_prop = Prop()
@@ -104,6 +112,8 @@ class ParserContext:
           if ITEM in synchronizations:
             return self.log_return(True)
           elif REF2 in synchronizations:
+            return self.log_return(True)
+          elif LETTER2 in synchronizations:
             return self.log_return(True)
       else:
         logging.getLogger('SYNTAX').error(f'Encountered {self.lexer.lexer_ctx_stack[-1].matched_token}, expected {symbol if symbol is None else symbol.name}.')

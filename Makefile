@@ -1,13 +1,13 @@
-exe = json2cv
+name = json2pdf
 
 windows: windows-build windows-clean windows-test windows-package
 
 windows-package:
-	tar.exe -a -c -f json2cv.zip json2cv.exe samples
-	del json2cv.exe
+	tar.exe -a -c -f $(name).zip $(name).exe samples
+	del $(name).exe
 
 windows-build:
-	poetry run pyinstaller -F --specpath .\release\spec --distpath .\ --workpath .\release\build --name $(exe) .\src\main.py
+	poetry run pyinstaller -F --specpath .\release\spec --distpath .\ --workpath .\release\build --name $(name) .\src\main.py
 
 windows-clean:
 	del /f /s /q .\release

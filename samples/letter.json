@@ -1,0 +1,16 @@
+{
+  "labels": { "Awesome Company": "Mysterious Company", "Awesome Job Role Title": "Mysterious Job Role Title", "A-LPHA": "REQNO" },
+  "company": "{Awesome Company}",
+  "position": "{Awesome Job Role Title}",
+  "reference": "{A-LPHA}",
+  "opening": "Dear Mr./Ms. Hiring Manager Name",
+  "body": [
+    "A short first section describing your interest. Why are you interested in this position? Why do you want to work for us specifically? If you are a student, are you applying for an internship, a COOP program, or student employment?",
+    "A longer second section describing how you meet the language, education and experience requirements. Take each requirement, one after the other, and tell us how you meet that requirement by using a concrete example taken from your life, academic, or professional experience.",
+    "A shorter third section describing how you meet the assets. Just like you did for the requirement, tell us how you meet each asset that you have by using a concrete example taken from your life, academic, or professional experience."
+  ],
+  "closing": "Sincerely",
+  "attachments": [
+    "Curriculum Vitae"
+  ]
+}

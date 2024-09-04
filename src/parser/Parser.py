@@ -7,8 +7,10 @@ class Parser():
   primary_parser_ctx: ParserContext
   auxiliary_parser_ctx: ParserContext
 
-  def __init__(self, lexer: Lexer):
-    self.primary_parser_ctx = ParserContext(lexer)
+  def __init__(self, lexer: Lexer, root: Nonterminal):
+    assert root.primordial_root
+    
+    self.primary_parser_ctx = ParserContext(lexer, root)
     self.auxiliary_parser_ctx = None
     self.primary_parser_ctx.log_return(False)
   

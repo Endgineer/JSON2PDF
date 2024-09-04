@@ -4,16 +4,19 @@ from semanter.Semanter import Semanter
 from compiler.units.Item import Item
 from compiler.units.Token import Token
 from synthesizer.routines.generators import *
+from compiler.components.Flags import Flags
 
 class SynthesizerContext:
   semanter: Semanter
   items: list[Item]
   tree: dict[str, list[dict[str, str | list[str] | dict[str, str]]]]
+  flags: Flags
 
-  def __init__(self, semanter: Semanter):
+  def __init__(self, semanter: Semanter, flags: Flags):
     self.semanter = semanter
     self.items = None
     self.tree = None
+    self.flags = flags
   
   def __repr__(self):
     return generate_from_tree(self)
@@ -54,7 +57,7 @@ class SynthesizerContext:
     self.tree = dict()
 
     for item in self.items:
-      section = item.section.get_string()
+      section = None if item.kind == Item.Kind.CLLETTER else item.section.get_string()
 
       if section not in self.tree:
         self.tree[section] = list()
@@ -73,8 +76,18 @@ class SynthesizerContext:
           self.tree[section][-1][prop_key] = dict()
           for pair in prop.value:
             self.tree[section][-1][prop_key][pair[0].get_string()] = None if pair[1] is None else pair[1].get_string()
-      
+
       logging.getLogger('SYNTHESIS').debug(f'Dictified item {item}: {self.tree[section][-1]}.')
+      
+      if item.kind == Item.Kind.CLLETTER:
+        self.flags.init_letter(
+          self.tree[section][-1][COMPANY] if COMPANY in self.tree[section][-1] else "",
+          self.tree[section][-1][POSITION] if POSITION in self.tree[section][-1] else "",
+          self.tree[section][-1][REFERENCE] if REFERENCE in self.tree[section][-1] else "",
+          self.tree[section][-1][OPENING] if OPENING in self.tree[section][-1] else "",
+          self.tree[section][-1][CLOSING] if CLOSING in self.tree[section][-1] else "",
+          ", ".join(self.tree[section][-1][ATTACHMENTS]) if ATTACHMENTS in self.tree[section][-1] else ""
+        )
 
 
 

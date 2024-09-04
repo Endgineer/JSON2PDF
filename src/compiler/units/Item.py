@@ -9,6 +9,7 @@ class Item:
     CVSKILLS = 1
     CVENTRIES = 2
     CVHONORS = 3
+    CLLETTER = 4
   
   section: Token
   reference: Token

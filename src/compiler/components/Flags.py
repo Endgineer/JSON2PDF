@@ -2,8 +2,10 @@ import typing
 import os
 
 from compiler.routines.awesome_cv import *
+from parser.constants.grammar import *
 
 class Flags:
+  root: Nonterminal
   anonymize: bool
   filepath: str
   filename: str
@@ -21,10 +23,15 @@ class Flags:
   spaced: bool
   darken: bool
   bolded: bool
+  lettertitle: str
+  letterclosing: str
 
-  def __init__(self, args: typing.Sequence[str]):
-    self.filepath = args.file_path
-    self.filename = os.path.basename(args.file_path)
+  def __init__(self, args: typing.Sequence[str], root: Nonterminal):
+    assert root.primordial_root
+
+    self.root = root
+    self.filepath = args.cvjson if root is CVROOT else args.cljson
+    self.filename = os.path.basename(self.filepath)
     self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email] or args.anonymized
     self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'
     self.color = args.color if args.color else '000000'
@@ -51,8 +58,48 @@ class Flags:
       self.github = f'\\github{{{args.github}}}' if args.github else '% \\github{}'
       self.website = f'\\homepage{{{args.website}}}' if args.website else '% \\homepage{}'
     
-    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}Curriculum Vitae}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Curriculum Vitae}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
+    DOCTYPE = 'Curriculum Vitae' if self.root is CVROOT else 'Cover Letter'
+    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}{DOCTYPE}}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Document Type}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
     self.header = f'\\makecvheader' if args.header else f'%\\makecvheader'
+
+    if self.root is CLROOT:
+      self.lettertitle = f'% Print the title with above letter information\n\\makelettertitle'
+      self.letterclosing = f'% Print the signature and enclosures with above letter information\n\\makeletterclosing'
+      self.letter_info = (
+        f'%-------------------------------------------------------------------------------\n'
+        f'%\tLETTER INFORMATION\n'
+        f'%\tAll of the below lines must be filled out\n'
+        f'%-------------------------------------------------------------------------------\n'
+        f'% SOMETHING WENT WRONG WITH SYNTHESIZER GENERATOR\n'
+        f'\n'
+        f'\n'
+      )
+    else:
+      self.lettertitle = f''
+      self.letterclosing = f''
+      self.letter_info = f''
+  
+  def init_letter(self, letter_company: str, letter_position: str, letter_reference: str, letter_opening: str, letter_closing: str, letter_attachments: str) -> None:
+    self.letter_info = (
+      f'%-------------------------------------------------------------------------------\n'
+      f'%\tLETTER INFORMATION\n'
+      f'%\tAll of the below lines must be filled out\n'
+      f'%-------------------------------------------------------------------------------\n'
+      f'% The company being applied to\n'
+      f'\\recipient{{{letter_company}}}{{{letter_position}\\\\{letter_reference}}}\n'
+      f'% The date on the letter, default is the date of compilation\n'
+      f'\\letterdate{{\\today}}\n'
+      f'% The title of the letter\n'
+      f'% \\lettertitle{{}}\n'
+      f'% How the letter is opened\n'
+      f'\\letteropening{{{letter_opening},}}\n'
+      f'% How the letter is closed\n'
+      f'\\letterclosing{{{letter_closing},}}\n'
+      f'% Any enclosures with the letter\n'
+      f'\\letterenclosure[Attached]{{{letter_attachments}}}\n'
+      f'\n'
+      f'\n'
+    )
   
   def wrap(self, tex: str) -> str:
     return (
@@ -105,6 +152,7 @@ class Flags:
       f'% If you would like to change the social information separator from a pipe (|) to something else\n'
       f'\\renewcommand{{\\acvHeaderSocialSep}}{{\\quad\\textbar\\quad}}\n'
       f'\n'
+      f'\n'
       f'%-------------------------------------------------------------------------------\n'
       f'%\tPERSONAL INFORMATION\n'
       f'%\tComment any of the lines below if they are not required\n'
@@ -137,6 +185,7 @@ class Flags:
       f'% \\quote{{``Be the change that you want to see in the world."}}\n'
       f'\n'
       f'\n'
+      f'{self.letter_info}'
       f'%-------------------------------------------------------------------------------\n'
       f'\\begin{{document}}\n'
       f'\n'
@@ -148,6 +197,8 @@ class Flags:
       f'% Leave any of these blank if they are not needed\n'
       f'{self.footer}\n'
       f'\n'
+      f'{self.lettertitle}\n'
+      f'\n'
       f'\n'
       f'%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n'
       f'%\tBEGIN CONTENT\n'
@@ -158,6 +209,7 @@ class Flags:
       f'%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n'
       f'%\tEND CONTENT\n'
       f'%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n'
+      f'{self.letterclosing}\n'
       f'\n'
       f'\n'
       f'\\end{{document}}\n'

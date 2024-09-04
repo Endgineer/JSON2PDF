@@ -6,6 +6,7 @@ class Nonterminal:
   follow: set[Token.Kind]
   nullable: bool
   phantasmal: bool
+  primordial_root: bool
 
   def __init__(self, symbol: str):
     self.symbol = symbol
@@ -13,6 +14,7 @@ class Nonterminal:
     self.follow = None
     self.nullable = False
     self.phantasmal = False
+    self.primordial_root = False
   
   def define(self, first: dict[Token.Kind, list], follow: set[Token.Kind]):
     self.first = {key:val[::-1] for key, val in first.items()}
@@ -25,6 +27,10 @@ class Nonterminal:
   
   def set_phantasmal(self):
     self.phantasmal = True
+    return self
+  
+  def set_primordial_root(self):
+    self.primordial_root = True
     return self
   
   def expand(self, token_kind: Token.Kind) -> list | None:
@@ -50,7 +56,12 @@ REFITEM1 = Nonterminal('REFITEM1')
 REFITEM2 = Nonterminal('REFITEM2')
 PREF = Nonterminal('PREF')
 
-ROOT = Nonterminal('ROOT')
+CLROOT = Nonterminal('CLROOT')
+LETTER = Nonterminal('LETTER')
+LETTER1 = Nonterminal('LETTER1')
+LETTER2 = Nonterminal('LETTER2')
+
+CVROOT = Nonterminal('CVROOT')
 EOF = Nonterminal('EOF')
 RESUME = Nonterminal('RESUME')
 RESUME1 = Nonterminal('RESUME1')
@@ -93,6 +104,8 @@ for to_be_nullable in [REFS, PREF, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRI
   to_be_nullable.set_nullable()
 for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
   to_be_phantasmal.set_phantasmal()
+for to_be_primordial_root in [CVROOT, CLROOT]:
+  to_be_primordial_root.set_primordial_root()
 
 
 
@@ -177,7 +190,38 @@ PREF.define(
 
 
 
-ROOT.define(
+CLROOT.define(
+  {
+    Token.Kind.LBRACE: [ LETTER, EOF ],
+    None: [ EOF ]
+  },
+  { None }
+)
+
+LETTER.define(
+  {
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, LETTER1 ]
+  },
+  { None }
+)
+
+LETTER1.define(
+  {
+    Token.Kind.STRING: [ PROPS, LETTER2 ]
+  },
+  LETTER.follow
+)
+
+LETTER2.define(
+  {
+    Token.Kind.RBRACE: [ Token.Kind.RBRACE ]
+  },
+  LETTER.follow
+)
+
+
+
+CVROOT.define(
   {
     Token.Kind.LBRACE: [ RESUME, EOF ],
     None: [ EOF ]
