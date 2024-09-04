@@ -80,6 +80,8 @@ class Flags:
       self.letter_info = f''
   
   def init_letter(self, letter_company: str, letter_position: str, letter_reference: str, letter_opening: str, letter_closing: str, letter_attachments: str) -> None:
+    attachments = f'\\letterenclosure[Attached]{{{letter_attachments}}}' if letter_attachments is not None else f'% \\letterenclosure[Attached]{{}}'
+
     self.letter_info = (
       f'%-------------------------------------------------------------------------------\n'
       f'%\tLETTER INFORMATION\n'
@@ -96,7 +98,7 @@ class Flags:
       f'% How the letter is closed\n'
       f'\\letterclosing{{{letter_closing},}}\n'
       f'% Any enclosures with the letter\n'
-      f'\\letterenclosure[Attached]{{{letter_attachments}}}\n'
+      f'{attachments}\n'
       f'\n'
       f'\n'
     )

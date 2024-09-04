@@ -86,7 +86,7 @@ class SynthesizerContext:
           self.tree[section][-1][REFERENCE] if REFERENCE in self.tree[section][-1] else "",
           self.tree[section][-1][OPENING] if OPENING in self.tree[section][-1] else "",
           self.tree[section][-1][CLOSING] if CLOSING in self.tree[section][-1] else "",
-          ", ".join(self.tree[section][-1][ATTACHMENTS]) if ATTACHMENTS in self.tree[section][-1] else ""
+          ", ".join(self.tree[section][-1][ATTACHMENTS]) if ATTACHMENTS in self.tree[section][-1] else None
         )
 
 
