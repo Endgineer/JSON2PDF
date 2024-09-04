@@ -1,8 +1,8 @@
-[COMPILER INFO]: Compiling "no_root.json" - Generating typesetting markup...
+[COMPILER INFO]: Compiling CV "no_root.json" - Generating typesetting markup...
 [LEXICAL DEBUG]: Switched context to "../image_jsons/no_root.json"...
-[SYNTAX DEBUG]: Context: "../image_jsons/no_root.json" | Scope[0]: None | Stack: [ROOT]
-[SYNTAX DEBUG]: Used production ROOT -> EOF.
-[SYNTAX DEBUG]: Context: "../image_jsons/no_root.json" | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Context: "../image_jsons/no_root.json" | Scope[0]: None | Stack: [CVROOT]
+[SYNTAX DEBUG]: Used production CVROOT -> EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/no_root.json" | Scope[1]: CVROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/no_root.json" | Scope[0]: None | Stack: []
-[COMPILER CRITICAL]: Compiling "no_root.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling CV "no_root.json" - INTERRUPT

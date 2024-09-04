@@ -1,8 +1,8 @@
-[COMPILER INFO]: Compiling "one_implicit_maximal_cvhonor.json" - Generating typesetting markup...
+[COMPILER INFO]: Compiling CV "one_implicit_maximal_cvhonor.json" - Generating typesetting markup...
 [LEXICAL DEBUG]: Switched context to "../image_jsons/one_implicit_maximal_cvhonor.json"...
-[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: [ROOT]
-[SYNTAX DEBUG]: Used production ROOT -> RESUME EOF.
-[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: ROOT | Stack: [RESUME, EOF]
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: [CVROOT]
+[SYNTAX DEBUG]: Used production CVROOT -> RESUME EOF.
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: CVROOT | Stack: [RESUME, EOF]
 [SYNTAX DEBUG]: Used production RESUME -> lbrace RESUME1.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[2]: RESUME | Stack: [lbrace, RESUME1, EOF]
 [LEXICAL DEBUG]: Scanned LBRACE at line 1 position 0.
@@ -556,9 +556,9 @@
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[4]: RESUME2 | Stack: [rbrace, EOF]
 [LEXICAL DEBUG]: Scanned RBRACE at line 5 position 0.
 [SYNTAX DEBUG]: Synchronized scope based on an upcoming None token, popping [RESUME2, RESUME1, RESUME].
-[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: ROOT | Stack: [EOF]
+[SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[1]: CVROOT | Stack: [EOF]
 [SYNTAX DEBUG]: Used production EOF -> ε.
 [SYNTAX DEBUG]: Context: "../image_jsons/one_implicit_maximal_cvhonor.json" | Scope[0]: None | Stack: []
 [SYNTHESIS WARNING]: Unused labels ['TestLabel'] in item of type CVHONORS referenced by "../image_jsons/modules/implicit_maximal_items::one_implicit_maximal_cvhonor" at line 3 position 4.
 [SYNTHESIS DEBUG]: Dictified item of type CVHONORS referenced by "../image_jsons/modules/implicit_maximal_items::one_implicit_maximal_cvhonor" at line 3 position 4: {'labels': {'TestLabel': 'TestSecret'}, 'ltag': 'TestLeftTag', 'title': 'TestTitle', 'subtitle': 'TestSubtitle', 'rtag': 'TestRightTag'}.
-[COMPILER CRITICAL]: Compiling "one_implicit_maximal_cvhonor.json" - INTERRUPT
+[COMPILER CRITICAL]: Compiling CV "one_implicit_maximal_cvhonor.json" - INTERRUPT
