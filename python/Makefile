@@ -3,7 +3,7 @@ name = json2pdf
 windows: windows-build windows-clean windows-test windows-package
 
 windows-package:
-	tar.exe -a -c -f $(name).zip $(name).exe samples
+	tar.exe -a -c -f $(name).zip $(name).exe ..\samples
 	del $(name).exe
 
 windows-build:

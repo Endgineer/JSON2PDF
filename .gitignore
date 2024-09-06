@@ -1,7 +1,5 @@
 __pycache__
 
-/release/
-
 /*.pdf
 /*.json*
 /*.tex
@@ -11,6 +9,9 @@ __pycache__
 /*.exe
 /*.zip
 
-/test/generated_logs
+/python/release/
+/python/test/generated_logs
+/python/*.exe
+/python/*.zip
 
 TODO
