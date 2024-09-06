@@ -7,8 +7,10 @@ __pycache__
 /*.aux
 /*.xdv
 /*.exe
+/*.dll
 /*.zip
 
+/external/*/
 /python/release/
 /python/test/generated_logs
 /python/*.exe
