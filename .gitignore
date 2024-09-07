@@ -10,6 +10,7 @@ __pycache__
 /*.dll
 /*.zip
 
+/bin
 /external/*/
 /python/release/
 /python/test/generated_logs
