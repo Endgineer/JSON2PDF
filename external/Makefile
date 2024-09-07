@@ -7,5 +7,3 @@ spdlog:
 
 argparse:
 	git clone https://github.com/morrisfranken/argparse.git
-	cd argparse && cmake -B build -G "MinGW Makefiles"
-	cd argparse/build && mingw32-make -j
