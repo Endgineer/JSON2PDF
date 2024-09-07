@@ -8,18 +8,18 @@ class ArgParser {
     bool &version = flag("v,version", "Display current version").set_default(false);
     bool &update = flag("u,update", "Check for updates").set_default(false);
 
-    std::shared_ptr<std::string> &cvJson = kwarg("cv,cvjson", "Path to cv json");
-    std::shared_ptr<std::string> &clJson = kwarg("cl,cljson", "Path to cl json");
+    std::string *&cvJson = kwarg("cv,cvjson", "Path to cv json");
+    std::string *&clJson = kwarg("cl,cljson", "Path to cl json");
 
-    std::shared_ptr<std::string> &varName = kwarg("n,name", "Name");
-    std::shared_ptr<std::vector<std::string>> &varTitles = kwarg("t,titles", "Titles").multi_argument();
-    std::shared_ptr<std::string> &varAddress = kwarg("a,address", "Address");
-    std::shared_ptr<std::string> &varMobile = kwarg("m,mobile", "Mobile");
-    std::shared_ptr<std::string> &varEmail = kwarg("e,email", "Email");
-    std::shared_ptr<std::string> &varLinkedin = kwarg("l,linkedin", "Linkedin");
-    std::shared_ptr<std::string> &varGithub = kwarg("g,github", "Github");
-    std::shared_ptr<std::string> &varColor = kwarg("c,color", "Color");
-    std::shared_ptr<std::string> &varWebsite = kwarg("w,website", "Website");
+    std::string *&varName = kwarg("n,name", "Name");
+    std::vector<std::string> *&varTitles = kwarg("t,titles", "Titles").multi_argument();
+    std::string *&varAddress = kwarg("a,address", "Address");
+    std::string *&varMobile = kwarg("m,mobile", "Mobile");
+    std::string *&varEmail = kwarg("e,email", "Email");
+    std::string *&varLinkedin = kwarg("l,linkedin", "Linkedin");
+    std::string *&varGithub = kwarg("g,github", "Github");
+    std::string *&varColor = kwarg("c,color", "Color");
+    std::string *&varWebsite = kwarg("w,website", "Website");
 
     bool &header = flag("header", "Enables document header").set_default(true);
     bool &footer = flag("footer", "Enables document footer").set_default(true);
@@ -34,13 +34,15 @@ class ArgParser {
     bool &interrupt = flag("interrupt", "Interrupt deep compilation").set_default(false);
   };
 
-  inline static std::shared_ptr<std::string> mainVersion = nullptr;
+  inline static std::string *mainVersion = nullptr;
 
-  inline static std::shared_ptr<Args> mainArgs = nullptr;
+  inline static Args *mainArgs = nullptr;
 
   public:
 
-  static const std::shared_ptr<std::string>& parse(int argc, char *argv[]);
+  static const std::string *init(int argc, char *argv[]);
+
+  static void clean();
 
   ArgParser() = delete;
 

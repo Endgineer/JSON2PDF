@@ -6,7 +6,9 @@
 int main(int argc, char *argv[]) {
   IniLogger::log(spdlog::level::info, "Initialized logger");
   
-  const std::shared_ptr<std::string> currentCompilerVersion = ArgParser::parse(argc, argv);
+  const std::string *currentCompilerVersion = ArgParser::init(argc, argv);
+
+  ArgParser::clean();
 
   return 0;
 }

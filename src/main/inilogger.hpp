@@ -4,11 +4,11 @@
 #include <spdlog/sinks/stdout_sinks.h>
 
 class IniLogger {
-  inline static std::shared_ptr<spdlog::logger> mainLogger = nullptr;
+  inline static spdlog::logger *mainLogger = nullptr;
   
   public:
 
-  static void log(spdlog::level::level_enum level, const std::string& message);
+  static void log(spdlog::level::level_enum level, const std::string &message);
 
   IniLogger() = delete;
 
