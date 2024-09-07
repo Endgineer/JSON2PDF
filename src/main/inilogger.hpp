@@ -4,7 +4,7 @@
 #include <spdlog/sinks/stdout_sinks.h>
 
 class IniLogger {
-  inline static std::shared_ptr<spdlog::logger> initializerLogger = nullptr;
+  inline static std::shared_ptr<spdlog::logger> mainLogger = nullptr;
   
   public:
 
