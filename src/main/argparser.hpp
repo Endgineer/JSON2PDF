@@ -34,15 +34,11 @@ class ArgParser {
     bool &interrupt = flag("interrupt", "Interrupt deep compilation").set_default(false);
   };
 
-  inline static std::shared_ptr<std::string> mainVersion = nullptr;
-
   inline static std::shared_ptr<Args> mainArgs = nullptr;
 
   public:
 
-  static void parse(int argc, char *argv[]);
-
-  static const std::string& getVersion();
+  static const std::string& parse(int argc, char *argv[]);
 
   ArgParser() = delete;
 
