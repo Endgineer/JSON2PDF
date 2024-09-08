@@ -25,9 +25,7 @@ COMP_OBJS = $(addprefix $(BIN_COMP)/, $(notdir $(COMP_SRCS:.cpp=.o)))
 # LIBRARY VARIABLES
 
 DIR_SPDLOG = ./external/spdlog
-LIB_SPDLOG = $(DIR_SPDLOG)/build/*.a
-INC_SPDLOG = -I $(DIR_SPDLOG)/include
-LNK_SPDLOG = $(LIB_SPDLOG) $(INC_SPDLOG)
+LNK_SPDLOG = $(DIR_SPDLOG)/build/*.a -I $(DIR_SPDLOG)/include
 
 DIR_ARGPARSE = ./external/argparse
 LNK_ARGPARSE = -I $(DIR_ARGPARSE)/include
