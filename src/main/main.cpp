@@ -8,6 +8,8 @@ int main(int argc, char *argv[]) {
   
   const std::string *currentCompilerVersion = ArgParser::init(argc, argv);
 
+  DllUpdater::update(currentCompilerVersion);
+
   ArgParser::clean();
 
   return 0;
