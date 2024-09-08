@@ -4,6 +4,8 @@
 #include <spdlog/sinks/stdout_sinks.h>
 
 class IniLogger {
+  inline static bool errored = false;
+  
   inline static spdlog::logger *mainLogger = nullptr;
   
   public:

@@ -5,8 +5,14 @@
 
 const std::string *ArgParser::init(int argc, char *argv[]) {
   if(mainArgs == nullptr) {
+    IniLogger::log(spdlog::level::info, "Parsing arguments");
+
     ArgParser::mainArgs = new Args(argparse::parse<Args>(argc, argv));
-    IniLogger::log(spdlog::level::info, "Parsed arguments");
+
+    if(mainArgs->cvJson == nullptr && mainArgs->clJson == nullptr) {
+      IniLogger::log(spdlog::level::err, "Missing cvjson or cljson flag");
+    }
+    
     ArgParser::mainVersion = new std::string(VERSION);
     if(mainArgs->version) {
       IniLogger::log(spdlog::level::info, "Version " + *ArgParser::mainVersion);

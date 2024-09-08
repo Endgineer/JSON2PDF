@@ -7,4 +7,5 @@ void IniLogger::log(spdlog::level::level_enum level, const std::string &message)
   }
 
   IniLogger::mainLogger->log(level, message);
+  IniLogger::errored |= (level == spdlog::level::err || level == spdlog::level::critical);
 }
