@@ -5,10 +5,10 @@
 #include <curl/curl.h>
 
 class DllUpdater {
-  static size_t writeBufferCallback(char *chunk, size_t size, size_t nmemb, std::string* buffer);
-  
-  static size_t writeFileCallback(char *chunk, size_t size, size_t nmemb, std::ofstream* file);
+  static bool versionIsBehind(const std::string &currentCompilerVersion, const std::string &latestCompilerVersion);
 
+  static size_t writeBufferCallback(char *chunk, size_t size, size_t nmemb, std::string *buffer);
+  
   public:
 
   static CURLcode update(const std::string *currentCompilerVersion);

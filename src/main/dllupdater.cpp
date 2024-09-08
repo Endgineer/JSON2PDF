@@ -3,13 +3,28 @@
 #include "inilogger.hpp"
 #include "json.hpp"
 
-size_t DllUpdater::writeBufferCallback(char *chunk, size_t size, size_t nmemb, std::string* buffer) {
-  buffer->append(chunk, size*nmemb);
-  return size*nmemb;
+bool DllUpdater::versionIsBehind(const std::string &currentCompilerVersion, const std::string &latestCompilerVersion) {
+  int currentCompilerVersionNumbers[3], latestCompilerVersionNumbers[3];
+
+  std::istringstream currentVersionParser(currentCompilerVersion);
+  currentVersionParser >> currentCompilerVersionNumbers[0];
+  currentVersionParser.get();
+  currentVersionParser >> currentCompilerVersionNumbers[1];
+  currentVersionParser.get();
+  currentVersionParser >> currentCompilerVersionNumbers[2];
+
+  std::istringstream latestVersionParser(latestCompilerVersion);
+  latestVersionParser >> latestCompilerVersionNumbers[0];
+  latestVersionParser.get();
+  latestVersionParser >> latestCompilerVersionNumbers[1];
+  latestVersionParser.get();
+  latestVersionParser >> latestCompilerVersionNumbers[2];
+
+  return std::lexicographical_compare(currentCompilerVersionNumbers, currentCompilerVersionNumbers+3, latestCompilerVersionNumbers, latestCompilerVersionNumbers+3);
 }
 
-size_t DllUpdater::writeFileCallback(char *chunk, size_t size, size_t nmemb, std::ofstream* file) {
-  file->write(chunk, size*nmemb);
+size_t DllUpdater::writeBufferCallback(char *chunk, size_t size, size_t nmemb, std::string *buffer) {
+  buffer->append(chunk, size*nmemb);
   return size*nmemb;
 }
 
@@ -57,7 +72,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   std::string responseBuffer;
 
-  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, writeBufferCallback);
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, DllUpdater::writeBufferCallback);
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set write buffer function curl option");
     curl_easy_cleanup(curlHandle);
@@ -98,7 +113,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
   }
   
   std::string latestCompilerVersion = responseJson[0]["name"];
-  if(latestCompilerVersion == *currentCompilerVersion) {
+  if(!DllUpdater::versionIsBehind(*currentCompilerVersion, latestCompilerVersion)) {
     IniLogger::log(spdlog::level::info, "Already up to date");
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
@@ -107,21 +122,19 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   IniLogger::log(spdlog::level::info, "Found new version "+latestCompilerVersion);
 
-  std::ofstream responseFile("compile.dll", std::ofstream::out | std::ofstream::binary | std::ofstream::trunc);
+  responseBuffer.clear();
 
-  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, writeFileCallback);
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, DllUpdater::writeBufferCallback);
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set write file function curl option");
-    responseFile.close();
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
   }
 
-  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &responseFile);
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &responseBuffer);
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set write file data curl option");
-    responseFile.close();
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -130,7 +143,6 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://github.com/Endgineer/JSON2PDF/releases/latest/download/compile.dll");
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set download url curl option");
-    responseFile.close();
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -139,12 +151,13 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
   returnCode = curl_easy_perform(curlHandle);
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to perform download");
-    responseFile.close();
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
   }
 
+  std::ofstream responseFile("compile.dll", std::ofstream::out | std::ofstream::binary | std::ofstream::trunc);
+  responseFile.write(responseBuffer.c_str(), responseBuffer.size());
   responseFile.close();
 
   curl_easy_cleanup(curlHandle);
