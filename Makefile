@@ -63,10 +63,12 @@ $(BIN)/compile.dll: $(COMP_OBJS)
 $(BIN)/$(PROJECT).exe: $(MAIN_OBJS)
 	$(CXX) $(MAIN_OBJS) $(LNKS) -o $@ $(LDFLAGS)
 
-dirs:
+prebuild:
 	if not exist "$(BIN_MAIN)" mkdir "$(BIN_MAIN)"
 	if not exist "$(BIN_COMP)" mkdir "$(BIN_COMP)"
+	cd $(DIR_LIBCURL)/bin && copy libcurl-x64.dll "../../../$(BIN)"
+	cd $(BIN) && curl -L -o cacert.pem https://curl.se/ca/cacert.pem
 
-build: dirs $(BIN)/$(PROJECT).exe $(BIN)/compile.dll
+build: prebuild $(BIN)/$(PROJECT).exe $(BIN)/compile.dll
 
 # EOF
