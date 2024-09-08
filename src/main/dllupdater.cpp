@@ -70,6 +70,14 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return returnCode;
   }
 
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_FAILONERROR, 1L);
+  if(returnCode != CURLE_OK) {
+    IniLogger::log(spdlog::level::err, "Failed to set fail on error curl option");
+    curl_easy_cleanup(curlHandle);
+    curl_global_cleanup();
+    return returnCode;
+  }
+
   std::string responseBuffer;
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, DllUpdater::writeBufferCallback);
