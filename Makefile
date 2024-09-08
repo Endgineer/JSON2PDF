@@ -55,13 +55,13 @@ $(BIN_COMP)/%.o: $(SRC_COMP)/%.cpp
 	$(CXX) $(CXXFLAGS) $(LNK_SPDLOG) -c $< -o $@
 
 $(BIN_MAIN)/%.o: $(SRC_MAIN)/%.cpp
-	$(CXX) $(CXXFLAGS) $(LNKS) -c $< -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) $(LNKS) -c $< -o $@
 
 $(BIN)/compile.dll: $(COMP_OBJS)
 	$(CXX) -shared $(COMP_OBJS) -o $@
 
 $(BIN)/$(PROJECT).exe: $(MAIN_OBJS)
-	$(CXX) $(MAIN_OBJS) $(LNKS) -o $@ $(LDFLAGS)
+	$(CXX) $(MAIN_OBJS) $(LNKS) $(BIN)/compile.dll -o $@ $(LDFLAGS)
 
 prebuild:
 	if not exist "$(BIN_MAIN)" mkdir "$(BIN_MAIN)"
@@ -69,6 +69,6 @@ prebuild:
 	if not exist "$(BIN)/libcurl-x64.dll" cd $(DIR_LIBCURL)/bin && copy libcurl-x64.dll "../../../$(BIN)"
 	if not exist "$(BIN)/cacert.pem" cd $(BIN) && curl -L -o cacert.pem https://curl.se/ca/cacert.pem
 
-build: prebuild $(BIN)/$(PROJECT).exe $(BIN)/compile.dll
+build: prebuild $(BIN)/compile.dll $(BIN)/$(PROJECT).exe
 
 # EOF

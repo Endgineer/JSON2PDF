@@ -10,6 +10,10 @@ int main(int argc, char *argv[]) {
 
   DllUpdater::update(currentCompilerVersion);
 
+  ThdDispatcher::dispatch(ArgParser::get());
+
+  ThdDispatcher::join();
+
   ArgParser::clean();
 
   return 0;

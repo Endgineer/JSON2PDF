@@ -30,3 +30,7 @@ void ArgParser::clean() {
   delete ArgParser::mainVersion;
   ArgParser::mainVersion = nullptr;
 }
+
+const Args* const ArgParser::get() {
+  return ArgParser::mainArgs;
+}

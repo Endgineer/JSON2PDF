@@ -3,6 +3,12 @@
 
 #define VERSION "5.0.0"
 
-class Compiler {};
+#include "../structs/ThdInfo.hpp"
+
+class Compiler {
+  public:
+
+  static void setup(const Info &info);
+};
 
 #endif
