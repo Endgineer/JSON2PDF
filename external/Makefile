@@ -1,4 +1,4 @@
-all: spdlog argparse libcurl
+all: spdlog argparse libcurl json
 
 spdlog:
 	git clone https://github.com/gabime/spdlog.git
@@ -11,3 +11,6 @@ argparse:
 libcurl:
 	curl -L -o libcurl.zip https://curl.se/windows/latest.cgi?p=win64-mingw.zip
 	tar -xf libcurl.zip && del libcurl.zip && move curl* libcurl
+
+json:
+	git clone https://github.com/nlohmann/json.git
