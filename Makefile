@@ -66,8 +66,8 @@ $(BIN)/$(PROJECT).exe: $(MAIN_OBJS)
 prebuild:
 	if not exist "$(BIN_MAIN)" mkdir "$(BIN_MAIN)"
 	if not exist "$(BIN_COMP)" mkdir "$(BIN_COMP)"
-	cd $(DIR_LIBCURL)/bin && copy libcurl-x64.dll "../../../$(BIN)"
-	cd $(BIN) && curl -L -o cacert.pem https://curl.se/ca/cacert.pem
+	if not exist "$(BIN)/libcurl-x64.dll" cd $(DIR_LIBCURL)/bin && copy libcurl-x64.dll "../../../$(BIN)"
+	if not exist "$(BIN)/cacert.pem" cd $(BIN) && curl -L -o cacert.pem https://curl.se/ca/cacert.pem
 
 build: prebuild $(BIN)/$(PROJECT).exe $(BIN)/compile.dll
 
