@@ -1,4 +1,4 @@
-all: spdlog argparse
+all: spdlog argparse libcurl
 
 spdlog:
 	git clone https://github.com/gabime/spdlog.git
@@ -7,3 +7,7 @@ spdlog:
 
 argparse:
 	git clone https://github.com/morrisfranken/argparse.git
+
+libcurl:
+	curl -L -o libcurl.zip https://curl.se/windows/latest.cgi?p=win64-mingw.zip
+	tar -xf libcurl.zip && del libcurl.zip && move curl* libcurl
