@@ -2,6 +2,8 @@
 
 #include "inilogger.hpp"
 #include "json.hpp"
+#include "pathfind.hpp"
+#include <filesystem>
 
 bool DllUpdater::versionIsBehind(const std::string &currentCompilerVersion, const std::string &latestCompilerVersion) {
   int currentCompilerVersionNumbers[3], latestCompilerVersionNumbers[3];
@@ -46,6 +48,8 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return CURLE_FAILED_INIT;
   }
 
+  std::string binPath = std::filesystem::path(PathFind::FindExecutable()).parent_path().string();
+
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_FOLLOWLOCATION, 1L);
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set follow location curl option");
@@ -54,7 +58,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return returnCode;
   }
 
-  returnCode = curl_easy_setopt(curlHandle, CURLOPT_CAINFO, "cacert.pem");
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_CAINFO, (binPath + "\\cacert.pem").c_str());
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set certificate authority information curl option");
     curl_easy_cleanup(curlHandle);
@@ -62,7 +66,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return returnCode;
   }
 
-  returnCode = curl_easy_setopt(curlHandle, CURLOPT_USERAGENT, "JSON2PDF/" + *currentCompilerVersion);
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_USERAGENT, ("JSON2PDF/" + *currentCompilerVersion).c_str());
   if(returnCode != CURLE_OK) {
     IniLogger::log(spdlog::level::err, "Failed to set user agent curl option");
     curl_easy_cleanup(curlHandle);
@@ -164,7 +168,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return returnCode;
   }
 
-  std::ofstream responseFile("compile.dll", std::ofstream::out | std::ofstream::binary | std::ofstream::trunc);
+  std::ofstream responseFile((binPath + "\\compile.dll").c_str(), std::ofstream::out | std::ofstream::binary | std::ofstream::trunc);
   responseFile.write(responseBuffer.c_str(), responseBuffer.size());
   responseFile.close();
 
