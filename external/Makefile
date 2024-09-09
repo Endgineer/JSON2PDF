@@ -1,4 +1,4 @@
-all: spdlog argparse libcurl json
+all: spdlog argparse libcurl json pathfind
 
 spdlog:
 	git clone https://github.com/gabime/spdlog.git
@@ -14,3 +14,8 @@ libcurl:
 
 json:
 	git clone https://github.com/nlohmann/json.git
+
+pathfind:
+	git clone https://github.com/bkloppenborg/pathfind.git
+	cd pathfind && cmake -B build -G "MinGW Makefiles"
+	cd pathfind/build && mingw32-make -j

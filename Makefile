@@ -37,7 +37,10 @@ LNK_LIBCURL = -L$(DIR_LIBCURL)/lib -I$(DIR_LIBCURL)/include
 DIR_JSON = $(LIBS)/json
 LNK_JSON = -I $(DIR_JSON)/single_include/nlohmann
 
-LNKS = $(LNK_SPDLOG) $(LNK_ARGPARSE) $(LNK_LIBCURL) $(LNK_JSON)
+DIR_PATHFIND = $(LIBS)/pathfind
+LNK_PATHFIND = -I $(DIR_PATHFIND)/src $(DIR_PATHFIND)/lib/libpathfind_static.a
+
+LNKS = $(LNK_SPDLOG) $(LNK_ARGPARSE) $(LNK_LIBCURL) $(LNK_JSON) $(LNK_PATHFIND)
 LDFLAGS = -lcurl
 
 # ALL TARGET
