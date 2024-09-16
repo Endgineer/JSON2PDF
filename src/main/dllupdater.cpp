@@ -48,11 +48,20 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
     return CURLE_FAILED_INIT;
   }
 
+  char errorBuffer[CURL_ERROR_SIZE];
+  returnCode = curl_easy_setopt(curlHandle, CURLOPT_ERRORBUFFER, errorBuffer);
+  if(returnCode != CURLE_OK) {
+    IniLogger::log(spdlog::level::err, "Failed to set error buffer curl option > " + std::string(errorBuffer));
+    curl_easy_cleanup(curlHandle);
+    curl_global_cleanup();
+    return returnCode;
+  }
+
   std::string binPath = std::filesystem::path(PathFind::FindExecutable()).parent_path().string();
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_FOLLOWLOCATION, 1L);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set follow location curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set follow location curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -60,7 +69,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_CAINFO, (binPath + "\\cacert.pem").c_str());
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set certificate authority information curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set certificate authority information curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -68,7 +77,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_USERAGENT, ("JSON2PDF/" + *currentCompilerVersion).c_str());
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set user agent curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set user agent curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -76,7 +85,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_FAILONERROR, 1L);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set fail on error curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set fail on error curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -86,7 +95,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, DllUpdater::writeBufferCallback);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set write buffer function curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set write buffer function curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -94,7 +103,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &responseBuffer);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set write buffer data curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set write buffer data curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -102,7 +111,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://api.github.com/repos/Endgineer/JSON2PDF/tags");
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set fetch url curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set fetch url curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -110,7 +119,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_perform(curlHandle);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to perform fetch");
+    IniLogger::log(spdlog::level::err, "Failed to perform fetch > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -138,7 +147,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEFUNCTION, DllUpdater::writeBufferCallback);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set write file function curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set write file function curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -146,7 +155,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_WRITEDATA, &responseBuffer);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set write file data curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set write file data curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -154,7 +163,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_setopt(curlHandle, CURLOPT_URL, "https://github.com/Endgineer/JSON2PDF/releases/latest/download/compile.dll");
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to set download url curl option");
+    IniLogger::log(spdlog::level::err, "Failed to set download url curl option > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
@@ -162,7 +171,7 @@ CURLcode DllUpdater::update(const std::string *currentCompilerVersion) {
 
   returnCode = curl_easy_perform(curlHandle);
   if(returnCode != CURLE_OK) {
-    IniLogger::log(spdlog::level::err, "Failed to perform download");
+    IniLogger::log(spdlog::level::err, "Failed to perform download > " + std::string(errorBuffer));
     curl_easy_cleanup(curlHandle);
     curl_global_cleanup();
     return returnCode;
