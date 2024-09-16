@@ -9,7 +9,7 @@ const std::string *ArgParser::init(int argc, char *argv[]) {
 
     ArgParser::mainArgs = new Args(argparse::parse<Args>(argc, argv));
 
-    if(mainArgs->cvJson == nullptr && mainArgs->clJson == nullptr) {
+    if(mainArgs->cvJson == std::nullopt && mainArgs->clJson == std::nullopt) {
       IniLogger::log(spdlog::level::err, "Missing cvjson or cljson flag");
     }
     

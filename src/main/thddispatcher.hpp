@@ -3,11 +3,14 @@
 
 #include "argparser.hpp"
 #include <thread>
+#include "../elements/nonterminal.hpp"
 
 class ThdDispatcher {
   inline static std::thread *cvThread = nullptr;
   
   inline static std::thread *clThread = nullptr;
+
+  static void routine(const Nonterminal &kernel, const std::string &docJson, const Args &args);
   
   public:
 

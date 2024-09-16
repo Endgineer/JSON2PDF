@@ -23,6 +23,12 @@ SRC_COMP = $(SRC)/$(COMP)
 COMP_SRCS = $(wildcard $(SRC_COMP)/*.cpp)
 COMP_OBJS = $(addprefix $(BIN_COMP)/, $(notdir $(COMP_SRCS:.cpp=.o)))
 
+SRC_CONSTS = $(SRC)/constants
+SRC_ELEMS = $(SRC)/elements
+COMMON_SRCS = $(wildcard $(SRC_CONSTS)/*.cpp) $(wildcard $(SRC_ELEMS)/*.cpp)
+BIN_COMMON = $(BIN)/common
+COMMON_OBJS = $(addprefix $(BIN_COMMON)/, $(notdir $(COMMON_SRCS:.cpp=.o)))
+
 # LIBRARY VARIABLES
 
 DIR_SPDLOG = $(LIBS)/spdlog
@@ -60,15 +66,22 @@ $(BIN_COMP)/%.o: $(SRC_COMP)/%.cpp
 $(BIN_MAIN)/%.o: $(SRC_MAIN)/%.cpp
 	$(CXX) $(CXXFLAGS) $(LNKS) -c $< -o $@
 
-$(BIN)/compile.dll: $(COMP_OBJS)
-	$(CXX) -shared $(COMP_OBJS) -o $@
+$(BIN_COMMON)/%.o: $(SRC_CONSTS)/%.cpp
+	$(CXX) $(CXXFLAGS) $(LNKS) -c $< -o $@
 
-$(BIN)/$(PROJECT).exe: $(MAIN_OBJS)
-	$(CXX) $(MAIN_OBJS) $(LNKS) $(BIN)/compile.dll -o $@ $(LDFLAGS)
+$(BIN_COMMON)/%.o: $(SRC_ELEMS)/%.cpp
+	$(CXX) $(CXXFLAGS) $(LNKS) -c $< -o $@
+
+$(BIN)/compile.dll: $(COMP_OBJS) $(COMMON_OBJS)
+	$(CXX) -shared $(COMP_OBJS) $(COMMON_OBJS) -o $@
+
+$(BIN)/$(PROJECT).exe: $(MAIN_OBJS) $(COMMON_OBJS)
+	$(CXX) $(MAIN_OBJS) $(COMMON_OBJS) $(LNKS) $(BIN)/compile.dll -o $@ $(LDFLAGS) -pthread
 
 prebuild:
 	if not exist "$(BIN_MAIN)" mkdir "$(BIN_MAIN)"
 	if not exist "$(BIN_COMP)" mkdir "$(BIN_COMP)"
+	if not exist "$(BIN_COMMON)" mkdir "$(BIN_COMMON)"
 	if not exist "$(BIN)/libcurl-x64.dll" cd $(DIR_LIBCURL)/bin && copy libcurl-x64.dll "../../../$(BIN)"
 	if not exist "$(BIN)/cacert.pem" cd $(BIN) && curl -L -o cacert.pem https://curl.se/ca/cacert.pem
 

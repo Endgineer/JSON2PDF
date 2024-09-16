@@ -4,19 +4,21 @@
 #include <vector>
 #include <string>
 
+#include "../elements/nonterminal.hpp"
+
 struct Info {
-  std::string doctype;
+  const Nonterminal *kernel;
   std::string jsonpath;
 
-  std::string varName;
-  std::vector<std::string> varTitles;
-  std::string varAddress;
-  std::string varMobile;
-  std::string varEmail;
-  std::string varLinkedin;
-  std::string varGithub;
-  std::string varColor;
-  std::string varWebsite;
+  std::optional<std::string> varName;
+  std::optional<std::vector<std::string>> varTitles;
+  std::optional<std::string> varAddress;
+  std::optional<std::string> varMobile;
+  std::optional<std::string> varEmail;
+  std::optional<std::string> varLinkedin;
+  std::optional<std::string> varGithub;
+  std::optional<std::string> varColor;
+  std::optional<std::string> varWebsite;
 
   bool header;
   bool footer;

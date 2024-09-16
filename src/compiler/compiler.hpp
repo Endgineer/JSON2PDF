@@ -8,7 +8,7 @@
 class Compiler {
   public:
 
-  static void setup(const Info &info);
+  Compiler(const Info &info);
 };
 
 #endif

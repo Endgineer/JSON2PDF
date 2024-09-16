@@ -1,3 +1,3 @@
 #include "compiler.hpp"
 
-void Compiler::setup(const Info &info) {}
+Compiler::Compiler(const Info &info) {}
