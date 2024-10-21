@@ -31,7 +31,7 @@ class Segment:
     if self.invocation is None:
       return pylatex.escape_latex(self.value) if self.active else self.value
     
-    return pylatex.escape_latex(self.value) if self.active else f'{{{self.invocation}}}'
+    return self.value if self.active else f'{{{self.invocation}}}'
   
   def activate(self, labels: dict[str], anonymize: bool, bolded: bool) -> bool:
     if self.active: return None
