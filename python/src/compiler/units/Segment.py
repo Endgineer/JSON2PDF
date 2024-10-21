@@ -33,7 +33,7 @@ class Segment:
     
     return pylatex.escape_latex(self.value) if self.active else f'{{{self.invocation}}}'
   
-  def activate(self, labels: dict[str, str], anonymize: bool, bolded: bool) -> bool:
+  def activate(self, labels: dict[str], anonymize: bool, bolded: bool) -> bool:
     if self.active: return None
     self.active = True
 
@@ -44,7 +44,7 @@ class Segment:
       return None
     elif anonymize:
       if self.invocation in labels:
-        self.value = labels[self.invocation]
+        self.value = labels[self.invocation].get_string()
         return True
       
       self.value = ''.join(['█' if c.isalnum() else c for c in self.invocation])

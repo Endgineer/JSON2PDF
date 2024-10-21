@@ -4,6 +4,7 @@ import os
 from parser.Parser import Parser
 from compiler.units.Item import Item
 from compiler.units.Prop import Prop
+from compiler.units.Token import Token
 import semanter.constants.propset as propset
 from semanter.utilities.IdentifierUtils import IdentifierUtils
 from compiler.components.Flags import Flags
@@ -101,7 +102,7 @@ class SemanterContext:
   
 
 
-  def analyze_prop_labels(self, props_with_valid_keys_vals: list[Prop]) -> dict[str, str]:
+  def analyze_prop_labels(self, props_with_valid_keys_vals: list[Prop]) -> dict[str, Token]:
     label_registry = dict()
     label_index = dict()
     
@@ -114,7 +115,7 @@ class SemanterContext:
             label_registry[pair_key] += 1
           else:
             label_registry[pair_key] = 1
-            label_index[pair_key] = None if pair[1] is None else pair[1].get_string()
+            label_index[pair_key] = pair[1]
           
           pair_key_cycle = pair[0].contains_invocation()
           pair_val_cycle = False if pair[1] is None else pair[1].contains_invocation()

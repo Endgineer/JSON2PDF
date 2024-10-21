@@ -91,7 +91,7 @@ class SynthesizerContext:
 
 
 
-  def activate_token(labels: dict[str, str], token: Token, anonymize: bool, bolded: bool) -> set[str]:
+  def activate_token(labels: dict[str, Token], token: Token, anonymize: bool, bolded: bool) -> set[str]:
     if token is None: return set()
     invoked_labels = set()
 

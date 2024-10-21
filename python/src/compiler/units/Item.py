@@ -17,7 +17,7 @@ class Item:
   char_number: int
   properties: list[Prop]
   kind: Kind
-  labels: dict[str, str]
+  labels: dict[str, Token]
 
   def __init__(self, section: Token, reference: Token, line_number: int, char_number: int, properties: list[Prop]):
     self.section = section
