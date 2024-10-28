@@ -3,7 +3,8 @@
 PhaseSink::PhaseSink(const std::string &name) : name(name) {}
 
 void PhaseSink::log(const spdlog::details::log_msg &message) {
-  sinkQueue.push(fmt::format("[{} - {}] {}", message.logger_name, spdlog::level::to_string_view(message.level), message.payload));
+  const static std::string levels[] = { "TRACE", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL" };
+  sinkQueue.push(fmt::format("[{} - {}] {}", message.logger_name, levels[message.level], message.payload));
 }
 
 void PhaseSink::flush() {}
