@@ -2,6 +2,7 @@
 
 namespace PhaseLogging {
   PhaseLogger::PhaseLogger(const std::string &name, spdlog::level::level_enum level) : spdlog::logger(name, {}) {
+    spdlog::register_logger(std::shared_ptr<PhaseLogger>(this));
     set_level(level);
 
     std::string phases[] = { "MAIN", "LEXER", "PARSER", "SEMANTER", "SYNTHESIZER" };
