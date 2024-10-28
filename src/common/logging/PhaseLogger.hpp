@@ -10,7 +10,13 @@
 #include "PhaseSink.hpp"
 
 namespace PhaseLogging {
-  enum Phase;
+  enum Phase {
+    MAIN,
+    LEXER,
+    PARSER,
+    SEMANTER,
+    SYNTHESIZER
+  };
 
   class PhaseLogger : public spdlog::logger {
     std::vector<std::shared_ptr<PhaseSink>> sinks_;

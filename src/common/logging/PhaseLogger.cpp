@@ -1,14 +1,6 @@
 #include "PhaseLogger.hpp"
 
 namespace PhaseLogging {
-  enum Phase {
-    MAIN,
-    LEXER,
-    PARSER,
-    SEMANTER,
-    SYNTHESIZER
-  };
-
   PhaseLogger::PhaseLogger(const std::string &name, spdlog::level::level_enum level) : spdlog::logger(name, {}) {
     set_level(level);
 

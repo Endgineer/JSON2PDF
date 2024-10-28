@@ -14,18 +14,18 @@ LIBS = ./external
 MAIN = main
 BIN_MAIN = $(BIN)/$(MAIN)
 SRC_MAIN = $(SRC)/$(MAIN)
-MAIN_SRCS = $(wildcard $(SRC_MAIN)/*.cpp)
+MAIN_SRCS = $(wildcard $(SRC_MAIN)/**/*.cpp)
 MAIN_OBJS = $(addprefix $(BIN_MAIN)/, $(notdir $(MAIN_SRCS:.cpp=.o)))
 
 COMP = compiler
 BIN_COMP = $(BIN)/$(COMP)
 SRC_COMP = $(SRC)/$(COMP)
-COMP_SRCS = $(wildcard $(SRC_COMP)/*.cpp)
+COMP_SRCS = $(wildcard $(SRC_COMP)/**/*.cpp)
 COMP_OBJS = $(addprefix $(BIN_COMP)/, $(notdir $(COMP_SRCS:.cpp=.o)))
 
 SRC_CONSTS = $(SRC)/constants
 SRC_ELEMS = $(SRC)/elements
-COMMON_SRCS = $(wildcard $(SRC_CONSTS)/*.cpp) $(wildcard $(SRC_ELEMS)/*.cpp)
+COMMON_SRCS = $(wildcard $(SRC_CONSTS)/**/*.cpp) $(wildcard $(SRC_ELEMS)/**/*.cpp)
 BIN_COMMON = $(BIN)/common
 COMMON_OBJS = $(addprefix $(BIN_COMMON)/, $(notdir $(COMMON_SRCS:.cpp=.o)))
 
