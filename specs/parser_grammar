@@ -1,6 +1,9 @@
 ===================================================================================================================
 GRAMMAR
 ===================================================================================================================
+EOF -> $
+
+
 
 REFF -> COLLECTION EOF
 REFF -> EOF
@@ -23,18 +26,40 @@ PREF -> , REF PREF
 
 
 
-CLROOT -> LETTER EOF
-CLROOT -> EOF
+ROOT -> SPECS EOF
+ROOT -> EOF
+
+SPECS -> { SPECS1
+SPECS1 -> DOCS SPECS2
+SPECS2 -> }
+
+DOCS -> epsilon
+DOCS -> RESUMESPEC PLETTERSPEC
+DOCS -> LETTERSPEC PRESUMESPEC
+
+PRESUMESPEC -> epsilon
+PRESUMESPEC -> RESUMESPEC
+
+PLETTERSPEC -> epsilon
+PLETTERSPEC -> LETTERSPEC
+
+RESUMESPEC -> resumekey RESUMESPEC1
+RESUMESPEC1 -> : RESUMESPEC2
+RESUMESPEC2 -> null
+RESUMESPEC2 -> RESUME
+
+LETTERSPEC -> letterkey LETTERSPEC1
+LETTERSPEC1 -> : LETTERSPEC2
+LETTERSPEC2 -> null
+LETTERSPEC2 -> LETTER
+
+
 
 LETTER -> { LETTER1
 LETTER1 -> PROPS LETTER2
 LETTER2 -> }
 
 
-
-CVROOT -> RESUME EOF
-CVROOT -> EOF
-EOF -> $
 
 RESUME -> { RESUME1
 RESUME1 -> SECTIONS RESUME2
