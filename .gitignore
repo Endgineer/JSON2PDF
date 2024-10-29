@@ -7,14 +7,11 @@ __pycache__
 /*.aux
 /*.xdv
 /*.exe
-/*.dll
 /*.zip
 
-/bin
-/external/*/
-/python/release/
-/python/test/generated_logs
-/python/*.exe
-/python/*.zip
+/release/
+/test/generated_logs
+/*.exe
+/*.zip
 
 TODO
