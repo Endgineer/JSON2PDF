@@ -126,10 +126,15 @@ PSTRINGPAIR -> epsilon
 PSTRINGPAIR -> , STRINGPAIR PSTRINGPAIR
 
 ===================================================================================================================
-SETS
+SPECIALS (ANALYZED)
 ===================================================================================================================
 
-NULLABLES = COLLECTION REFS PREF RESUME LETTER SECTIONS PSECTION ITEMS PITEM PPROP STRINGPTS PSTRINGPT STRINGPAIRS PSTRINGPAIR
+NULLABLES = REFS, PREF, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR
+PHANTASMALS = EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR
+
+===================================================================================================================
+SETS (GENERATED)
+===================================================================================================================
 
 FIRST SETS
 
