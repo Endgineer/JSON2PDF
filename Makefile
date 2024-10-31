@@ -3,7 +3,7 @@ name = json2pdf
 windows: windows-build windows-clean windows-test windows-package
 
 windows-package:
-	tar -cf $(name).zip $(name).exe .\src\__pycache__\main*.pyc .\samples
+	tar -cf $(name).zip $(name).exe samples -C src\__pycache__ main*.pyc
 	del $(name).exe
 
 windows-build:
