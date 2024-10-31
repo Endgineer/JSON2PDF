@@ -44,6 +44,8 @@ class Nonterminal:
   def __repr__(self):
     return self.symbol
 
+EOF = Nonterminal('EOF')
+
 REFF = Nonterminal('REFF')
 COLLECTION = Nonterminal('COLLECTION')
 COLLECTION1 = Nonterminal('COLLECTION1')
@@ -56,16 +58,28 @@ REFITEM1 = Nonterminal('REFITEM1')
 REFITEM2 = Nonterminal('REFITEM2')
 PREF = Nonterminal('PREF')
 
-CLROOT = Nonterminal('CLROOT')
+ROOT = Nonterminal('ROOT')
+SPECS = Nonterminal('SPECS')
+SPECS1 = Nonterminal('SPECS1')
+SPECS2 = Nonterminal('SPECS2')
+DOCS = Nonterminal('DOCS')
+RESUMESPEC = Nonterminal('RESUMESPEC')
+RESUMESPEC1 = Nonterminal('RESUMESPEC1')
+RESUMESPEC2 = Nonterminal('RESUMESPEC2')
+PRESUMESPEC = Nonterminal('PRESUMESPEC')
+LETTERSPEC = Nonterminal('LETTERSPEC')
+LETTERSPEC1 = Nonterminal('LETTERSPEC1')
+LETTERSPEC2 = Nonterminal('LETTERSPEC2')
+PLETTERSPEC = Nonterminal('PLETTERSPEC')
+
+RESUME = Nonterminal('RESUME')
+RESUME1 = Nonterminal('RESUME1')
+RESUME2 = Nonterminal('RESUME2')
+
 LETTER = Nonterminal('LETTER')
 LETTER1 = Nonterminal('LETTER1')
 LETTER2 = Nonterminal('LETTER2')
 
-CVROOT = Nonterminal('CVROOT')
-EOF = Nonterminal('EOF')
-RESUME = Nonterminal('RESUME')
-RESUME1 = Nonterminal('RESUME1')
-RESUME2 = Nonterminal('RESUME2')
 SECTIONS = Nonterminal('SECTIONS')
 SECTION = Nonterminal('SECTION')
 SECTION1 = Nonterminal('SECTION1')
@@ -104,10 +118,17 @@ for to_be_nullable in [REFS, PREF, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRI
   to_be_nullable.set_nullable()
 for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
   to_be_phantasmal.set_phantasmal()
-for to_be_primordial_root in [CVROOT, CLROOT]:
+for to_be_primordial_root in [RESUME, LETTER]:
   to_be_primordial_root.set_primordial_root()
 
 
+
+EOF.define(
+  {
+    None: []
+  },
+  { None }
+)
 
 REFF.define(
   {
@@ -190,14 +211,6 @@ PREF.define(
 
 
 
-CLROOT.define(
-  {
-    Token.Kind.LBRACE: [ LETTER, EOF ],
-    None: [ EOF ]
-  },
-  { None }
-)
-
 LETTER.define(
   {
     Token.Kind.LBRACE: [ Token.Kind.LBRACE, LETTER1 ]
@@ -220,21 +233,6 @@ LETTER2.define(
 )
 
 
-
-CVROOT.define(
-  {
-    Token.Kind.LBRACE: [ RESUME, EOF ],
-    None: [ EOF ]
-  },
-  { None }
-)
-
-EOF.define(
-  {
-    None: []
-  },
-  { None }
-)
 
 RESUME.define(
   {
