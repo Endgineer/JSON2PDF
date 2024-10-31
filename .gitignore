@@ -6,8 +6,6 @@ __pycache__
 /*.log
 /*.aux
 /*.xdv
-/*.exe
-/*.zip
 
 /release/
 /test/generated_logs
