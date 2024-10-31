@@ -15,3 +15,6 @@ windows-clean:
 
 windows-test:
 	cd .\test && python test.py
+
+windows-update:
+	poetry update
