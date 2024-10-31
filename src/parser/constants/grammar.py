@@ -114,7 +114,7 @@ PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
 
 
 
-for to_be_nullable in [REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
+for to_be_nullable in [REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEMS, PITEM, PROPS, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
   to_be_nullable.set_nullable()
 for to_be_phantasmal in [EOF, PREF, PRESUMESPEC, PLETTERSPEC, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
   to_be_phantasmal.set_phantasmal()
@@ -192,6 +192,7 @@ REF2.define(
 
 REFITEM1.define(
   {
+    Token.Kind.RBRACE: [ PROPS, REFITEM2 ],
     Token.Kind.STRING: [ PROPS, REFITEM2 ]
   },
   REF.follow
@@ -323,6 +324,7 @@ LETTER.define(
 
 LETTER1.define(
   {
+    Token.Kind.RBRACE: [ PROPS, LETTER2 ],
     Token.Kind.STRING: [ PROPS, LETTER2 ]
   },
   LETTER.follow
@@ -430,6 +432,7 @@ ITEM.define(
 
 ITEM1.define(
   {
+    Token.Kind.RBRACE: [ PROPS, ITEM2 ],
     Token.Kind.STRING: [ PROPS, ITEM2 ]
   },
   ITEM.follow

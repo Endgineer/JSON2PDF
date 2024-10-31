@@ -89,6 +89,7 @@ ITEM2 -> }
 PITEM -> epsilon
 PITEM -> , ITEM PITEM
 
+PROPS -> epsilon
 PROPS -> PROP PPROP
 
 PROP -> string PROP1
@@ -130,7 +131,7 @@ PSTRINGPAIR -> , STRINGPAIR PSTRINGPAIR
 SPECIALS (ANALYZED)
 ===================================================================================================================
 
-NULLABLES = REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR
+NULLABLES = REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEMS, PITEM, PROPS, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR
 PHANTASMALS = EOF, PREF, PRESUMESPEC, PLETTERSPEC, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR
 
 ===================================================================================================================
@@ -147,7 +148,7 @@ FIRST[REFS] = string
 FIRST[REF] = string
 FIRST[REF1] = :
 FIRST[REF2] = {
-FIRST[REFITEM1] = string
+FIRST[REFITEM1] = } string
 FIRST[REFITEM2] = }
 FIRST[PREF] = ,
 
@@ -168,7 +169,7 @@ FIRST[RESUME] = {
 FIRST[RESUME1] = } string
 FIRST[RESUME2] = }
 FIRST[LETTER] = { string
-FIRST[LETTER1] = string
+FIRST[LETTER1] = } string
 FIRST[LETTER2] = }
 
 FIRST[SECTIONS] = string
@@ -181,7 +182,7 @@ FIRST[ITEMS] = { string
 FIRST[SECTION4] = ]
 FIRST[ITEM] = { string
 FIRST[PITEM] = ,
-FIRST[ITEM1] = string
+FIRST[ITEM1] = } string
 FIRST[PROPS] = string
 FIRST[ITEM2] = }
 FIRST[PROP] = string
