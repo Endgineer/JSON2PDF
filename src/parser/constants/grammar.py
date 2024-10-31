@@ -114,9 +114,9 @@ PSTRINGPAIR = Nonterminal('PSTRINGPAIR')
 
 
 
-for to_be_nullable in [REFS, PREF, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
+for to_be_nullable in [REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEMS, PITEM, PPROP, STRINGPTS, PSTRINGPT, STRINGPAIRS, PSTRINGPAIR]:
   to_be_nullable.set_nullable()
-for to_be_phantasmal in [EOF, PREF, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
+for to_be_phantasmal in [EOF, PREF, PRESUMESPEC, PLETTERSPEC, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR]:
   to_be_phantasmal.set_phantasmal()
 for to_be_primordial_root in [RESUME, LETTER]:
   to_be_primordial_root.set_primordial_root()
@@ -129,6 +129,8 @@ EOF.define(
   },
   { None }
 )
+
+
 
 REFF.define(
   {
@@ -211,11 +213,112 @@ PREF.define(
 
 
 
-LETTER.define(
+ROOT.define(
   {
-    Token.Kind.LBRACE: [ Token.Kind.LBRACE, LETTER1 ]
+    None: [ EOF ],
+    Token.Kind.LBRACE: [ SPECS, EOF ]
   },
   { None }
+)
+
+SPECS.define(
+  {
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, SPECS1 ]
+  },
+  { None }
+)
+
+SPECS1.define(
+  {
+    Token.Kind.RBRACE: [ DOCS, SPECS2 ],
+    Token.Kind.RESUMEKEY: [ DOCS, SPECS2 ],
+    Token.Kind.LETTERKEY: [ DOCS, SPECS2 ]
+  },
+  SPECS.follow
+)
+
+SPECS2.define(
+  {
+    Token.Kind.RBRACE: [ Token.Kind.RBRACE ]
+  },
+  SPECS.follow
+)
+
+DOCS.define(
+  {
+    Token.Kind.RESUMEKEY: [ RESUMESPEC, PLETTERSPEC ],
+    Token.Kind.LETTERKEY: [ LETTERSPEC, PRESUMESPEC ]
+  },
+  { Token.Kind.RBRACE }
+)
+
+RESUMESPEC.define(
+  {
+    Token.Kind.RESUMEKEY: [ Token.Kind.RESUMEKEY, RESUMESPEC1 ]
+  },
+  { Token.Kind.RBRACE, Token.Kind.COMMA }
+)
+
+RESUMESPEC1.define(
+  {
+    Token.Kind.COLON: [ Token.Kind.COLON, RESUMESPEC2 ]
+  },
+  RESUMESPEC.follow
+)
+
+RESUMESPEC2.define(
+  {
+    Token.Kind.LBRACE: [ RESUME ],
+    Token.Kind.NULL: [ Token.Kind.NULL ]
+  },
+  RESUMESPEC.follow
+)
+
+PRESUMESPEC.define(
+  {
+    Token.Kind.COMMA: [ Token.Kind.COMMA, RESUMESPEC ]
+  },
+  DOCS.follow
+)
+
+LETTERSPEC.define(
+  {
+    Token.Kind.LETTERKEY: [ Token.Kind.LETTERKEY, LETTERSPEC1 ]
+  },
+  { Token.Kind.RBRACE, Token.Kind.COMMA }
+)
+
+LETTERSPEC1.define(
+  {
+    Token.Kind.COLON: [ Token.Kind.COLON, LETTERSPEC2 ]
+  },
+  LETTERSPEC.follow
+)
+
+LETTERSPEC2.define(
+  {
+    Token.Kind.LBRACE: [ LETTER ],
+    Token.Kind.STRING: [ LETTER ],
+    Token.Kind.NULL: [ Token.Kind.NULL ]
+  },
+  LETTERSPEC.follow
+)
+
+PLETTERSPEC.define(
+  {
+    Token.Kind.COMMA: [ Token.Kind.COMMA, LETTERSPEC ]
+  },
+  DOCS.follow
+)
+
+
+
+LETTER.define(
+  {
+    Token.Kind.LBRACE: [ Token.Kind.LBRACE, LETTER1 ],
+    Token.Kind.STRING: [ Token.Kind.STRING ]
+  },
+  LETTERSPEC.follow
 )
 
 LETTER1.define(
@@ -238,7 +341,7 @@ RESUME.define(
   {
     Token.Kind.LBRACE: [ Token.Kind.LBRACE, RESUME1 ]
   },
-  { None }
+  RESUMESPEC.follow
 )
 
 RESUME1.define(
@@ -255,6 +358,8 @@ RESUME2.define(
   },
   RESUME.follow
 )
+
+
 
 SECTIONS.define(
   {

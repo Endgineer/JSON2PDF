@@ -12,6 +12,9 @@ class Token:
     COLON = 5
     COMMA = 6
     STRING = 7
+    RESUMEKEY = 8
+    LETTERKEY = 9
+    NULL = 10
   
   value: list[Segment]
   kind: Kind
