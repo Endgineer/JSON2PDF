@@ -134,10 +134,10 @@ NULLABLES = REFS, PREF, DOCS, PRESUMESPEC, PLETTERSPEC, SECTIONS, PSECTION, ITEM
 PHANTASMALS = EOF, PREF, PRESUMESPEC, PLETTERSPEC, PSECTION, PITEM, PPROP, PSTRINGPT, PSTRINGPAIR
 
 ===================================================================================================================
-SETS (GENERATED)
+FIRST SETS (GENERATED)
 ===================================================================================================================
 
-FIRST SETS
+FIRST[EOF] = $
 
 FIRST[REFF] = { $
 FIRST[COLLECTION] = {
@@ -151,17 +151,27 @@ FIRST[REFITEM1] = string
 FIRST[REFITEM2] = }
 FIRST[PREF] = ,
 
-FIRST[CLROOT] = { $
-FIRST[LETTER] = {
+FIRST[ROOT] = $ {
+FIRST[SPECS] = {
+FIRST[SPECS1] = } resumekey letterkey
+FIRST[SPECS2] = }
+FIRST[DOCS] = resumekey letterkey
+FIRST[RESUMESPEC] = resumekey
+FIRST[RESUMESPEC1] = :
+FIRST[RESUMESPEC2] = { null
+FIRST[PRESUMESPEC] = resumekey
+FIRST[LETTERSPEC] = letterkey
+FIRST[LETTERSPEC1] = :
+FIRST[LETTERSPEC2] = { string null
+FIRST[PLETTERSPEC] = letterkey
+FIRST[RESUME] = {
+FIRST[RESUME1] = } string
+FIRST[RESUME2] = }
+FIRST[LETTER] = { string
 FIRST[LETTER1] = string
 FIRST[LETTER2] = }
 
-FIRST[CVROOT] = $ {
-FIRST[RESUME] = {
-FIRST[EOF] = $
-FIRST[RESUME1] = } string
 FIRST[SECTIONS] = string
-FIRST[RESUME2] = }
 FIRST[SECTION] = string
 FIRST[PSECTION] = ,
 FIRST[SECTION1] = :
@@ -193,7 +203,11 @@ FIRST[PSTRINGPAIR] = ,
 FIRST[STRINGPAIR1] = :
 FIRST[STRINGPAIR2] = string
 
-FOLLOW SETS
+===================================================================================================================
+FOLLOW SETS (GENERATED)
+===================================================================================================================
+
+FOLLOW[EOF] =
 
 FOLLOW[REFF] =
 FOLLOW[COLLECTION] = $
@@ -207,17 +221,27 @@ FOLLOW[REFITEM1] = } ,
 FOLLOW[REFITEM2] = } ,
 FOLLOW[PREF] = }
 
-FOLLOW[CLROOT] =
-FOLLOW[LETTER] = $
-FOLLOW[LETTER1] = $
-FOLLOW[LETTER2] = $
+FOLLOW[ROOT] =
+FOLLOW[SPECS] = $
+FOLLOW[SPECS1] = $
+FOLLOW[SPECS2] = $
+FOLLOW[DOCS] = }
+FOLLOW[RESUMESPEC] = } letterkey
+FOLLOW[RESUMESPEC1] = } letterkey
+FOLLOW[RESUMESPEC2] = } letterkey
+FOLLOW[PRESUMESPEC] = }
+FOLLOW[LETTERSPEC] = } resumekey
+FOLLOW[LETTERSPEC1] = } resumekey
+FOLLOW[LETTERSPEC2] = } resumekey
+FOLLOW[PLETTERSPEC] = }
+FOLLOW[RESUME] = } letterkey
+FOLLOW[RESUME1] = } letterkey
+FOLLOW[RESUME2] = } letterkey
+FOLLOW[LETTER] = } resumekey
+FOLLOW[LETTER1] = } resumekey
+FOLLOW[LETTER2] = } resumekey
 
-FOLLOW[CVROOT] =
-FOLLOW[RESUME] = $
-FOLLOW[EOF] =
-FOLLOW[RESUME1] = $
 FOLLOW[SECTIONS] = }
-FOLLOW[RESUME2] = $
 FOLLOW[SECTION] = } ,
 FOLLOW[PSECTION] = }
 FOLLOW[SECTION1] = } ,
