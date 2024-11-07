@@ -23,21 +23,6 @@ files = [
 ]
 
 [[package]]
-name = "errorhandler"
-version = "2.0.1"
-description = "A logging framework handler that tracks when messages above a certain level have been logged."
-optional = false
-python-versions = "*"
-files = [
-    {file = "errorhandler-2.0.1-py2.py3-none-any.whl", hash = "sha256:dc6c54f5d9a4599e744b57aac2f925cce873188e9b02cae7c0eb120ee08a893f"},
-    {file = "errorhandler-2.0.1.tar.gz", hash = "sha256:7e578ad67af40845bfd044f71627a29f1fc436d53ccb058bbf1792ef31ab6163"},
-]
-
-[package.extras]
-build = ["pkginfo", "setuptools-git", "sphinx", "twine", "wheel"]
-test = ["coveralls", "nose", "nose-cov", "nose-fixes"]
-
-[[package]]
 name = "logging"
 version = "0.4.9.6"
 description = "A logging module for Python"
@@ -202,4 +187,4 @@ type = ["importlib-metadata (>=7.0.2)", "jaraco.develop (>=7.21)", "mypy (==1.12
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11,<3.13"
-content-hash = "0fa6809b31af7f1a62a0b47a80839878fdcdaad3c17e199d73a89838d9d2762e"
+content-hash = "b62251fab245367782e491fb811b3b316e05ddb7594ef916689103fc0b2fe1b7"
