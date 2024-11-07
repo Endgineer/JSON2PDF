@@ -1,10 +1,6 @@
 name = json2pdf
 
-windows: windows-build windows-clean windows-test windows-package
-
-windows-package:
-	tar -cf $(name).zip $(name).exe samples
-	del $(name).exe
+windows: windows-build windows-clean windows-test
 
 windows-build:
 	poetry run pyinstaller -F --specpath .\release\spec --distpath .\ --workpath .\release\build --name $(name) .\src\main.py
