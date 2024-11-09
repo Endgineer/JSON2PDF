@@ -1,9 +1,13 @@
 import argparse
 import pathlib
+import requests
+import subprocess
+import sys
+
+from models.SemanticVersion import SemanticVersion
 
 class ArgParser:
   json: pathlib.Path
-  update: bool
   docName: str | None
   docTitles: list[str] | None
   docAddress: str | None
@@ -22,7 +26,7 @@ class ArgParser:
   debug: bool
   abort: bool
 
-  def __init__(self) -> None:
+  def __init__(self, version: str) -> None:
     arg_parser = argparse.ArgumentParser()
 
     arg_parser.add_argument('json', type=str)
@@ -54,7 +58,6 @@ class ArgParser:
     args = arg_parser.parse_args()
     
     self.json = args.json
-    self.update = args.update
     self.docName = args.name
     self.docTitles = args.titles
     self.docAddress = args.address
@@ -72,3 +75,30 @@ class ArgParser:
     self.bold = args.bold
     self.debug = args.debug
     self.abort = args.abort
+
+    if args.update:
+      current_version = SemanticVersion(version)
+
+      response = requests.get('https://api.github.com/repos/Endgineer/JSON2PDF/releases/latest')
+      response.raise_for_status()
+      result = response.json()
+      
+      if current_version.is_older_than(result['tag_name']):
+        response = requests.get('https://github.com/Endgineer/JSON2PDF/releases/latest/download/json2pdf.exe')
+        response.raise_for_status()
+
+        exepath = pathlib.Path(sys.argv[0]).with_suffix('.upd')
+        with open(f'{exepath}', 'wb') as exefile:
+          exefile.write(response.content)
+        
+        batpath = exepath.parent / 'repl.bat'
+        with open(batpath, 'w') as batfile:
+          batfile.write((
+            f'@echo off'
+            f'taskkill /F /IM json2pdf.exe'
+            f'move /Y "{exepath}" "{exepath.with_suffix(".exe")}"'
+            f'del "%~f0"'
+          ))
+        
+        subprocess.Popen(batpath, creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS)
+        exit(0)
