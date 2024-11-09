@@ -94,11 +94,11 @@ class ArgParser:
         batpath = exepath.parent / 'repl.bat'
         with open(batpath, 'w') as batfile:
           batfile.write((
-            f'@echo off'
-            f'taskkill /F /IM json2pdf.exe'
-            f'move /Y "{exepath}" "{exepath.with_suffix(".exe")}"'
-            f'del "%~f0"'
+            f'@echo off\n'
+            f'taskkill /F /IM json2pdf.exe\n'
+            f'move /Y "{exepath}" "{exepath.with_suffix(".exe")}"\n'
+            f'del "%~f0"\n'
           ))
         
         subprocess.Popen(batpath, creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS)
-        exit(0)
+        sys.exit(0)
