@@ -13,7 +13,7 @@ class PhaseLogger:
     for _ in Document:
       self.abort.append(abort)
     
-    handler = logging.FileHandler(filename=f'{jsonpath.with_suffix(".dbg.log")}', encoding='utf-8') if debug else logging.StreamHandler()
+    handler = logging.FileHandler(f'{jsonpath.with_suffix(".dbg.log")}', 'w', 'utf-8') if debug else logging.StreamHandler()
     handler.setFormatter(logging.Formatter('[%(name)s %(levelname)s]: %(message)s'))
     
     self.loggers = list()
