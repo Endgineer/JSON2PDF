@@ -7,15 +7,15 @@ import sys
 from models.SemanticVersion import SemanticVersion
 
 class ArgParser:
-  json: pathlib.Path
-  docName: str | None
-  docTitles: list[str] | None
-  docAddress: str | None
-  docMobile: str | None
-  docEmail: str | None
-  docLinkedin: str | None
-  docGithub: str | None
-  docWebsite: str | None
+  json_path: pathlib.Path
+  about_name: str | None
+  about_titles: list[str] | None
+  about_address: str | None
+  about_mobile: str | None
+  about_email: str | None
+  about_linkedin: str | None
+  about_github: str | None
+  about_website: str | None
   color: str
   header: bool
   footer: bool
@@ -57,15 +57,15 @@ class ArgParser:
     
     args = arg_parser.parse_args()
     
-    self.json = args.json
-    self.docName = args.name
-    self.docTitles = args.titles
-    self.docAddress = args.address
-    self.docMobile = args.mobile
-    self.docEmail = args.email
-    self.docLinkedin = args.linkedin
-    self.docGithub = args.github
-    self.docWebsite = args.website
+    self.json_path = args.json
+    self.about_name = args.name
+    self.about_titles = args.titles
+    self.about_address = args.address
+    self.about_mobile = args.mobile
+    self.about_email = args.email
+    self.about_linkedin = args.linkedin
+    self.about_github = args.github
+    self.about_website = args.website
     self.color = args.color
     self.header = args.header
     self.footer = args.footer
