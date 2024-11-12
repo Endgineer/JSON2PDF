@@ -32,9 +32,13 @@ class PhaseLogger:
       logger.handlers.clear()
     logging.shutdown()
   
-  def log(self, document: Document, phase: Phase, level: int, message: str) -> None:
+  def log(self, document: Document | None, phase: Phase, level: int, message: str) -> None:
     if level >= logging.ERROR:
-      self.abort[document.value] = True
+      if document is None:
+        for i in range(len(self.abort)):
+          self.abort[i] = True
+      else:
+        self.abort[document.value] = True
     self.loggers[phase.value].log(level, message)
   
   def cv_compile_debug(self, message: str) -> None:
