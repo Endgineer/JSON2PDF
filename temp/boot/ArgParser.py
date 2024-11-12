@@ -57,7 +57,7 @@ class ArgParser:
     
     args = arg_parser.parse_args()
     
-    self.json_path = args.json
+    self.json_path = pathlib.Path(args.json)
     self.about_name = args.name
     self.about_titles = args.titles
     self.about_address = args.address
