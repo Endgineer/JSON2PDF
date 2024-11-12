@@ -29,7 +29,7 @@ class PhaseLogger:
     for logger in self.loggers:
       for handler in logger.handlers:
         handler.close()
-        logger.removeHandler(handler)
+      logger.handlers.clear()
     logging.shutdown()
   
   def log(self, document: Document, phase: Phase, level: int, message: str) -> None:
