@@ -57,7 +57,7 @@ class ArgParser:
     
     args = arg_parser.parse_args()
     
-    self.json_path = pathlib.Path(args.json)
+    self.json_path = pathlib.Path(f'{args.json}.json')
     self.about_name = args.name
     self.about_titles = args.titles
     self.about_address = args.address
@@ -102,3 +102,6 @@ class ArgParser:
         
         subprocess.Popen(batpath, creationflags=subprocess.CREATE_NO_WINDOW | subprocess.DETACHED_PROCESS)
         sys.exit(0)
+      
+      if not self.json_path.exists():
+        raise FileNotFoundError(f'"{self.json_path}" does not exist.')
