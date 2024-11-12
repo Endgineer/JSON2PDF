@@ -22,6 +22,16 @@ class PhaseLogger:
       self.loggers[-1].setLevel(logging.DEBUG if debug else logging.INFO)
       self.loggers[-1].addHandler(handler)
   
+  def __enter__(self):
+    return self
+  
+  def __exit__(self, exception_type, exception_value, exception_traceback):
+    for logger in self.loggers:
+      for handler in logger.handlers:
+        handler.close()
+        logger.removeHandler(handler)
+    logging.shutdown()
+  
   def log(self, document: Document, phase: Phase, level: int, message: str) -> None:
     if level >= logging.ERROR:
       self.abort[document.value] = True
