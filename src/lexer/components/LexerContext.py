@@ -17,6 +17,8 @@ class LexerContext:
     STR_AWAIT_BOLD_CHAR = 5
     STR_POSSIBLE_BOLD_END = 6
     STR_POSSIBLE_BOLD_IN_INVOKATION = 7
+    STR_POSSIBLE_DIRECTIVE = 8
+    STR_DIRECTIVE_CHAR = 9
   
   logger: PhaseLogger
   filepath: str
@@ -65,6 +67,9 @@ class LexerContext:
   
   def create_new_segment(self, backtrack_end: int = 0) -> None:
     self.matched_token_value.append(Segment(self.matched_token_len - backtrack_end))
+  
+  def get_segment_value(self) -> str:
+    return self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len]
   
   def finalize_segment_plain(self, backtrack_end: int = 0) -> None:
     self.matched_token_value[-1].define_as_plain(self.document[self.matched_token_start_idx + self.matched_token_value[-1].relative_position : self.matched_token_start_idx + self.matched_token_len - backtrack_end])

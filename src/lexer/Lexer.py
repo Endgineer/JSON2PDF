@@ -33,6 +33,8 @@ class Lexer():
       elif match_invocation_delimiter(self.lexer_ctx_stack[-1]): pass
       elif match_possible_bold_in_invokation(self.lexer_ctx_stack[-1]): pass
       elif match_start(self.lexer_ctx_stack[-1]): pass
+      elif match_possible_directive(self.lexer_ctx_stack[-1]): pass
+      elif match_directive_char(self.lexer_ctx_stack[-1]): pass
       
       if self.lexer_ctx_stack[-1].matched_token_kind is None:
         pass
