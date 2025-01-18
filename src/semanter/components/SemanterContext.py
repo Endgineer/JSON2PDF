@@ -1,6 +1,7 @@
 import logging
 import os
 
+from compiler.logger.PhaseLogger import *
 from parser.Parser import Parser
 from compiler.units.Item import Item
 from compiler.units.Prop import Prop
@@ -10,13 +11,15 @@ from semanter.utilities.IdentifierUtils import IdentifierUtils
 from compiler.components.Flags import Flags
 
 class SemanterContext:
+  logger: PhaseLogger
   parser: Parser
   cache: dict[str, dict[str, Item] | None]
   registry: dict[str, Item.Kind]
   current_item_valid: bool
   flags: Flags
 
-  def __init__(self, parser: Parser, flags: Flags):
+  def __init__(self, parser: Parser, flags: Flags, logger: PhaseLogger):
+    self.logger = logger
     self.parser = parser
     self.cache = dict()
     self.registry = dict()
@@ -41,7 +44,7 @@ class SemanterContext:
 
 
   def error(self, message: str) -> None:
-    logging.getLogger('SEMANTIC').error(message)
+    self.logger.log(None, Phase.SEMANTIC, logging.ERROR, message)
     self.current_item_valid = False
 
 
@@ -140,7 +143,7 @@ class SemanterContext:
       self.error(f'Type mismatch between item {item} and section namespace "{section_name}", which has previously accepted items of type {self.registry[section_name].name}.')
     elif self.current_item_valid:
       self.registry[section_name] = item.kind
-      logging.getLogger('SEMANTIC').debug(f'Registered item {item} under section namespace "{section_name}".')
+      self.logger.log(None, Phase.SEMANTIC, logging.DEBUG, f'Registered item {item} under section namespace "{section_name}".')
       return True
     
     return False
@@ -150,7 +153,7 @@ class SemanterContext:
   def query_cache(self, item: Item) -> Item:
     reference_string = item.reference.get_string()
     if reference_string.startswith('//'):
-      logging.getLogger('SEMANTIC').debug(f'Item {item} is a comment; skipping semantic analysis.')
+      self.logger.log(None, Phase.SEMANTIC, logging.DEBUG, f'Item {item} is a comment; skipping semantic analysis.')
       return None
 
     reference_parts = self.sundered_reference(item, reference_string)
@@ -159,14 +162,14 @@ class SemanterContext:
 
     cache_entry_dirty = fileref not in self.cache
     if cache_entry_dirty:
-      logging.getLogger('SEMANTIC').debug(f'Cache miss for item {item}.')
+      self.logger.log(None, Phase.SEMANTIC, logging.DEBUG, f'Cache miss for item {item}.')
       self.query_disk(fileref)
     
     properties = None
     regex_tokens = IdentifierUtils.tokenize_regex(itemref)
     for cached_itemref in self.cache[fileref].keys():
       if IdentifierUtils.match_itemref(cached_itemref, regex_tokens):
-        logging.getLogger('SEMANTIC').debug(f'Fetched "{fileref}::{cached_itemref}" matches item {item}.' if cache_entry_dirty else f'Cache hit "{fileref}::{cached_itemref}" matches item {item}.')
+        self.logger.log(None, Phase.SEMANTIC, logging.DEBUG, f'Fetched "{fileref}::{cached_itemref}" matches item {item}.' if cache_entry_dirty else f'Cache hit "{fileref}::{cached_itemref}" matches item {item}.')
         properties = self.cache[fileref][cached_itemref].properties
         break
     

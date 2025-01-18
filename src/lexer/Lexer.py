@@ -1,3 +1,4 @@
+from compiler.logger.PhaseLogger import PhaseLogger
 from compiler.units.Token import Token
 from lexer.components.LexerContext import LexerContext
 from lexer.routines.matchers import *
@@ -5,8 +6,8 @@ from lexer.routines.matchers import *
 class Lexer():
   lexer_ctx_stack: list[LexerContext]
 
-  def __init__(self, filepath: str):
-    self.lexer_ctx_stack = [LexerContext(filepath)]
+  def __init__(self, filepath: str, logger: PhaseLogger):
+    self.lexer_ctx_stack = [LexerContext(filepath, logger)]
     if not self.lexer_ctx_stack[-1].at_end_of_file(): self.scan()
   
   def scan(self) -> Token:
@@ -44,7 +45,7 @@ class Lexer():
     return None if len(self.lexer_ctx_stack) == 0 or self.lexer_ctx_stack[-1].matched_token is None else self.lexer_ctx_stack[-1].matched_token.kind
 
   def context_switch(self, filepath: str) -> None:
-    self.lexer_ctx_stack.append(LexerContext(filepath))
+    self.lexer_ctx_stack.append(LexerContext(filepath, self.lexer_ctx_stack[-1].logger))
     if not self.lexer_ctx_stack[-1].at_end_of_file(): self.scan()
   
   def get_context_name(self) -> str:

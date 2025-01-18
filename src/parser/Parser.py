@@ -1,3 +1,4 @@
+from compiler.logger.PhaseLogger import PhaseLogger
 from parser.components.ParserContext import ParserContext
 from parser.constants.grammar import *
 from lexer.Lexer import Lexer
@@ -7,10 +8,8 @@ class Parser():
   primary_parser_ctx: ParserContext
   auxiliary_parser_ctx: ParserContext
 
-  def __init__(self, lexer: Lexer, root: Nonterminal):
-    assert root.primordial_root
-    
-    self.primary_parser_ctx = ParserContext(lexer, root)
+  def __init__(self, lexer: Lexer, logger: PhaseLogger):
+    self.primary_parser_ctx = ParserContext(lexer, ROOT, logger)
     self.auxiliary_parser_ctx = None
     self.primary_parser_ctx.log_return(False)
   
@@ -28,7 +27,7 @@ class Parser():
     return self.primary_parser_ctx.captured_item
 
   def parse_all(self, filepath: str) -> list[Item]:
-    self.auxiliary_parser_ctx = ParserContext(self.primary_parser_ctx.lexer, REFF)
+    self.auxiliary_parser_ctx = ParserContext(self.primary_parser_ctx.lexer, REFF, self.primary_parser_ctx.logger)
     self.auxiliary_parser_ctx.lexer.context_switch(filepath)
     self.auxiliary_parser_ctx.log_return(False)
     

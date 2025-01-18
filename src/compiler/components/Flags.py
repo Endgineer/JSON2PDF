@@ -3,9 +3,9 @@ import os
 
 from compiler.routines.awesome_cv import *
 from parser.constants.grammar import *
+from compiler.logger.PhaseLogger import Document
 
 class Flags:
-  root: Nonterminal
   anonymize: bool
   filepath: str
   filename: str
@@ -26,18 +26,15 @@ class Flags:
   lettertitle: str
   letterclosing: str
 
-  def __init__(self, args: typing.Sequence[str], root: Nonterminal):
-    assert root.primordial_root
-
-    self.root = root
-    self.filepath = args.cvjson if root is CVROOT else args.cljson
+  def __init__(self, args: typing.Sequence[str]):
+    self.filepath = args.path
     self.filename = os.path.basename(self.filepath)
-    self.anonymize = None in [args.name, args.position, args.address, args.mobile, args.email] or args.anonymized
-    self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join(args.position), '}']) if args.position else '\\position{Awesome Position}'
-    self.color = args.color if args.color else '000000'
+    self.anonymize = None in [args.name,  args.titles, args.address, args.mobile, args.email] or args.anon
+    self.position = ''.join(['\\position{', '{\\enskip\\cdotp\\enskip}'.join( args.titles), '}']) if  args.titles else '\\position{Awesome Position}'
+    self.color = args.color
     self.spaced = args.spaced
     self.darken = args.darken
-    self.bolded = args.bolded
+    self.bolded = args.bold
     
     if self.anonymize:
       footer_name = f'First Last'
@@ -58,26 +55,8 @@ class Flags:
       self.github = f'\\github{{{args.github}}}' if args.github else '% \\github{}'
       self.website = f'\\homepage{{{args.website}}}' if args.website else '% \\homepage{}'
     
-    DOCTYPE = 'Curriculum Vitae' if self.root is CVROOT else 'Cover Letter'
-    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}{DOCTYPE}}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Document Type}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
+    self.footer = f'\\makecvfooter\n  {{\\today}}\n  {{{footer_name}{{\\enskip\\cdotp\\enskip}}DOCTYPE}}\n  {{\\thepage\\ / \\pageref*{{LastPage}}}}' if args.footer else '%\\makecvfooter\n  % {\\today}\n  % {Document Type}\n  % {\\thepage\\ / \\pageref*{LastPage}}'
     self.header = f'\\makecvheader' if args.header else f'%\\makecvheader'
-
-    if self.root is CLROOT:
-      self.lettertitle = f'% Print the title with above letter information\n\\makelettertitle'
-      self.letterclosing = f'% Print the signature and enclosures with above letter information\n\\makeletterclosing'
-      self.letter_info = (
-        f'%-------------------------------------------------------------------------------\n'
-        f'%\tLETTER INFORMATION\n'
-        f'%\tAll of the below lines must be filled out\n'
-        f'%-------------------------------------------------------------------------------\n'
-        f'% SOMETHING WENT WRONG WITH SYNTHESIZER GENERATOR\n'
-        f'\n'
-        f'\n'
-      )
-    else:
-      self.lettertitle = f''
-      self.letterclosing = f''
-      self.letter_info = f''
   
   def init_letter(self, letter_company: str, letter_position: str, letter_reference: str, letter_opening: str, letter_closing: str, letter_attachments: str) -> None:
     attachments = f'\\letterenclosure[Attached]{{{letter_attachments}}}' if letter_attachments is not None else f'% \\letterenclosure[Attached]{{}}'
@@ -103,7 +82,24 @@ class Flags:
       f'\n'
     )
   
-  def wrap(self, tex: str) -> str:
+  def wrap(self, tex: str, doctype: Document) -> str:
+    if doctype == Document.CL:
+      lettertitle = f'% Print the title with above letter information\n\\makelettertitle'
+      letterclosing = f'% Print the signature and enclosures with above letter information\n\\makeletterclosing'
+      letter_info = (
+        f'%-------------------------------------------------------------------------------\n'
+        f'%\tLETTER INFORMATION\n'
+        f'%\tAll of the below lines must be filled out\n'
+        f'%-------------------------------------------------------------------------------\n'
+        f'% SOMETHING WENT WRONG WITH SYNTHESIZER GENERATOR\n'
+        f'\n'
+        f'\n'
+      )
+    else:
+      lettertitle = f''
+      letterclosing = f''
+      letter_info = f''
+
     return (
       f'%!TEX TS-program = xelatex\n'
       f'%!TEX encoding = UTF-8 Unicode\n'
@@ -187,7 +183,7 @@ class Flags:
       f'% \\quote{{``Be the change that you want to see in the world."}}\n'
       f'\n'
       f'\n'
-      f'{self.letter_info}'
+      f'{letter_info}'
       f'%-------------------------------------------------------------------------------\n'
       f'\\begin{{document}}\n'
       f'\n'
@@ -197,9 +193,9 @@ class Flags:
       f'\n'
       f'% Print the footer with 3 arguments(<left>, <center>, <right>)\n'
       f'% Leave any of these blank if they are not needed\n'
-      f'{self.footer}\n'
+      f'{self.footer.replace("DOCTYPE", "Curriculum Vitae" if doctype == Document.CV else "Cover Letter", 1)}\n'
       f'\n'
-      f'{self.lettertitle}\n'
+      f'{lettertitle}\n'
       f'\n'
       f'\n'
       f'%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n'
@@ -211,7 +207,7 @@ class Flags:
       f'%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n'
       f'%\tEND CONTENT\n'
       f'%<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n'
-      f'{self.letterclosing}\n'
+      f'{letterclosing}\n'
       f'\n'
       f'\n'
       f'\\end{{document}}\n'

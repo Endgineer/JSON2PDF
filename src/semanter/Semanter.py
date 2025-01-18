@@ -1,3 +1,4 @@
+from compiler.logger.PhaseLogger import PhaseLogger
 from compiler.units.Item import Item
 from semanter.components.SemanterContext import SemanterContext
 from parser.Parser import Parser
@@ -6,8 +7,8 @@ from compiler.components.Flags import Flags
 class Semanter:
   semanter_ctx: SemanterContext
 
-  def __init__(self, parser: Parser, flags: Flags):
-    self.semanter_ctx = SemanterContext(parser, flags)
+  def __init__(self, parser: Parser, flags: Flags, logger: PhaseLogger):
+    self.semanter_ctx = SemanterContext(parser, flags, logger)
   
   def analyze(self) -> Item:
     while True:

@@ -2,6 +2,7 @@ import enum
 import logging
 from collections import deque
 
+from compiler.logger.PhaseLogger import *
 from compiler.units.Token import Token
 from compiler.units.Segment import Segment
 
@@ -17,6 +18,7 @@ class LexerContext:
     STR_POSSIBLE_BOLD_END = 6
     STR_POSSIBLE_BOLD_IN_INVOKATION = 7
   
+  logger: PhaseLogger
   filepath: str
   document: str
   line_start_idx: int
@@ -30,11 +32,12 @@ class LexerContext:
   current_char: str
   errors: deque[str]
 
-  def __init__(self, filepath: str):
-    self.switch(filepath)
+  def __init__(self, filepath: str, logger: PhaseLogger):
+    self.switch(filepath, logger)
   
-  def switch(self, filepath: str) -> None:
-    logging.getLogger('LEXICAL').debug(f'Switched context to "{filepath}"...')
+  def switch(self, filepath: str, logger: PhaseLogger) -> None:
+    self.logger = logger
+    self.logger.log(None, Phase.LEXICAL, logging.DEBUG, f'Switched context to "{filepath}"...')
 
     with open(filepath, 'r') as file:
       self.document = file.read()
@@ -52,7 +55,7 @@ class LexerContext:
     self.errors = deque()
   
   def restore(self) -> None:
-    logging.getLogger('LEXICAL').debug(f'Restored context of "{self.filepath}"...')
+    self.logger.log(None, Phase.LEXICAL, logging.DEBUG, f'Restored context of "{self.filepath}"...')
   
   def scan_next_char(self) -> None:
     self.current_char = self.document[self.matched_token_start_idx + self.matched_token_len]
@@ -75,10 +78,10 @@ class LexerContext:
   def capture_token(self) -> Token:
     token = self.matched_token
     if token is not None:
-      logging.getLogger('LEXICAL').debug(f'Scanned {token}.')
+      self.logger.log(None, Phase.LEXICAL, logging.DEBUG, f'Scanned {token}.')
     
     while len(self.errors) > 0:
-      logging.getLogger('LEXICAL').error(self.errors.popleft())
+      self.logger.log(None, Phase.LEXICAL, logging.ERROR, self.errors.popleft())
     
     self.matched_token = None if self.matched_token_kind is None else Token(
       self.matched_token_value if self.matched_token_kind == Token.Kind.STRING else None,

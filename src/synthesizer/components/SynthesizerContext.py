@@ -1,5 +1,6 @@
 import logging
 
+from compiler.logger.PhaseLogger import *
 from semanter.Semanter import Semanter
 from compiler.units.Item import Item
 from compiler.units.Token import Token
@@ -7,12 +8,14 @@ from synthesizer.routines.generators import *
 from compiler.components.Flags import Flags
 
 class SynthesizerContext:
+  logger: PhaseLogger
   semanter: Semanter
   items: list[Item]
   tree: dict[str, list[dict[str, str | list[str] | dict[str, str]]]]
   flags: Flags
 
-  def __init__(self, semanter: Semanter, flags: Flags):
+  def __init__(self, semanter: Semanter, flags: Flags, logger: PhaseLogger):
+    self.logger = logger
     self.semanter = semanter
     self.items = None
     self.tree = None
@@ -39,17 +42,17 @@ class SynthesizerContext:
       
       for prop in item.properties:
         if prop.kind == str:
-          invoked_labels.update(SynthesizerContext.activate_token(item.labels, prop.value, anonymize, bolded))
+          invoked_labels.update(self.activate_token(item.labels, prop.value, anonymize, bolded))
         elif prop.kind == list:
           for point in prop.value:
-            invoked_labels.update(SynthesizerContext.activate_token(item.labels, point, anonymize, bolded))
+            invoked_labels.update(self.activate_token(item.labels, point, anonymize, bolded))
         elif prop.kind == dict:
           for pair in prop.value:
-            invoked_labels.update(SynthesizerContext.activate_token(item.labels, pair[1], anonymize, bolded))
+            invoked_labels.update(self.activate_token(item.labels, pair[1], anonymize, bolded))
       
       redundant_labels = set(item.labels) - invoked_labels
       if len(redundant_labels) > 0:
-        logging.getLogger('SYNTHESIS').warning(f'Unused labels {sorted(redundant_labels)} in item {item}.')
+        self.logger.log(None, Phase.SYNTHESIS, logging.WARNING, f'Unused labels {sorted(redundant_labels)} in item {item}.')
 
 
 
@@ -77,7 +80,7 @@ class SynthesizerContext:
           for pair in prop.value:
             self.tree[section][-1][prop_key][pair[0].get_string()] = None if pair[1] is None else pair[1].get_string()
 
-      logging.getLogger('SYNTHESIS').debug(f'Dictified item {item}: {self.tree[section][-1]}.')
+      self.logger.log(None, Phase.SYNTHESIS, logging.DEBUG, f'Dictified item {item}: {self.tree[section][-1]}.')
       
       if item.kind == Item.Kind.CLLETTER:
         self.flags.init_letter(
@@ -91,7 +94,7 @@ class SynthesizerContext:
 
 
 
-  def activate_token(labels: dict[str, Token], token: Token, anonymize: bool, bolded: bool) -> set[str]:
+  def activate_token(self, labels: dict[str, Token], token: Token, anonymize: bool, bolded: bool) -> set[str]:
     if token is None: return set()
     invoked_labels = set()
 
@@ -102,9 +105,9 @@ class SynthesizerContext:
       if invocation_result is None:
         pass
       elif invocation_result == False:
-        logging.getLogger('SYNTHESIS').warning(f'Missing label for invocation "{segment.invocation}" in {token_string}{", will obfuscate instead" if anonymize else ""}.')
+        self.logger.log(None, Phase.SYNTHESIS, logging.WARNING, f'Missing label for invocation "{segment.invocation}" in {token_string}{", will obfuscate instead" if anonymize else ""}.')
       else:
-        logging.getLogger('SYNTHESIS').debug(f'Bound invocation "{segment.invocation}" in {token_string} to its label.')
+        self.logger.log(None, Phase.SYNTHESIS, logging.DEBUG, f'Bound invocation "{segment.invocation}" in {token_string} to its label.')
         invoked_labels.add(segment.invocation)
     
     return invoked_labels
