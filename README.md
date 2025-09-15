@@ -1,4 +1,8 @@
 # JSON2PDF
+> NOTICE
+> 
+> JSON2PDF has been discontinued in favor of using Typst. All releases have been deleted to avoid future issues caused from unresolved security vulnerabilities. If you currently use JSON2PDF, it is highly recommended that you discontinue its use, as the tool will no longer be updated. For all your document typesetting tasks, look into Typst, a friendlier analogue to LaTeX.
+
 Compiler built in Python that uses a modified version of [Posquit0's Awesome-CV](https://github.com/posquit0/Awesome-CV) LaTeX template to generate a CV or CL in `pdf` format based on a `json` image of the CV or CL.
 
 ## Installation
